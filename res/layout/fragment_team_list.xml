@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cars_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:baselineAligned="false"
+     >
+
+    <include
+        android:id="@+id/status_bar_include"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        layout="@layout/element_status_bar" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/status_bar_include"
+        android:text="@string/labelTeamManagement"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        style="@style/BlockHeadline"
+    />
+
+    <TableLayout
+        android:id="@+id/tableTeamManagement"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_below="@id/textView1"
+    >
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+		    <TextView
+		        android:layout_width="120dp"
+		        android:layout_height="wrap_content"
+		        android:textStyle="bold"
+		        android:padding="4dp"
+		        android:text="@string/labelTeamLeader"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			<Spinner
+		        android:id="@+id/selectTeamLeader"
+		        android:layout_width="270dp"
+		        android:layout_height="wrap_content"
+		    />
+
+		</TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+		    <TextView
+		        android:layout_width="120dp"
+		        android:layout_height="wrap_content"
+		        android:textStyle="bold"
+		        android:padding="4dp"
+		        android:text="@string/labelTeamLeaderSubst"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			<Spinner
+		        android:id="@+id/selectTeamLeaderSubst"
+		        android:layout_width="270dp"
+		        android:layout_height="wrap_content"
+		    />
+
+		</TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+		    <TextView
+		        android:layout_width="120dp"
+		        android:layout_height="wrap_content"
+		        android:textStyle="bold"
+		        android:padding="4dp"
+		        android:text="@string/labelTeamLeaderBonus"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <LinearLayout
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+		        >
+
+				<EditText
+					android:id="@+id/editTextTeamLeaderBonus"
+					android:layout_width="50dp"
+					android:layout_height="wrap_content"
+					android:padding="4dp"
+					android:inputType="numberDecimal"
+				/>
+	
+			    <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:text="@string/labelPercent"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			</LinearLayout>
+
+		</TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        >
+
+            <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal"
+			    android:layout_column="1"
+            >
+
+				<Button
+				    android:id="@+id/buttonSave"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:background="@drawable/button_green"
+				    android:paddingLeft="10dp"
+				    android:paddingRight="10dp"
+				    android:text="@string/labelSave"
+				/>
+	
+				<Button
+				    android:id="@+id/buttonTeamwork"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:background="@drawable/button_blue"
+				    android:paddingLeft="10dp"
+				    android:paddingRight="10dp"
+				    android:text="@string/labelTeamWork"
+				/>
+
+            </LinearLayout>
+
+		</TableRow>
+
+	</TableLayout>
+
+    <TableLayout
+        android:id="@+id/tableTeamBusiness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView1"
+        android:layout_toRightOf="@id/tableTeamManagement"
+    >
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_column="1"
+		        android:textStyle="bold"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:text="@string/labelPhotoSession_pl"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textStyle="bold"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:text="@string/labelMovieSession_pl"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		</TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textStyle="bold"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:text="@string/labelTeamBooked"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <TextView
+		        android:id="@+id/textViewTeamPhotoBooked"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <TextView
+		        android:id="@+id/textViewTeamMovieBooked"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		</TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textStyle="bold"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:text="@string/labelTeamPipeline"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <TextView
+		        android:id="@+id/textViewTeamPhotoPipeline"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <TextView
+		        android:id="@+id/textViewTeamMoviePipeline"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		</TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textStyle="bold"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:text="@string/labelRequestsPipeline"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <TextView
+		        android:id="@+id/textViewRequestPhotoPipeline"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <TextView
+		        android:id="@+id/textViewRequestMoviePipeline"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="end"
+		        android:padding="4dp"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		</TableRow>
+
+	</TableLayout>
+
+   	<ListView
+        android:id="@+id/listTeams"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@id/tableTeamManagement"
+    />
+
+</RelativeLayout>

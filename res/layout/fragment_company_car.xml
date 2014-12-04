@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+	<ImageView
+	    android:id="@+id/imageView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/arrow"
+	    android:padding="5dp"
+	    android:contentDescription="@string/imageDescription"
+	/>
+
+	<TableLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    >
+	
+	    <TableRow
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" >
+	
+	        <TextView
+	            android:id="@+id/textViewTitle"
+		        android:layout_span="4"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+	        
+	    </TableRow>
+	
+	    <TableRow
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" >
+	
+	        <TextView
+	            android:layout_width="80dp"
+	            android:layout_height="wrap_content"
+	            android:text="@string/labelClass"
+	            android:textStyle="bold"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	        
+	        <TextView
+	            android:id="@+id/textViewClass"
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	        
+	        <TextView
+	            android:layout_width="80dp"
+	            android:layout_height="wrap_content"
+	            android:text="@string/labelValue"
+	            android:textStyle="bold"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	        
+	        <TextView
+	            android:id="@+id/textViewValue"
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	        
+	    </TableRow>
+	
+	    <TableRow
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" >
+	
+	        <TextView
+	            android:layout_width="80dp"
+	            android:layout_height="wrap_content"
+	            android:text="@string/labelAge"
+	            android:textStyle="bold"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	        
+	        <TextView
+	            android:id="@+id/textViewAge"
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	        
+	        <TextView
+	            android:layout_width="80dp"
+	            android:layout_height="wrap_content"
+	            android:text="@string/labelDriver"
+	            android:textStyle="bold"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	        
+	        <TextView
+	            android:id="@+id/textViewDriver"
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	        
+	    </TableRow>
+	
+	    <TableRow
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" >
+	
+	        <TextView
+	            android:layout_width="80dp"
+	            android:layout_height="wrap_content"
+	            android:text="@string/labelStatus"
+	            android:textStyle="bold"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	        <TextView
+	            android:id="@+id/textViewStatus"
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	    </TableRow>
+
+	</TableLayout>
+
+	<ImageView
+	    android:id="@+id/messageImage"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:onClick="modelViewDetails"
+	    android:padding="5dp"
+	    android:contentDescription="@string/imageDescription"
+	/>
+
+</LinearLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include
+        android:id="@+id/status_bar_include"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        layout="@layout/element_status_bar" />
+
+	<ImageView
+		android:id="@+id/messageImage"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/status_bar_include"
+		android:layout_alignParentLeft="true"
+		android:contentDescription="@string/imageDescription"
+		android:padding="10dp"
+		android:onClick="modelViewDetails"
+		android:src="@drawable/lightening"
+	/>
+
+	<Button
+		android:id="@+id/buttonCredit"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:background="@drawable/button_green"
+		android:text="@string/labelCreditRequest"
+		android:layout_below="@id/status_bar_include"
+		android:layout_toRightOf="@id/messageImage"
+	/>
+
+	<View
+		android:id="@+id/viewAccountChart"
+		android:layout_width="300dp"
+		android:layout_height="200dp"
+		android:layout_below="@id/status_bar_include"
+		android:layout_toRightOf="@id/buttonCredit"
+	/>
+
+    <ScrollView
+        android:id="@+id/account_transaction_scroll"
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+	    android:layout_below="@id/viewAccountChart"
+	    >
+	
+	    <TableLayout
+	        android:id="@+id/account_transaction_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <TableRow 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+	            >
+
+		        <TextView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/labelDate"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:gravity="end"
+			        android:textAppearance="?android:attr/textAppearanceSmall"
+		            />
+
+		       <TextView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/labelAccSubject"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall"
+		            />
+
+		       <TextView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/labelAmount"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:gravity="end"
+			        android:textAppearance="?android:attr/textAppearanceSmall"
+		            />
+
+		       <TextView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/labelBalance"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:gravity="end"
+			        android:textAppearance="?android:attr/textAppearanceSmall"
+		            />
+
+	        </TableRow>
+
+	    </TableLayout>
+
+	</ScrollView>
+
+</RelativeLayout>

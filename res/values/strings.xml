@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Model Manager</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_account">mein Konto</string>
+
+    <string name="title_section_daily_business">Tag</string>
+    <string name="title_section_my_models">Models</string>
+    <string name="title_section_expenses">Ausgaben</string>
+    <string name="title_section_cars">Fahrzeuge</string>
+    <string name="title_section_bonuses">Prämien</string>
+    <string name="title_section_vacation">Urlaub</string>
+    <string name="title_section_training">Fortbildung</string>
+    <string name="title_section_account">Konto</string>
+    <string name="title_section_incidents">Ereignisse</string>
+    <string name="title_section_teams">Teams</string>
+    <string name="title_section_operation">Auslastung</string>
+    <string name="title_section_movieproduction">Filmproduktion</string>
+
+    <string name="button_refresh">Aktualisieren</string>
+    <string name="button_save">Speichern</string>
+
+    <string name="title_model_detail">Personalakte</string>
+    <string name="title_account_detail">Kontoauszug</string>
+    <string name="title_model_negotiation">Verhandlung</string>
+    <string name="title_car_maintenance">Fahrzeugverwaltung</string>
+    <string name="title_car_shopping">Fahrzeugeinkauf</string>
+    <string name="title_movieproduction">Filmproduktion</string>
+
+    <string name="imageDescription">Profilbild</string>
+    <string name="messageOfferRejected">Unzureichendes Angebot</string>
+    <string name="displaySomeModel">Ein geeignetes Model</string>
+
+    <string name="labelName">Name</string>
+    <string name="labelSum">Summe</string>
+    <string name="labelFirstName">Vorname</string>
+    <string name="labelLastName">Nachname</string>
+    <string name="labelStatus">Status</string>
+    <string name="labelSalary">Gehalt</string>
+    <string name="labelBonus">Prämie</string>
+    <string name="labelVacation">Urlaub</string>
+    <string name="labelVacation4week">Urlaub / 4 Wochen</string>
+    <string name="labelVacationRest">Resturlaub</string>
+    <string name="labelCar">Auto</string>
+    <string name="labelTeam">Team</string>
+    <string name="labelNoTeam">kein Team</string>
+    <string name="labelNewTeam">neues Team</string>
+    <string name="labelTeamWork">Teamarbeit</string>
+    <string name="labelTeamManagement">Team-Verwaltung</string>
+    <string name="labelTeamLeader">Teamleiterin</string>
+    <string name="labelTeamLeaderSubst">Stellv. Teamleiterin</string>
+    <string name="labelTeamLeaderBonus">Vergütung</string>
+    <string name="labelTeamBooked">Team\nausgeführt</string>
+    <string name="labelTeamPipeline">Team\noffen</string>
+    <string name="labelRequestsPipeline">Anfragen\noffen</string>
+    <string name="labelAccept">OK</string>
+    <string name="labelDoAccept">akzeptieren</string>
+    <string name="labelNegotiate">verhandeln</string>
+    <string name="labelFireImmmediately">fristlos kündigen</string>
+    <string name="labelDeny">ablehnen</string>
+    <string name="labelCreate">erstellen</string>
+    <string name="labelOffer">anbieten</string>
+    <string name="labelRemove">entfernen</string>
+    <string name="labelSuggest">vorschlagen</string>
+    <string name="labelReclaim">fordern</string>
+    <string name="labelSave">speichern</string>
+    <string name="labelAbort">abbrechen</string>
+    <string name="labelRent">vermieten</string>
+
+    <string name="labelBalance">Kontostand</string>
+    <string name="labelCompanyCars">Firmenwagen im Fuhrpark</string>
+    <string name="labelCompanyCar">Firmenwagen</string>
+    <string name="labelCarTypes">Zum Kauf verfügbare Modelle</string>
+    <string name="labelCarModel">Modell</string>
+    <string name="labelLicensePlate">Zulassung</string>
+    <string name="labelClass">Klasse</string>
+    <string name="labelPrice">Preis</string>
+    <string name="labelAge">Alter</string>
+    <string name="labelValue">Wert</string>
+    <string name="labelValueSale">Verkaufswert</string>
+    <string name="labelRepairCost">Reparaturkosten</string>
+    <string name="labelDriver">Fahrer</string>
+    <string name="labelHistory">Vorgeschichte</string>
+    <string name="labelBuy">kaufen</string>
+    <string name="labelRepair">instandsetzen</string>
+    <string name="labelTheRepair">Reparatur</string>
+    <string name="labelTakeaway">wegnehmen</string>
+    <string name="labelDeassign">abschreiben</string>
+    <string name="labelSell">verkaufen</string>
+    <string name="labelSale">Verkauf</string>
+    <string name="labelTrash">verschrotten</string>
+    <string name="labelHire">anwerben</string>
+    <string name="labelFire">entlassen</string>
+    <string name="labelInUse">in Benutzung</string>
+    <string name="labelUnused">unbenutzt</string>
+    <string name="labelGone">verloren</string>
+    <string name="labelDefect">defekt</string>
+    <string name="labelTotal">gesamt</string>
+    <string name="labelDate">Datum</string>
+    <string name="labelDay">Tag</string>
+    <string name="labelAccSubject">Verwendungszweck</string>
+    <string name="labelAmount">Betrag</string>
+    <string name="labelTraining">Fortbildung</string>
+    <string name="labelDuration">Dauer</string>
+    <string name="labelTheOffer">Angebot</string>
+    <string name="labelThePrice">Gage</string>
+    <string name="labelRaise">Gehaltserhöhung</string>
+    <string name="labelTheReclaim">Rückzahlung</string>
+    <string name="labelToday">Heute</string>
+    <string name="labelOnBoard">Angestellt seit</string>
+    <string name="labelDismissal">Kündigung</string>
+    <string name="labelSpendings">Lebenshaltung und Ausgaben</string>
+    <string name="labelEvents">Ereignisse</string>
+    <string name="labelTodayEvents">Heute</string>
+    <string name="labelPastEvents">Ereignisprotokoll</string>
+    <string name="labelSubstitute">Ersatz</string>
+    <string name="labelPhotoSession_si">Fotosession</string>
+    <string name="labelPhotoSession_pl">Fotosessions</string>
+    <string name="labelMovieSession_si">Filmsession</string>
+    <string name="labelMovieSession_pl">Filmsessions</string>
+    <string name="labelSession_si">Session</string>
+    <string name="labelSession_pl">Sessions</string>
+    <string name="labelNotification_si">Benachrichtigung</string>
+    <string name="labelNotification_pl">Benachrichtigungen</string>
+    <string name="labelIncident_si">Zwischenfall</string>
+    <string name="labelIncident_pl">Zwischenfälle</string>
+    <string name="labelRequest_si">Anfrage</string>
+    <string name="labelRequest_pl">Anfragen</string>
+    <string name="labelEarnings">Einnahmen</string>
+    <string name="labelBuyNewCar">Neues Auto kaufen</string>
+    <string name="labelTaxInsurance">Steuern und Versicherung wöchentlich</string>
+    <string name="labelMaxSpeed">Höchst-\ngeschwindigkeit</string>
+    <string name="labelPower">Leistung</string>
+    <string name="labelCylinders">Zylinder</string>
+    <string name="labelCapacity">Hubraum</string>
+    <string name="labelPercent">%</string>
+    <string name="labelProgress">Fortschritt</string>
+    <string name="labelPreparing">Bereite den neuen Tag vor&#8230;</string>
+    <string name="labelPersonalFile">Personalakte</string>
+    <string name="labelAccountStatement">Kontoauszug</string>
+    <string name="labelExpenses">Ausgaben</string>
+    <string name="labelIncomes">Einnahmen</string>
+    <string name="labelCredit">Kredit</string>
+    <string name="labelCreditRequest">Kreditanfrage</string>
+    <string name="labelCreditPayback">Rückzahlung</string>
+    <string name="labelCost">Kosten</string>
+    <string name="labelApproximately">ca.</string>
+
+    <string name="labelMovieproduction">Filmproduktion</string>
+    <string name="labelMovieType">Filmart</string>
+    <string name="labelStartDay">Drehbeginn</string>
+    <string name="labelEndDay">Ende</string>
+    <string name="labelStartMovieProduction">Neue Filmproduktion planen</string>
+    <string name="labelStartProduction">planen</string>
+    <string name="labelDailyPayment">tägliche Gage</string>
+    <string name="labelActor">Darstellerin</string>
+    <string name="labelEngagementForDay">Engage-\nment für Tag</string>
+
+    <string name="labelQualityPhoto">Fotomodell</string>
+    <string name="labelQualityMovie">Filmmodell</string>
+    <string name="labelQualityTLead">Teamleiterin</string>
+    <string name="labelHealth">Gesundheit</string>
+    <string name="labelAmbition">Ehrgeiz</string>
+    <string name="labelCriminal">Kriminelle Neigung</string>
+    <string name="labelMood">Stimmung</string>
+    <string name="labelErotic">erotische Ausstrahlung</string>
+
+    <string name="labelAlreadyPlanned">geplant</string>
+    <string name="labelOperationChart">Auslastungsplan</string>
+
+    <string name="labelNotifyPaycheck">Benachrichtigung bei Gehaltszahlung</string>
+    <string name="labelNotifySick">Benachrichtigung bei Krankmeldung</string>
+    <string name="labelWorthIncrease">Wertsteigerungsfaktor</string>
+    <string name="worthincrease">worthincrease</string>
+
+    <string name="questionQuitCompensation" formatted="false">Bei einer arbeitgeberseitigen Kündigung steht %1s eine Abfindung in Höhe von %2s zu. Entlassung durchführen?</string>
+
+    <string name="logmessage_raise" formatted="false">Gehaltserhöhung von %1s auf %2s</string>
+    <string name="logmessage_vacation4week" formatted="false">Änderung Urlaubsanspruch von %1d auf %2d Tage / 4 Wochen</string>
+    <string name="logmessage_vacationRest" formatted="false">Erhöhung Resturlaub von %1d auf %2d Tage</string>
+    <string name="logmessage_bonus">Auszahlung Prämie</string>
+    <string name="logmessage_car_assign" formatted="false">Zuteilung Firmenwagen %1s</string>
+    <string name="logmessage_car_assign2" formatted="false">Zuteilung</string>
+    <string name="logmessage_car_change" formatted="false">Austausch des Firmenwagens gegen %1s</string>
+    <string name="logmessage_car_repair" formatted="false">Reparatur des Firmenwagens %1s</string>
+    <string name="logmessage_car_repair2" formatted="false">Reparatur des Firmenwagens %C</string>
+    <string name="logmessage_car_repair3" formatted="false">Instandsetzung/Reparatur</string>
+    <string name="logmessage_car_sale" formatted="false">Verkauf des Firmenwagens %1s</string>
+    <string name="logmessage_car_sale2" formatted="false">Verkauf</string>
+    <string name="logmessage_car_trash" formatted="false">Verschrottung</string>
+    <string name="logmessage_car_breakdown" formatted="false">Technischer Defekt</string>
+    <string name="logmessage_car_accident" formatted="false">Verwicklung in Verkehrsunfall</string>
+    <string name="logmessage_car_wrecked" formatted="false">Unfall mit Totalschaden</string>
+    <string name="logmessage_car_stolen" formatted="false">Diebstahl</string>
+    <string name="logmessage_car_takeaway" formatted="false">Rückgabe in den Firmenwagenpool</string>
+    <string name="logmessage_car_deassign" formatted="false">Abschreibung</string>
+    <string name="logmessage_car_buy" formatted="false">Kauf</string>
+
+    <string name="logmessage_sick_today" formatted="false">%N ist heute krank</string>
+    <string name="logmessage_training_today" formatted="false">%N nimmt heute an der Fortbildung "%U" teil</string>
+    <string name="logmessage_vacation_today" formatted="false">%N hat heute Urlaub</string>
+    <string name="logmessage_dismissal" formatted="false">betriebsbedingte Kündigung</string>
+    <string name="logmessage_dismissal_imm" formatted="false">fristlose Kündigung</string>
+    <string name="logmessage_hire" formatted="false">%1s wird mit einem Gehalt von %2s pro Woche eingestellt.</string>
+    <string name="logmessage_become_unavailable" formatted="false">%N steht nicht mehr für eine Anstellung zur Verfügung.</string>
+    <string name="logmessage_become_available" formatted="false">%N steht wieder für eine Anstellung zur Verfügung.</string>
+    <string name="logmessage_change_team" formatted="false">%N wechselt vom Team %T1 ins Team %T2.</string>
+    <string name="logmessage_model_quit" formatted="false">%N hat gekündigt.</string>
+
+    <string name="accountmessage_bonus">Prämie</string>
+    <string name="accountmessage_company_car_costs">Steuern und Versicherungsbeiträge der Firmenwagen</string>
+    <string name="accountmessage_compensation">Abfindung</string>
+    <string name="accountmessage_reclaim">Rückzahlung</string>
+    <string name="accountmessage_credit_pay">Kreditauszahlung</string>
+    <string name="accountmessage_credit_payback">Kreditrückzahlung</string>
+    
+    <string name="display_msg_appl_intro">Ich bin ein erstklassiges Model mit hervorragenden Referenzen.</string>
+    <string name="display_msg_appl_qualities">Meine besondere Stärke ist die Tätigkeit als</string>
+    <string name="display_msg_appl_and_top_qualities">und ganz ausgezeichnete Arbeit leiste ich als</string>
+    <string name="display_msg_appl_only_top_qualities">Ganz ausgezeichnete Arbeit leiste ich als</string>
+
+    <string name="display_msg_appl_model_photo">Model für Fotoaufnahmen</string>
+    <string name="display_msg_appl_model_movie">Model für Filmaufnahmen</string>
+    <string name="display_msg_appl_teamleader">Teamleiterin</string>
+    <string name="display_msg_appl_conjunction">und als</string>
+
+    <string name="display_msg_appl_erotic">Meine Auftraggeber loben stets meine besondere Ausstrahlung.</string>
+    <string name="display_msg_appl_ambition">Ich bin sehr fleißig.</string>
+    <string name="display_msg_appl_health">Eigentlich bin ich so gut wie nie krank.</string>
+
+    <string name="display_msg_appl_experiences">Ich habe früher schon hier gearbeitet mit einem Gehalt von %S</string>
+    <string name="display_msg_appl_experience">Von Tag #%F bis Tag #%T</string>
+
+    <string name="display_msg_appl_expect_salary" formatted="false">Ich erwarte ein Gehalt von %S pro Woche.</string>
+
+    <string name="display_msg_work_presentation" formatted="false">In den letzten 4 Wochen habe ich in %W mitgewirkt und damit einen Gewinn von %E erwirtschaftet. Dafür habe ich Prämien in Höhe von %B erhalten.</string>
+    <string name="display_msg_work_conjunction">und</string>
+
+    <string name="display_msg_teamwork_no_leader">Keine der Teamleiterinnen steht derzeit für Teamleiteraufgaben zur Verfügung.</string>
+
+    <string name="display_msg_training_finished" formatted="false">%N hat die Fortbildung "%U" mit Erfolg abgeschlossen.</string>
+    <string name="display_msg_training_result_improve">Ihre %Q hat sich sehr verbessert.</string>
+    <string name="display_msg_training_result_improve_more">Ihre %Q hat sich extrem verbessert.</string>
+    <string name="display_msg_training_result_degrade">Ihre %Q hat sich verschlechtert.</string>
+    <string name="display_msg_training_qualification_as">Qualifikation als</string>
+
+    <string name="display_msg_training_last_training">Meine letzte Fortbildung war vor %1s.</string>
+    <string name="display_msg_training_no_training">Ich habe bisher noch an keiner Fortbildung teilgenommen.</string>
+
+    <string name="display_msg_bookreject_no_car">Ich habe zur Zeit kein Auto.</string>
+    <string name="display_msg_bookreject_bonus_missing">Erst einmal möchte ich eine Prämie in Höhe von %1s.</string>
+    <string name="display_msg_bookreject_vacation">Ich fühle mich überarbeitet und möchte erst einmal Urlaub machen.</string>
+    <string name="display_msg_bookreject_bad_mood">Heute bin ich nicht in der Stimmung, um vor der Kamera zu stehen.</string>
+
+    <string name="display_msg_credit_offer" formatted="false">Ich verfüge über ein Privatvermögen von %1s, wovon ich Dir einen Betrag von bis zu %2s kurzfristig als Kredit mit einem Zinssatz von %3s %% pro Tag zur Verfügung stellen würde. Für den Gesamtbetrag wären das %4s Zinsen (plus Zinseszinsen ab dem 2. Tag) täglich.</string>
+    <string name="display_msg_credit_open" formatted="false">Sie haben bei %1s noch Schulden in Höhe von %2s (%3s %% Zinsen)</string>
+
+    <string name="display_msg_movie_start_cost">Vorbereitungskosten</string>
+    <string name="display_msg_movie_daily_cost">tägl. Produktionskosten</string>
+    <string name="display_msg_movie_finish_cost">Abschlußkosten</string>
+    <string name="display_msg_movie_model_cost">Gagen für die Darstellerinnen nach Vereinbarung</string>
+    <string name="display_msg_movie_abort" formatted="false">Dreharbeiten zum Film "%M" abgebrochen.</string>
+    <string name="display_msg_movie_finished" formatted="false">Dreharbeiten zum Film "%M" abgeschlossen.</string>
+    <string name="display_msg_movie_sold" formatted="false">Verkauf des fertiggestellten Films "%M".</string>
+    <string name="display_msg_movie_rented" formatted="false">Vermietung des fertiggestellten Films "%M".</string>
+
+
+    <string name="display_monday">Montag</string>
+    <string name="display_tuesday">Dienstag</string>
+    <string name="display_wednesday">Mittwoch</string>
+    <string name="display_thursday">Donnerstag</string>
+    <string name="display_friday">Freitag</string>
+    <string name="display_saturday">Samstag</string>
+    <string name="display_sunday">Sonntag</string>
+    
+    <string name="display_year_si">Jahr</string>
+    <string name="display_year_pl">Jahre</string>
+    <string name="display_month_si">Monat</string>
+    <string name="display_month_pl">Monate</string>
+    <string name="display_week_si">Woche</string>
+    <string name="display_week_pl">Wochen</string>
+    <string name="display_day_si">Tag</string>
+    <string name="display_day_pl">Tage</string>
+
+    <string name="display_option_yes">Ja</string>
+    <string name="display_option_no">No</string>
+    <string name="display_option_cancel">Abbruch</string>
+    <string name="display_option_ok">OK</string>
+
+    <string name="display_state_available">verfügbar</string>
+    <string name="display_account_no_statements">Keine Umsätze vorhanden</string>
+    <string name="display_offer_other_model">anderes Model wählen</string>
+
+    <string name="model_state_free">frei</string>
+    <string name="model_state_hired">angestellt</string>
+    <string name="model_state_vacation">Urlaub</string>
+    <string name="model_state_sick">krank</string>
+    <string name="model_state_training">Fortbildung</string>
+    <string name="model_state_unavailable">nicht verfügbar</string>
+    <string name="model_state_movieprod">Filmproduktion</string>
+
+    <string name="movie_type_entertainment">Unterhaltungsfilm</string>
+    <string name="movie_type_erotic">Erotikfilm</string>
+    <string name="movie_type_porn">Pornofilm</string>
+
+    <string name="training_state_planned">geplant</string>
+    <string name="training_state_in_progress">aktuell</string>
+    <string name="training_state_finished">abgeschlossen</string>
+    <string name="training_state_failed">abgebrochen</string>
+
+    <string name="typename_small_car">Kleinwagen</string>
+    <string name="typename_medium_car">Mittelklasse</string>
+    <string name="typename_large_car">Oberklasse</string>
+    <string name="typename_sports_car">Sportwagen</string>
+    <string name="typename_luxury_car">Luxuslimosine</string>
+    
+    <string name="car_status_new">neu</string>
+    <string name="car_status_in_use">in Benutzung</string>
+    <string name="car_status_used_alittle">wenig gebraucht</string>
+    <string name="car_status_used_alot">stark gebraucht</string>
+    <string name="car_status_defect">defekt</string>
+    <string name="car_status_stolen">gestohlen</string>
+    <string name="car_status_wrecked">Totalschaden</string>
+    <string name="car_status_sold">verkauft</string>
+
+<!-- 
+    <string-array name="country_arrays">
+        <item>Malaysia</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
+ -->
+</resources>

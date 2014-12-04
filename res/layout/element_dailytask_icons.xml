@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<ImageView
+		android:id="@+id/messageIcon"
+		android:layout_width="100dp"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:contentDescription="@string/imageDescription"
+		android:padding="10dp"
+		android:src="@drawable/lightening" />
+
+    <ImageView
+        android:id="@+id/messageImage"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"
+        android:contentDescription="@string/imageDescription"
+        android:padding="10dp"
+        android:onClick="modelViewDetails"
+        android:src="@drawable/lightening" />
+
+	<ImageView
+	    android:id="@+id/accountIcon"
+		android:layout_width="100dp"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_toLeftOf="@id/messageImage"
+		android:paddingLeft="10dp"
+		android:paddingRight="10dp"
+		android:contentDescription="@string/imageDescription"
+        android:onClick="modelViewAccount"
+		android:src="@drawable/money2" />
+
+	<TextView
+		android:id="@+id/messageText"
+		android:padding="4dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_toRightOf="@id/messageIcon"
+		android:layout_toLeftOf="@id/accountIcon"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+		 />
+
+</merge>

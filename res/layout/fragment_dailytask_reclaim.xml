@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="horizontal" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        layout="@layout/element_dailytask_icons" />
+
+	<TableLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/messageText"
+		android:layout_toRightOf="@id/messageIcon"
+		android:layout_toLeftOf="@id/messageImage"
+	>
+
+		<include layout="@layout/element_dailytask_ok" />
+
+		<include layout="@layout/element_dailytask_fire" />
+
+		<include layout="@layout/element_dailytask_reclaim" />
+
+	</TableLayout>
+
+</RelativeLayout>

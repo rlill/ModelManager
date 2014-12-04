@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cars_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:baselineAligned="false"
+     >
+
+	    <include
+	        android:id="@+id/status_bar_include"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_alignParentRight="true"
+	        layout="@layout/element_status_bar" />
+
+	    <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/status_bar_include"
+	        android:text="@string/labelCompanyCars"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        style="@style/BlockHeadline"
+	    />
+
+	    <TableLayout
+	        android:id="@+id/tableCompanyCarOverview"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/textView1"
+	        android:layout_toRightOf="@id/imageView1"
+	    >
+
+	        <TableRow
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" >
+
+			    <TextView
+			        android:layout_width="120dp"
+			        android:layout_height="wrap_content"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:text="@string/labelInUse"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewCarsInUse"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewValueInUse"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			</TableRow>
+
+	        <TableRow
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" >
+
+			    <TextView
+			        android:layout_width="120dp"
+			        android:layout_height="wrap_content"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:text="@string/labelUnused"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewCarsUnused"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewValueUnused"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			</TableRow>
+
+	        <TableRow
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" >
+
+			    <TextView
+			        android:layout_width="120dp"
+			        android:layout_height="wrap_content"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:text="@string/labelGone"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewCarsGone"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewValueGone"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			</TableRow>
+
+	        <TableRow
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" >
+
+			    <TextView
+			        android:layout_width="120dp"
+			        android:layout_height="wrap_content"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:text="@string/labelDefect"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewCarsDefect"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewValueDefect"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			</TableRow>
+
+	        <TableRow
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" >
+
+			    <TextView
+			        android:layout_width="120dp"
+			        android:layout_height="wrap_content"
+			        android:textStyle="bold"
+			        android:padding="4dp"
+			        android:text="@string/labelTotal"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewCarsTotal"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <TextView
+			        android:id="@+id/textViewValueTotal"
+			        android:layout_width="160dp"
+			        android:layout_height="wrap_content"
+			        android:padding="4dp"
+			        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			    <Button 
+			        android:id="@+id/button1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/labelBuyNewCar"
+			        android:background="@drawable/button_green"
+			        android:padding="10dp"
+			        android:onClick="carShopping"
+			        />
+
+			</TableRow>
+
+		</TableLayout>
+
+    	<ListView
+	        android:id="@+id/listCompanyCars"
+	        android:layout_height="match_parent"
+	        android:layout_width="match_parent"
+	        android:layout_below="@id/tableCompanyCarOverview"
+	    >
+	    </ListView>
+
+</RelativeLayout>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/dialogNegotiation"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:descendantFocusability="beforeDescendants"
+	android:focusableInTouchMode="true"
+>
+
+	<include
+		android:id="@+id/status_bar_include"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"
+		layout="@layout/element_status_bar" />
+
+	<TextView
+		android:id="@+id/textview_name"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="5dp"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+	/>
+
+	<ImageView
+		android:id="@+id/imageView1"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:paddingTop="20dp"
+		android:layout_below="@id/textview_name"
+		android:layout_alignParentLeft="true"
+		android:contentDescription="@string/imageDescription"
+	/>
+
+	<TextView
+		android:id="@+id/textViewDescription"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="5dp"
+		android:layout_below="@id/imageView1"
+		android:layout_alignParentLeft="true"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+	/>
+
+	<TextView
+		android:id="@+id/textViewOpenCredits"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="5dp"
+		android:textColor="#FFFF0000"
+		android:layout_below="@id/textViewDescription"
+		android:layout_alignParentLeft="true"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+	/>
+
+	<TableLayout
+		android:id="@+id/tableCreditActions"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/textViewOpenCredits"
+		android:layout_alignParentLeft="true"
+	>
+
+		<TableRow
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" >
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="5dp"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="@string/labelCredit"
+			/>
+
+		    <EditText
+		        android:id="@+id/editTextRequest"
+		        android:layout_width="100dp"
+		        android:layout_height="wrap_content"
+		        android:padding="4dp"
+		        android:inputType="numberDecimal"
+			/>
+
+			<Button
+				android:id="@+id/buttonRequest"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/button_blue"
+				android:text="@string/labelCreditRequest"
+			/>
+
+		</TableRow>
+
+		<TableRow
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" >
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="5dp"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="@string/labelCredit"
+			/>
+
+		    <EditText
+		        android:id="@+id/editTextPayback"
+		        android:layout_width="100dp"
+		        android:layout_height="wrap_content"
+		        android:padding="4dp"
+		        android:inputType="numberDecimal"
+			/>
+
+			<Button
+				android:id="@+id/buttonPayback"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/button_green"
+				android:text="@string/labelCreditPayback"
+			/>
+
+		</TableRow>
+		
+	</TableLayout>
+
+</RelativeLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="horizontal" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        layout="@layout/element_dailytask_icons" />
+
+	<TableLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/messageText"
+		android:layout_toRightOf="@id/messageIcon"
+		android:layout_toLeftOf="@id/messageImage"
+	>
+
+		<include layout="@layout/element_dailytask_ok" />
+
+		<TableRow
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			>
+
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/labelSubstitute"
+	            android:textStyle="bold"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			<Spinner
+		        android:id="@+id/selectSubstitute"
+		        android:layout_width="270dp"
+		        android:layout_height="wrap_content"
+		    />
+
+	    </TableRow>
+
+	    <TableRow
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" >
+
+			<LinearLayout
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+	            android:layout_column="1"
+				android:orientation="horizontal"
+		    >
+
+		        <TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/labelThePrice"
+		            android:padding="4dp"
+		            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+				<EditText
+			        android:id="@+id/editTextOffer"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+		            android:inputType="numberDecimal"
+			    />
+
+			</LinearLayout>
+
+	        <Button
+	            style="?android:attr/buttonBarButtonStyle"
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/button_blue"
+	            android:text="@string/labelOffer"
+	            android:hint="@string/labelOffer"
+	            android:onClick="dailyBusinessOffer"
+	        />
+
+	    </TableRow>
+
+		<include layout="@layout/element_dailytask_deny" />
+
+	</TableLayout>
+
+</RelativeLayout>

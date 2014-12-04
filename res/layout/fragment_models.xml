@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+	    <include
+	        android:id="@+id/status_bar_include"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_alignParentRight="true"
+	        layout="@layout/element_status_bar" />
+
+        <ToggleButton
+            android:id="@+id/filter_free"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+	        android:layout_below="@id/status_bar_include"
+	        android:layout_alignParentLeft="true"
+            android:textOn="@string/model_state_free"
+            android:textOff="@string/model_state_free" />
+
+        <ToggleButton
+            android:id="@+id/filter_unavailable"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+	        android:layout_below="@id/status_bar_include"
+            android:layout_toRightOf="@id/filter_free"
+            android:textOn="@string/model_state_unavailable"
+            android:textOff="@string/model_state_unavailable" />
+
+        <ToggleButton
+            android:id="@+id/filter_hired"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+	        android:layout_below="@id/status_bar_include"
+            android:layout_toRightOf="@id/filter_unavailable"
+            android:checked="true"
+            android:textOn="@string/model_state_hired"
+            android:textOff="@string/model_state_hired" />
+
+        <ToggleButton
+            android:id="@+id/filter_vacation"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+	        android:layout_below="@id/status_bar_include"
+            android:layout_toRightOf="@id/filter_hired"
+            android:checked="true"
+            android:textOn="@string/model_state_vacation"
+            android:textOff="@string/model_state_vacation" />
+
+        <ToggleButton
+            android:id="@+id/filter_sick"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+	        android:layout_below="@id/status_bar_include"
+            android:layout_toRightOf="@id/filter_vacation"
+            android:checked="true"
+            android:textOn="@string/model_state_sick"
+            android:textOff="@string/model_state_sick" />
+
+        <ToggleButton
+            android:id="@+id/filter_training"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+	        android:layout_below="@id/status_bar_include"
+            android:layout_toRightOf="@id/filter_sick"
+            android:checked="true"
+            android:textOn="@string/model_state_training"
+            android:textOff="@string/model_state_training" />
+
+        <ToggleButton
+            android:id="@+id/filter_movieprod"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+	        android:layout_below="@id/status_bar_include"
+            android:layout_toRightOf="@id/filter_training"
+            android:checked="true"
+            android:textOn="@string/model_state_movieprod"
+            android:textOff="@string/model_state_movieprod" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    />
+
+</LinearLayout>

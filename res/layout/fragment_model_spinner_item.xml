@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+<!-- 
+    android:layout_width="300dp"
+    android:layout_height="100dp"
+ -->
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/imageDescription"
+        android:padding="3dp"
+    />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:textStyle="bold"
+		android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+    />
+
+    <LinearLayout
+        android:id="@+id/ratingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/imageView1"
+        android:layout_below="@+id/textView1"
+    >
+
+	    <RatingBar
+	        android:id="@+id/ratingBar1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:numStars="10"
+	        android:stepSize="0.1"
+	        android:isIndicator="true"
+	        style="?android:attr/ratingBarStyleSmall"
+        />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewStatus"
+        android:layout_toLeftOf="@+id/imageView1"
+        android:layout_below="@+id/ratingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+    />
+
+</RelativeLayout>

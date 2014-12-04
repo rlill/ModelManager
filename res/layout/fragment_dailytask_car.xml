@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="horizontal" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        layout="@layout/element_dailytask_icons" />
+
+	<TableLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/messageText"
+		android:layout_toRightOf="@id/messageIcon"
+		android:layout_toLeftOf="@id/messageImage"
+	>
+
+		<TableRow
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/labelTheOffer"
+				android:textStyle="bold"
+				android:padding="4dp"
+				android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			<Spinner
+				android:id="@+id/selectCar"
+				android:layout_width="240dp"
+				android:layout_height="wrap_content" />
+
+			<Button
+				style="?android:attr/buttonBarButtonStyle"
+				android:id="@+id/buttonOk"
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/button_green"
+				android:text="@string/labelAccept"
+				android:onClick="dailyBusinessAccept"
+				/>
+
+		</TableRow>
+
+				<include layout="@layout/element_dailytask_deny" />
+
+	</TableLayout>
+
+</RelativeLayout>
+
