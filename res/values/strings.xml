@@ -196,11 +196,11 @@
     <string name="logmessage_car_takeaway" formatted="false">Rückgabe in den Firmenwagenpool</string>
     <string name="logmessage_car_deassign" formatted="false">Abschreibung</string>
     <string name="logmessage_car_buy" formatted="false">Kauf</string>
-    <string name="logmessage_movie_assign" formatted="false">%N wird ins Filmteam des Films &quot;%M&quot; aufgenommen</string>
-    <string name="logmessage_movie_deassign" formatted="false">%N hat das Filmteam des Films &quot;%M&quot; verlassen</string>
+    <string name="logmessage_movie_assign" formatted="false">%N wird ins Filmteam des Films \"%M\" aufgenommen</string>
+    <string name="logmessage_movie_deassign" formatted="false">%N hat das Filmteam des Films \"%M\" verlassen</string>
 
     <string name="logmessage_sick_today" formatted="false">%N ist heute krank</string>
-    <string name="logmessage_training_today" formatted="false">%N nimmt heute an der Fortbildung "%U" teil</string>
+    <string name="logmessage_training_today" formatted="false">%N nimmt heute an der Fortbildung \"%U\" teil</string>
     <string name="logmessage_vacation_today" formatted="false">%N hat heute Urlaub</string>
     <string name="logmessage_dismissal" formatted="false">betriebsbedingte Kündigung</string>
     <string name="logmessage_dismissal_imm" formatted="false">fristlose Kündigung</string>
@@ -241,7 +241,7 @@
 
     <string name="display_msg_teamwork_no_leader">Keine der Teamleiterinnen steht derzeit für Teamleiteraufgaben zur Verfügung.</string>
 
-    <string name="display_msg_training_finished" formatted="false">%N hat die Fortbildung "%U" mit Erfolg abgeschlossen.</string>
+    <string name="display_msg_training_finished" formatted="false">%N hat die Fortbildung \"%U\" mit Erfolg abgeschlossen.</string>
     <string name="display_msg_training_result_improve">Ihre %Q hat sich sehr verbessert.</string>
     <string name="display_msg_training_result_improve_more">Ihre %Q hat sich extrem verbessert.</string>
     <string name="display_msg_training_result_degrade">Ihre %Q hat sich verschlechtert.</string>
@@ -262,10 +262,10 @@
     <string name="display_msg_movie_daily_cost">tägl. Produktionskosten</string>
     <string name="display_msg_movie_finish_cost">Abschlußkosten</string>
     <string name="display_msg_movie_model_cost">Gagen für die Darstellerinnen nach Vereinbarung</string>
-    <string name="display_msg_movie_abort" formatted="false">Dreharbeiten zum Film "%M" abgebrochen.</string>
-    <string name="display_msg_movie_finished" formatted="false">Dreharbeiten zum Film "%M" abgeschlossen.</string>
-    <string name="display_msg_movie_sold" formatted="false">Verkauf des fertiggestellten Films "%M".</string>
-    <string name="display_msg_movie_rented" formatted="false">Vermietung des fertiggestellten Films "%M".</string>
+    <string name="display_msg_movie_abort" formatted="false">Dreharbeiten zum Film \"%M\" abgebrochen.</string>
+    <string name="display_msg_movie_finished" formatted="false">Dreharbeiten zum Film \"%M\" abgeschlossen.</string>
+    <string name="display_msg_movie_sold" formatted="false">Verkauf des fertiggestellten Films \"%M\".</string>
+    <string name="display_msg_movie_rented" formatted="false">Vermietung des fertiggestellten Films \"%M\".</string>
 
 
     <string name="display_monday">Montag</string>
