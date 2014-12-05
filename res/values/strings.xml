@@ -196,6 +196,8 @@
     <string name="logmessage_car_takeaway" formatted="false">Rückgabe in den Firmenwagenpool</string>
     <string name="logmessage_car_deassign" formatted="false">Abschreibung</string>
     <string name="logmessage_car_buy" formatted="false">Kauf</string>
+    <string name="logmessage_movie_assign" formatted="false">%N wird ins Filmteam des Films &quot;%M&quot; aufgenommen</string>
+    <string name="logmessage_movie_deassign" formatted="false">%N hat das Filmteam des Films &quot;%M&quot; verlassen</string>
 
     <string name="logmessage_sick_today" formatted="false">%N ist heute krank</string>
     <string name="logmessage_training_today" formatted="false">%N nimmt heute an der Fortbildung "%U" teil</string>

@@ -8,6 +8,7 @@ import java.util.TreeSet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -20,9 +21,13 @@ import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.adapter.ModelSpinnerAdapter;
 import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.model.MovieModel;
+import de.rlill.modelmanager.model.Movieproduction;
+import de.rlill.modelmanager.persistance.MovieModelDbAdapter;
 import de.rlill.modelmanager.service.DiaryService;
+import de.rlill.modelmanager.service.MessageService;
 import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.service.MovieService;
+import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
 import de.rlill.modelmanager.struct.ModelStatus;
 
@@ -93,7 +98,7 @@ public class MovieModelSelectDialog extends Activity implements OnClickListener 
         		R.id.textView1,
         		substList,
         		getLayoutInflater(),
-        		EventFlag.NEWDAY);
+        		EventFlag.MOVIE);
 		sp.setAdapter(replacementAdapter);
 
 		// select model to be modified/removed
@@ -132,8 +137,22 @@ public class MovieModelSelectDialog extends Activity implements OnClickListener 
 			EditText et = (EditText)findViewById(R.id.editTextOffer);
 			int offer = Util.atoi(et.getText().toString());
 
-			// TODO: do the check
+			// TODO: do minimum check
 
+
+
+			// update already booked or insert new?
+			List<MovieModel> mmList = MovieModelDbAdapter.getMovieModels(movieId, model.getId(), DiaryService.today() + 1);
+			Log.i(LOG_TAG, String.format("Movie %d, Model %d, day %d: %d relations",
+					movieId, model.getId(), DiaryService.today() + 1, mmList.size()));
+			if (mmList.size() == 0) {
+				String msg = MessageService.getMessage(R.string.logmessage_movie_assign, model);
+				Movieproduction mpr = MovieService.getMovie(movieId);
+				DiaryService.log(msg.replace("%M", mpr.getName()),
+						EventClass.MOVIE_CAST, EventFlag.AVAILABLE, model.getId(), offer);
+			}
+
+			// add() performs update (price) if entry already exists
 			MovieService.addModelForMovie(movieId, model.getId(), DiaryService.today() + 1, offer);
 
 			Intent intent = getIntent();
@@ -144,6 +163,11 @@ public class MovieModelSelectDialog extends Activity implements OnClickListener 
 		}
 		else if (v.getId() == R.id.button2) {
 			// remove
+			String msg = MessageService.getMessage(R.string.logmessage_movie_deassign, model);
+			Movieproduction mpr = MovieService.getMovie(movieId);
+			DiaryService.log(msg.replace("%M", mpr.getName()),
+					EventClass.MOVIE_CAST, EventFlag.UNAVAILABLE, modelId, 0);
+
 			MovieService.removeModelFromMovie(movieId, model.getId());
 
 			Intent intent = getIntent();

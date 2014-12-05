@@ -51,6 +51,8 @@ public class MessageService {
 		translate(res, R.string.logmessage_car_stolen);
 		translate(res, R.string.logmessage_car_takeaway);
 		translate(res, R.string.logmessage_car_buy);
+		translate(res, R.string.logmessage_movie_assign);
+		translate(res, R.string.logmessage_movie_deassign);
 
 		translate(res, R.string.display_msg_movie_abort);
 		translate(res, R.string.display_msg_movie_sold);
