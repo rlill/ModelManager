@@ -28,7 +28,7 @@
 
 	    <TableLayout
 	        android:id="@+id/tableCompanyCarOverview"
-	        android:layout_width="match_parent"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/textView1"
 	        android:layout_toRightOf="@id/imageView1"
@@ -172,19 +172,32 @@
 			        android:padding="4dp"
 			        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-			    <Button 
-			        android:id="@+id/button1"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:text="@string/labelBuyNewCar"
-			        android:background="@drawable/button_green"
-			        android:padding="10dp"
-			        android:onClick="carShopping"
-			        />
-
 			</TableRow>
 
 		</TableLayout>
+
+	    <Button 
+	        android:id="@+id/button1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/tableCompanyCarOverview"
+	        android:layout_below="@id/textView1"
+	        android:text="@string/labelBuyNewCar"
+	        android:background="@drawable/button_green"
+	        android:padding="10dp"
+	        android:onClick="carShopping"
+	        />
+
+	    <Button 
+	        android:id="@+id/button2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/tableCompanyCarOverview"
+	        android:layout_below="@id/button1"
+	        android:text="@string/labelModelsWithoutCar"
+	        android:background="@drawable/button_blue"
+	        android:padding="10dp"
+	        />
 
     	<ListView
 	        android:id="@+id/listCompanyCars"

@@ -8,32 +8,33 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.Util;
-import de.rlill.modelmanager.adapter.CarTypeListAdapter;
 import de.rlill.modelmanager.adapter.CompanyCarListAdapter;
 import de.rlill.modelmanager.adapter.StatusBarFragmentAdapter;
 import de.rlill.modelmanager.dialog.CarMaintenanceDialog;
-import de.rlill.modelmanager.model.CarType;
 import de.rlill.modelmanager.model.CompanyCar;
+import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.service.CarService;
-import de.rlill.modelmanager.setup.CarTypes;
+import de.rlill.modelmanager.service.ModelService;
 
-public class CompanyCarFragment extends Fragment implements OnItemClickListener {
+public class CompanyCarFragment extends Fragment
+		implements OnItemClickListener, OnClickListener {
 
 	private static final String LOG_TAG = CompanyCarFragment.class.getSimpleName();
 
 	private View fragmentView;
-    private List<CarType> carTypeListItems;
     private List<CompanyCar> companyCarListItems;
-    private ArrayAdapter<CarType> carTypeAdapter;
     private ArrayAdapter<CompanyCar> companyCarAdapter;
+    private boolean noCarModels = false;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,16 +44,7 @@ public class CompanyCarFragment extends Fragment implements OnItemClickListener 
 
         StatusBarFragmentAdapter.initStatusBar(fragmentView);
 
-        carTypeListItems = new ArrayList<CarType>();
         companyCarListItems = new ArrayList<CompanyCar>();
-
-        carTypeAdapter = new CarTypeListAdapter(
-        		container.getContext(),
-        		android.R.layout.simple_list_item_1,
-        		R.id.listCompanyCars,
-        		carTypeListItems,
-        		inflater,
-        		this);
 
         companyCarAdapter = new CompanyCarListAdapter(
         		container.getContext(),
@@ -66,6 +58,9 @@ public class CompanyCarFragment extends Fragment implements OnItemClickListener 
         listView.setTextFilterEnabled(true);
         listView.setOnItemClickListener(this);
 
+        Button b = (Button)fragmentView.findViewById(R.id.button2);
+        b.setOnClickListener(this);
+
         updateSummary();
 
         return fragmentView;
@@ -74,12 +69,21 @@ public class CompanyCarFragment extends Fragment implements OnItemClickListener 
     @Override
 	public void onResume() {
 		super.onResume();
-		carTypeListItems.clear();
-		carTypeListItems.addAll(CarTypes.getCarTypes());
-		carTypeAdapter.notifyDataSetChanged();
 
 		companyCarListItems.clear();
-		companyCarListItems.addAll(CarService.getCompanyPoolCars());
+
+		if (noCarModels) {
+			for (Model model : ModelService.getHiredModels()) {
+				if (model.getCarId() != 0) continue;
+
+				// store modelId in car id property
+				CompanyCar cc = new CompanyCar(model.getId());
+				companyCarListItems.add(cc);
+			}
+		}
+		else
+			companyCarListItems.addAll(CarService.getCompanyPoolCars());
+
 		companyCarAdapter.notifyDataSetChanged();
 
 		updateSummary();
@@ -167,4 +171,15 @@ public class CompanyCarFragment extends Fragment implements OnItemClickListener 
         tv = (TextView)fragmentView.findViewById(R.id.textViewValueTotal);
         tv.setText(Util.amount(valsumTotal));
     }
+
+	@Override
+	public void onClick(View v) {
+
+		noCarModels = !noCarModels;
+
+        Button b = (Button)fragmentView.findViewById(R.id.button2);
+        b.setText(getResources().getString(noCarModels ? R.string.labelModelsWithCar : R.string.labelModelsWithoutCar));
+
+        onResume();
+	}
 }

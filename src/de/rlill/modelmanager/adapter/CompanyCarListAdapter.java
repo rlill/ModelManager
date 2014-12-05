@@ -50,6 +50,26 @@ public class CompanyCarListAdapter extends ArrayAdapter<CompanyCar> {
 			viewElements = (CompanyCarListViewElements) convertView.getTag();
 		}
 
+		if (companyCar.getCarTypeId() == 0) {
+			// dummy for 'Model without car'
+			viewElements.setName("");
+			viewElements.setClass("");
+			viewElements.setAge(0);
+			viewElements.setValue(0);
+
+			Model model = ModelService.getModelById(companyCar.getId());
+			viewElements.setContextModel(model);
+
+			int ir = appContext.getResources().getIdentifier(model.getImage(), "drawable", appContext.getPackageName());
+			viewElements.setModelImage(ir);
+
+			viewElements.setDriver(model.getFullname());
+			viewElements.setStatus(CarStatus.NEW);
+			viewElements.setImage(0);
+
+			return convertView;
+		}
+
 		viewElements.setName(companyCar.getCarType().getDescription() + " [" + companyCar.getLicensePlate() + "]");
 		viewElements.setClass(companyCar.getCarType().getCclass().getName());
 		viewElements.setAge(DiaryService.today() - companyCar.getBuyday());

@@ -119,6 +119,17 @@ public class ModelService {
     	return result;
     }
 
+    public static List<Model> getHiredModels() {
+		List<ModelStatus> statusFilters = new ArrayList<ModelStatus>();
+		statusFilters.add(ModelStatus.HIRED);
+		statusFilters.add(ModelStatus.SICK);
+		statusFilters.add(ModelStatus.VACATION);
+		statusFilters.add(ModelStatus.TRAINING);
+		statusFilters.add(ModelStatus.MOVIEPROD);
+
+		return ModelService.getAllModels(statusFilters);
+	}
+
     public static void initTeamSpinner(Context ctx, Spinner sp, int selectedTeamId) {
 
 		// list Teams

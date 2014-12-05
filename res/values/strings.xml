@@ -129,6 +129,8 @@
     <string name="labelRequest_pl">Anfragen</string>
     <string name="labelEarnings">Einnahmen</string>
     <string name="labelBuyNewCar">Neues Auto kaufen</string>
+    <string name="labelModelsWithCar">Models mit Auto</string>
+    <string name="labelModelsWithoutCar">Models ohne Auto</string>
     <string name="labelTaxInsurance">Steuern und Versicherung wöchentlich</string>
     <string name="labelMaxSpeed">Höchst-\ngeschwindigkeit</string>
     <string name="labelPower">Leistung</string>

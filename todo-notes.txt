@@ -6,6 +6,7 @@ Events:
 Model negDlg
 	- balance summary
 		o (test) correct sums
+		  -> teamleader count booking prices
 		o vertical bars in color
 
 "1 Tage Resturlaub" - Singular!
@@ -22,12 +23,13 @@ insufficient offer: redisplay form with previous values
 - OUT/LOSS-PAYVAR (offer)
 
 
-car dlg: list models without car
+(test) car dlg: list models without car
 
 Diary logging duplicates, formulation
 
 Teams: hide empty
 
+Automatic teamwork
 
 New day progress dialog
 
@@ -41,3 +43,6 @@ Games (from pl)
 - 5 names > select face (multiple choice, 4 options)
 - 5 faces > type in name, compare after reducing the spelling
 - bet amount for each question (1 000 .. 10 000 000)
+
+Blocking layer on today fragment if account in dept
+
