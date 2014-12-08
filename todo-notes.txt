@@ -30,6 +30,7 @@ Diary logging duplicates, formulation
 Teams: hide empty
 
 Automatic teamwork
+-> Teamleader payment notification Zusammenfassen, TL Name!
 
 New day progress dialog
 

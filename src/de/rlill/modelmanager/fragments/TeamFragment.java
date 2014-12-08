@@ -1,7 +1,6 @@
 package de.rlill.modelmanager.fragments;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
@@ -19,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.adapter.ModelSpinnerAdapter;
@@ -32,16 +30,9 @@ import de.rlill.modelmanager.model.Today;
 import de.rlill.modelmanager.persistance.DiaryDbAdapter;
 import de.rlill.modelmanager.persistance.TeamDbAdapter;
 import de.rlill.modelmanager.persistance.TodayDbAdapter;
-import de.rlill.modelmanager.service.DiaryService;
-import de.rlill.modelmanager.service.EventService;
 import de.rlill.modelmanager.service.ModelService;
-import de.rlill.modelmanager.service.TodayService.TeamWork;
-import de.rlill.modelmanager.service.TransactionService;
 import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
-import de.rlill.modelmanager.struct.ModelStatus;
-import de.rlill.modelmanager.struct.Quality;
-import de.rlill.modelmanager.struct.RejectReasons;
 import de.rlill.modelmanager.struct.ViewElements;
 
 public class TeamFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
@@ -249,172 +240,28 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 		if (v instanceof LinearLayout) {
 			onItemClick(null, v, 0, 0);
 		}
-		else if (v.getId() == R.id.buttonTeamwork) {
+		else if (v.getId() == R.id.buttonTeamwork && selectedTeam != null) {
 			// teamwork
-			teamwork();
+			ModelService.teamwork(selectedTeam);
 			fillStatistics();
 		}
 		else if (v.getId() == R.id.buttonSave && selectedTeam != null) {
 			// save
-	        Spinner sp = (Spinner)fragmentView.findViewById(R.id.selectTeamLeader);
-	        Model m = (Model)sp.getSelectedItem();
-	        selectedTeam.setLeader1(m.getId());
+			Spinner sp = (Spinner) fragmentView.findViewById(R.id.selectTeamLeader);
+			Model m = (Model) sp.getSelectedItem();
+			selectedTeam.setLeader1(m.getId());
 
-			sp = (Spinner)fragmentView.findViewById(R.id.selectTeamLeaderSubst);
-	        m = (Model)sp.getSelectedItem();
-	        selectedTeam.setLeader2(m.getId());
+			sp = (Spinner) fragmentView.findViewById(R.id.selectTeamLeaderSubst);
+			m = (Model) sp.getSelectedItem();
+			selectedTeam.setLeader2(m.getId());
 
-			EditText et = (EditText)fragmentView.findViewById(R.id.editTextTeamLeaderBonus);
+			EditText et = (EditText) fragmentView.findViewById(R.id.editTextTeamLeaderBonus);
 			selectedTeam.setBonus(Util.atoi(et.getText().toString()));
 
 			TeamDbAdapter.updateTeam(selectedTeam);
+			ModelService.teamwork(selectedTeam);
 
 			adapter.updateListElement(v, selectedTeam);
-		}
-	}
-
-	private void teamwork() {
-
-		if (selectedTeam == null) return;
-
-		// check if first leader is active
-		Model leader = ModelService.getModelById(selectedTeam.getLeader1());
-		Model l1 = leader;
-		if (leader.getStatus() != ModelStatus.HIRED) {
-			// check if second leader is active
-			leader = ModelService.getModelById(selectedTeam.getLeader2());
-		}
-		if (leader.getStatus() != ModelStatus.HIRED) {
-			Log.e(LOG_TAG, "Team #" + selectedTeam.getId()
-					+ " was managed, but leader 1 #" + selectedTeam.getLeader1() + " is " + l1.getStatus()
-					+ " and leader 2 #" + selectedTeam.getLeader2() + " is " + leader.getStatus());
-			Toast.makeText(context, R.string.display_msg_teamwork_no_leader, Toast.LENGTH_LONG).show();
-			return;
-		}
-
-		// collect requests
-		List<Model> substList = ModelService.getTeamMembers(selectedTeam.getId());
-		List<Today> photoRequests = new ArrayList<Today>();
-		List<Today> movieRequests = new ArrayList<Today>();
-		for (Today today : TodayDbAdapter.getAllEvents()) {
-			// process booking requests only
-			if (today.getEvent().getEclass() != EventClass.BOOKING
-					&& today.getEvent().getEclass() != EventClass.BOOKREJECT) continue;
-
-			// accept requests with no model assigned
-			boolean thisTeam = today.getModelId() == ModelService.UNDEFINED_MODEL;
-
-			// and accept requests for model from this team
-			if (!thisTeam) {
-				for (Model m : substList) if (m.getId() == today.getModelId()) thisTeam = true;
-			}
-
-			// skip everything else
-			if (!thisTeam) continue;
-
-			switch (today.getEvent().getFlag()) {
-			case PHOTO:
-				photoRequests.add(today);
-				break;
-			case MOVIE:
-				movieRequests.add(today);
-				break;
-			default:
-				Log.w(LOG_TAG, "Today BOOKING event " + today.getEvent().getFlag() + ": #" + today.getId());
-			}
-		}
-
-		// assign to best models
-
-		// movies
-		TeamWork tw = new TeamWork();
-		Collections.sort(substList, new ModelService.ModelQualityComparator(Quality.MOVIE));
-		for (Today t : movieRequests) {
-			Model match = null;
-			for (Model m : substList) {
-				if (m.getStatus() != ModelStatus.HIRED) continue;
-				if (ModelService.isActiveTeamLeader(m.getId())) continue;
-				RejectReasons rr = ModelService.bookingRejectReasons(m.getId());
-				if (rr.willReject()) continue;
-				if (ModelService.isModelBookableToday(m.getId(), EventFlag.MOVIE)) {
-					match = m;
-					break;
-				}
-			}
-
-			if (match != null) {
-				// book
-				int mqual = t.getModel().getQuality_movie();
-				if (mqual < 0) mqual = 1;
-
-				int squal = match.getQuality_movie();
-				if (squal < 1) squal = 1;
-
-				int newPrice = t.getAmount2() / mqual * squal;
-				Log.i(LOG_TAG, "PRICE " + t.getAmount2() + ".- / " + mqual + " * " + squal + " = " + newPrice);
-
-				t.setAmount1(newPrice);
-				t.setModelId(match.getId());
-				ModelService.reportBooking(t);
-				TransactionService.transfer(-1, 0, newPrice, t.getNoteAcct());
-				DiaryService.log(t);
-				TodayDbAdapter.removeToday(t.getId());
-
-				tw.bookings++;
-				tw.earnings += newPrice;
-				Log.i(LOG_TAG, "Team " + match.getTeamId() + " event " + tw.bookings + " " + Util.amount(newPrice) + " - " + match.getFullname());
-			}
-			else
-				Log.d(LOG_TAG, "No bookable model for MOVIE request #" + t.getId());
-		}
-
-		// photosessions
-		Collections.sort(substList, new ModelService.ModelQualityComparator(Quality.PHOTO));
-		for (Today t : photoRequests) {
-			Model match = null;
-			for (Model m : substList) {
-				if (m.getStatus() != ModelStatus.HIRED) continue;
-				if (ModelService.isActiveTeamLeader(m.getId())) continue;
-				RejectReasons rr = ModelService.bookingRejectReasons(m.getId());
-				if (rr.willReject()) continue;
-				if (ModelService.isModelBookableToday(m.getId(), EventFlag.PHOTO)) {
-					match = m;
-					break;
-				}
-			}
-
-			if (match != null) {
-				// book
-				int mqual = t.getModel().getQuality_photo();
-				if (mqual < 0) mqual = 1;
-
-				int squal = match.getQuality_photo();
-				if (squal < 1) squal = 1;
-
-				int newPrice = t.getAmount2() / mqual * squal;
-				Log.i(LOG_TAG, "PRICE " + t.getAmount2() + ".- / " + mqual + " * " + squal + " = " + newPrice);
-
-				t.setAmount1(newPrice);
-				t.setModelId(match.getId());
-				ModelService.reportBooking(t);
-				TransactionService.transfer(-1, 0, newPrice, t.getNoteAcct());
-				DiaryService.log(t);
-				TodayDbAdapter.removeToday(t.getId());
-
-				tw.bookings++;
-				tw.earnings += newPrice;
-				Log.i(LOG_TAG, "Team " + match.getTeamId() + " event " + tw.bookings + " " + Util.amount(newPrice) + " - " + match.getFullname());
-			}
-			else
-				Log.d(LOG_TAG, "No bookable model for PHOTO request #" + t.getId());
-		}
-
-		if (tw.earnings > 0) {
-			int bonus = tw.earnings * selectedTeam.getBonus() / 100;
-			Today t = EventService.newNotification(leader.getId(), EventFlag.GROUPWORK, tw.earnings, bonus);
-			Log.i(LOG_TAG, "Team " + selectedTeam.getId() + " has performed " + tw.bookings + " bookings and earned *" + tw.earnings + ".- Leader " + leader.getFullname() + " gets *" + bonus + ".-");
-			TransactionService.transfer(0, leader.getId(), bonus, t.getNoteAcct());
-			DiaryService.log(t);
 		}
 	}
 }

@@ -14,6 +14,7 @@ import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.model.Diary;
 import de.rlill.modelmanager.model.Event;
 import de.rlill.modelmanager.model.Model;
+import de.rlill.modelmanager.model.Team;
 import de.rlill.modelmanager.model.Today;
 import de.rlill.modelmanager.persistance.DiaryDbAdapter;
 import de.rlill.modelmanager.persistance.EventDbAdapter;
@@ -66,11 +67,13 @@ public class TodayService {
 			ModelService.reportBooking(today);
 			DiaryService.log(today);
 			TodayDbAdapter.removeToday(today.getId());
+			triggerTeamwork();
 			break;
 		case BOOKREJECT:
 			ModelService.grantVacation(today.getModelId());
 			ModelService.clearTodaysBookings(today.getModelId(), EventFlag.PHOTO);
 			TodayService.dropEvents(today.getModelId(), EventClass.REQUEST, EventFlag.VACATION, EventFlag.TRAINING);
+			triggerTeamwork();
 			break;
 		case REQUEST:
 			switch (today.getEvent().getFlag()) {
@@ -78,6 +81,7 @@ public class TodayService {
 				ModelService.grantBonus(today.getModelId(), today.getAmount1(), today.getAmount2());
 				DiaryService.logAccept(today);
 				TodayDbAdapter.removeToday(today.getId());
+				triggerTeamwork();
 				break;
 			case VACATION:
 				ModelService.grantVacation(today.getModelId());
@@ -95,6 +99,7 @@ public class TodayService {
 				DiaryService.logAccept(today);
 				ModelService.grantRaise(today.getModelId(), newSalary);
 				TodayDbAdapter.removeToday(today.getId());
+				triggerTeamwork();
 				break;
 			case CAR_UPDATE:
 				int carId = Util.atoi(formularData.get(R.string.labelCar));
@@ -112,6 +117,7 @@ public class TodayService {
 				today.setAmount1(Util.atoi(formularData.get(R.string.labelPrice)));
 				DiaryService.logAccept(today);
 				TodayDbAdapter.removeToday(today.getId());
+				triggerTeamwork();
 				break;
 			case QUIT:
 				TodayService.dropRequests(today.getModelId());
@@ -293,6 +299,7 @@ public class TodayService {
 				String msg = ctx.getString(R.string.logmessage_car_assign, CarService.getCarInfo(companyCarId));
 				DiaryService.log(msg, EventClass.ACCEPT, EventFlag.CAR_UPDATE, today.getModelId(), carPrice);
 			}
+			triggerTeamwork();
 			break;
 
 		case REQUEST:
@@ -305,6 +312,7 @@ public class TodayService {
 					DiaryService.logAccept(today);
 					ModelService.grantRaise(today.getModelId(), newSalary);
 					TodayDbAdapter.removeToday(today.getId());
+					triggerTeamwork();
 				}
 				else {
 					// toast
@@ -325,6 +333,7 @@ public class TodayService {
 					ModelService.grantRaise(today.getModelId(), offer);
 					TodayDbAdapter.removeToday(today.getId());
 					TodayService.dropEvents(today.getModelId(), EventClass.REQUEST, EventFlag.RAISE);
+					triggerTeamwork();
 				}
 				// check bonus offer
 				offer = Util.atoi(formularData.get(R.string.labelBonus));
@@ -337,6 +346,7 @@ public class TodayService {
 					ModelService.grantBonus(today.getModelId(), offer, -1);
 					TodayDbAdapter.removeToday(today.getId());
 					TodayService.dropEvents(today.getModelId(), EventClass.REQUEST, EventFlag.BONUS);
+					triggerTeamwork();
 				}
 				break;
 
@@ -346,6 +356,7 @@ public class TodayService {
 				if (offer >= today.getAmount2()) {
 					ModelService.grantBonus(today.getModelId(), offer, today.getAmount1());
 					TodayDbAdapter.removeToday(today.getId());
+					triggerTeamwork();
 				}
 				break;
 
@@ -604,6 +615,12 @@ public class TodayService {
 
 		NewDayService nd = new NewDayService(ctx, ve);
 		nd.execute(null, null, null);
+	}
+
+	private static void triggerTeamwork() {
+		for (Team team : ModelService.getAllTeams()) {
+			ModelService.teamwork(team);
+		}
 	}
 
 	public static List<Today> getTodayEventsForModel(int modelId) {

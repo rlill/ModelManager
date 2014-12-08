@@ -23,6 +23,7 @@ import de.rlill.modelmanager.persistance.ModelDbAdapter;
 import de.rlill.modelmanager.persistance.ModelTrainingDbAdapter;
 import de.rlill.modelmanager.persistance.TeamDbAdapter;
 import de.rlill.modelmanager.persistance.TodayDbAdapter;
+import de.rlill.modelmanager.service.TodayService.TeamWork;
 import de.rlill.modelmanager.struct.CarAction;
 import de.rlill.modelmanager.struct.CarClass;
 import de.rlill.modelmanager.struct.CarStatus;
@@ -279,6 +280,147 @@ public class ModelService {
 		// no active leader, act unmanaged
 		return false;
 	}
+
+
+	public static void teamwork(Team team) {
+
+		// check if first leader is active
+		Model leader = ModelService.getModelById(team.getLeader1());
+		if (leader.getStatus() != ModelStatus.HIRED) {
+			// check if second leader is active
+			leader = ModelService.getModelById(team.getLeader2());
+		}
+		if (leader.getStatus() != ModelStatus.HIRED) {
+			Log.w(LOG_TAG, "No Teamwork in team " + team.getId() + " because no leader is available");
+			return;
+		}
+
+		// collect requests
+		List<Model> substList = ModelService.getTeamMembers(team.getId());
+		List<Today> photoRequests = new ArrayList<Today>();
+		List<Today> movieRequests = new ArrayList<Today>();
+		for (Today today : TodayDbAdapter.getAllEvents()) {
+			// process booking requests only
+			if (today.getEvent().getEclass() != EventClass.BOOKING
+					&& today.getEvent().getEclass() != EventClass.BOOKREJECT) continue;
+
+			// accept requests with no model assigned
+			boolean thisTeam = today.getModelId() == ModelService.UNDEFINED_MODEL;
+
+			// and accept requests for model from this team
+			if (!thisTeam) {
+				for (Model m : substList) if (m.getId() == today.getModelId()) thisTeam = true;
+			}
+
+			// skip everything else
+			if (!thisTeam) continue;
+
+			switch (today.getEvent().getFlag()) {
+			case PHOTO:
+				photoRequests.add(today);
+				break;
+			case MOVIE:
+				movieRequests.add(today);
+				break;
+			default:
+				Log.w(LOG_TAG, "Today BOOKING event " + today.getEvent().getFlag() + ": #" + today.getId());
+			}
+		}
+
+		// assign to best models
+
+		// movies
+		TeamWork tw = new TeamWork();
+		Collections.sort(substList, new ModelService.ModelQualityComparator(Quality.MOVIE));
+		for (Today t : movieRequests) {
+			Model match = null;
+			for (Model m : substList) {
+				if (m.getStatus() != ModelStatus.HIRED) continue;
+				if (ModelService.isActiveTeamLeader(m.getId())) continue;
+				RejectReasons rr = ModelService.bookingRejectReasons(m.getId());
+				if (rr.willReject()) continue;
+				if (ModelService.isModelBookableToday(m.getId(), EventFlag.MOVIE)) {
+					match = m;
+					break;
+				}
+			}
+
+			if (match != null) {
+				// book
+				int mqual = t.getModel().getQuality_movie();
+				if (mqual < 0) mqual = 1;
+
+				int squal = match.getQuality_movie();
+				if (squal < 1) squal = 1;
+
+				int newPrice = t.getAmount2() / mqual * squal;
+				Log.i(LOG_TAG, "PRICE " + t.getAmount2() + ".- / " + mqual + " * " + squal + " = " + newPrice);
+
+				t.setAmount1(newPrice);
+				t.setModelId(match.getId());
+				ModelService.reportBooking(t);
+				TransactionService.transfer(-1, 0, newPrice, t.getNoteAcct());
+				DiaryService.log(t);
+				TodayDbAdapter.removeToday(t.getId());
+
+				tw.bookings++;
+				tw.earnings += newPrice;
+				Log.i(LOG_TAG, "Team " + match.getTeamId() + " event " + tw.bookings + " " + Util.amount(newPrice) + " - " + match.getFullname());
+			}
+			else
+				Log.d(LOG_TAG, "No bookable model for MOVIE request #" + t.getId());
+		}
+
+		// photosessions
+		Collections.sort(substList, new ModelService.ModelQualityComparator(Quality.PHOTO));
+		for (Today t : photoRequests) {
+			Model match = null;
+			for (Model m : substList) {
+				if (m.getStatus() != ModelStatus.HIRED) continue;
+				if (ModelService.isActiveTeamLeader(m.getId())) continue;
+				RejectReasons rr = ModelService.bookingRejectReasons(m.getId());
+				if (rr.willReject()) continue;
+				if (ModelService.isModelBookableToday(m.getId(), EventFlag.PHOTO)) {
+					match = m;
+					break;
+				}
+			}
+
+			if (match != null) {
+				// book
+				int mqual = t.getModel().getQuality_photo();
+				if (mqual < 0) mqual = 1;
+
+				int squal = match.getQuality_photo();
+				if (squal < 1) squal = 1;
+
+				int newPrice = t.getAmount2() / mqual * squal;
+				Log.i(LOG_TAG, "PRICE " + t.getAmount2() + ".- / " + mqual + " * " + squal + " = " + newPrice);
+
+				t.setAmount1(newPrice);
+				t.setModelId(match.getId());
+				ModelService.reportBooking(t);
+				TransactionService.transfer(-1, 0, newPrice, t.getNoteAcct());
+				DiaryService.log(t);
+				TodayDbAdapter.removeToday(t.getId());
+
+				tw.bookings++;
+				tw.earnings += newPrice;
+				Log.i(LOG_TAG, "Team " + match.getTeamId() + " event " + tw.bookings + " " + Util.amount(newPrice) + " - " + match.getFullname());
+			}
+			else
+				Log.d(LOG_TAG, "No bookable model for PHOTO request #" + t.getId());
+		}
+
+		if (tw.earnings > 0) {
+			int bonus = tw.earnings * team.getBonus() / 100;
+			Today t = EventService.newNotification(leader.getId(), EventFlag.GROUPWORK, tw.earnings, bonus);
+			Log.i(LOG_TAG, "Team " + team.getId() + " has performed " + tw.bookings + " bookings and earned *" + tw.earnings + ".- Leader " + leader.getFullname() + " gets *" + bonus + ".-");
+			TransactionService.transfer(0, leader.getId(), bonus, t.getNoteAcct());
+			DiaryService.log(t);
+		}
+	}
+
 
 	public static Statistics getStatistics(int modelId) {
 		Statistics st = modelStatistics.get(modelId);
