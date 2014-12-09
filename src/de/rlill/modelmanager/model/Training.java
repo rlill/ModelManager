@@ -91,7 +91,7 @@ public class Training {
 	}
 	public String toString() {
 		String result = description;
-		if (price > 0) result += " (" + Util.amount(price) + ")";
+		if (price > 0) result += " (" + duration + " d, " + Util.amount(price) + ")";
 		return result;
 	}
 }

@@ -20,7 +20,6 @@ import de.rlill.modelmanager.adapter.AccountListAdapter;
 import de.rlill.modelmanager.dialog.AccountDetailDialog;
 import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.service.ModelService;
-import de.rlill.modelmanager.struct.ModelStatus;
 
 public class AccountFragment extends Fragment implements OnItemClickListener {
 
@@ -60,13 +59,7 @@ public class AccountFragment extends Fragment implements OnItemClickListener {
 	    myself.setLastname("Konto");
 	    listItems.add(myself);
 
-	    List<ModelStatus> filterList = new ArrayList<ModelStatus>();
-	    filterList.add(ModelStatus.HIRED);
-	    filterList.add(ModelStatus.VACATION);
-	    filterList.add(ModelStatus.SICK);
-	    filterList.add(ModelStatus.TRAINING);
-
-	    List<Model> accountModels = ModelService.getAllModels(filterList);
+	    List<Model> accountModels = ModelService.getHiredModels();
 	    Collections.sort(accountModels, new ModelService.ModelNameComparator());
 
 	    Log.d(LOG_TAG, "Displaying " + (1 + accountModels.size()) + " accounts");

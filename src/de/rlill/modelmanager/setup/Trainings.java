@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.util.SparseArray;
 import de.rlill.modelmanager.model.Training;
+import de.rlill.modelmanager.service.PropertiesService;
 
 public class Trainings {
 
@@ -24,11 +25,12 @@ public class Trainings {
 	private static void init() {
 		trainingList = new ArrayList<Training>();
 		trainingMap = new SparseArray<Training>();
+		double worthincreaseFactor = PropertiesService.getWorthincrease();
 
 		Training training = new Training(1);
 		training.setDescription("Profitraining für Fotomodels");
-		training.setDuration(3);
-		training.setPrice(20000);
+		training.setDuration(4);
+		training.setPrice((int)(worthincreaseFactor * 12000));
 		training.setInc_qphoto(40);
 		training.setInc_mood(20);
 		trainingList.add(training);
@@ -36,8 +38,8 @@ public class Trainings {
 
 		training = new Training(2);
 		training.setDescription("Profitraining für Filmmodels");
-		training.setDuration(3);
-		training.setPrice(22000);
+		training.setDuration(4);
+		training.setPrice((int)(worthincreaseFactor * 15000));
 		training.setInc_qmovie(40);
 		training.setInc_mood(20);
 		trainingList.add(training);
@@ -46,7 +48,7 @@ public class Trainings {
 		training = new Training(3);
 		training.setDescription("Erotiktraining für Models");
 		training.setDuration(3);
-		training.setPrice(25000);
+		training.setPrice((int)(worthincreaseFactor * 18000));
 		training.setInc_erotic(40);
 		training.setInc_mood(20);
 		training.setInc_criminal(40);
@@ -56,7 +58,7 @@ public class Trainings {
 		training = new Training(3);
 		training.setDescription("Shopping-Urlaub");
 		training.setDuration(3);
-		training.setPrice(30000);
+		training.setPrice((int)(worthincreaseFactor * 20000));
 		training.setInc_erotic(40);
 		training.setInc_mood(20);
 		trainingList.add(training);
@@ -65,7 +67,7 @@ public class Trainings {
 		training = new Training(4);
 		training.setDescription("Teamleiterkurs");
 		training.setDuration(5);
-		training.setPrice(40000);
+		training.setPrice((int)(worthincreaseFactor * 30000));
 		training.setInc_ambition(20);
 		training.setInc_qtlead(40);
 		trainingList.add(training);
@@ -74,7 +76,7 @@ public class Trainings {
 		training = new Training(5);
 		training.setDescription("Wellness-Kurzurlaub");
 		training.setDuration(3);
-		training.setPrice(30000);
+		training.setPrice((int)(worthincreaseFactor * 25000));
 		training.setInc_ambition(10);
 		training.setInc_mood(20);
 		training.setInc_health(30);
@@ -85,7 +87,7 @@ public class Trainings {
 		training = new Training(6);
 		training.setDescription("Wellness-Urlaub");
 		training.setDuration(8);
-		training.setPrice(60000);
+		training.setPrice((int)(worthincreaseFactor * 40000));
 		training.setInc_ambition(20);
 		training.setInc_mood(40);
 		training.setInc_health(50);

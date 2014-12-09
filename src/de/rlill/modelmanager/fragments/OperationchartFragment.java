@@ -1,6 +1,5 @@
 package de.rlill.modelmanager.fragments;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +23,6 @@ import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.service.DiaryService;
 import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.struct.DiaryIterator;
-import de.rlill.modelmanager.struct.ModelStatus;
 import de.rlill.modelmanager.struct.Operation;
 import de.rlill.modelmanager.struct.Weekday;
 
@@ -98,14 +96,7 @@ public class OperationchartFragment extends Fragment {
 			ll.addView(tv);
 		}
 
-		List<ModelStatus> statusList = new ArrayList<ModelStatus>();
-		statusList.add(ModelStatus.HIRED);
-		statusList.add(ModelStatus.VACATION);
-		statusList.add(ModelStatus.TRAINING);
-		statusList.add(ModelStatus.SICK);
-		statusList.add(ModelStatus.MOVIEPROD);
-//		statusList.add(ModelStatus.FREE);
-		List<Model> listItems = ModelService.getAllModels(statusList);
+		List<Model> listItems = ModelService.getHiredModels();
 
 		DiaryIterator diaryIterator = DiaryService.listOperationsEventsSince(startDay);
 

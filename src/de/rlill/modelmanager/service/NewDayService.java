@@ -376,7 +376,8 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				// car broken/stolen
 				if (model.getCarId() > 0) {
 					Today t;
-					switch (Util.rnd(50)) {
+					switch (Util.rnd(70)) {
+					case 1:
 					case 2:
 						CarService.log(model.getCarId(), CarAction.BREAKDOWN,
 								MessageService.getMessage(R.string.logmessage_car_breakdown),

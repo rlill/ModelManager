@@ -45,11 +45,15 @@ public class MessageService {
 		translate(res, R.string.logmessage_model_quit);
 		translate(res, R.string.logmessage_car_repair2);
 		translate(res, R.string.logmessage_car_repair3);
+		translate(res, R.string.logmessage_car_sale2);
+		translate(res, R.string.logmessage_car_trash);
 		translate(res, R.string.logmessage_car_breakdown);
 		translate(res, R.string.logmessage_car_accident);
 		translate(res, R.string.logmessage_car_wrecked);
 		translate(res, R.string.logmessage_car_stolen);
 		translate(res, R.string.logmessage_car_takeaway);
+		translate(res, R.string.logmessage_car_assign);
+		translate(res, R.string.logmessage_car_deassign);
 		translate(res, R.string.logmessage_car_buy);
 		translate(res, R.string.logmessage_movie_assign);
 		translate(res, R.string.logmessage_movie_deassign);

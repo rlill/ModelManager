@@ -1,6 +1,7 @@
 package de.rlill.modelmanager.dialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -66,13 +67,13 @@ public class MovieModelSelectDialog extends Activity implements OnClickListener 
 
 		Spinner sp = (Spinner)findViewById(R.id.selectModel);
 
-		List<Model> substList = new ArrayList<Model>();
+		List<Model> modelList = new ArrayList<Model>();
 
 		int mode = intent.getIntExtra(EXTRA_MODE, 0);
 		if (mode == MODE_MODIFY) {
 			// add models currently assigned to movie
 			for (MovieModel mm : MovieService.getModelsForMovie(movieId, DiaryService.today() + 1)) {
-				substList.add(ModelService.getModelById(mm.getModelId()));
+				modelList.add(ModelService.getModelById(mm.getModelId()));
 			}
 		}
 		else {
@@ -88,15 +89,17 @@ public class MovieModelSelectDialog extends Activity implements OnClickListener 
 
 			for (Model model : ModelService.getAllModels(statusFilters)) {
 				if (modelsPlannedTomorrow.contains(model.getId())) continue;
-				substList.add(model);
+				modelList.add(model);
 			}
 		}
+
+		Collections.sort(modelList, new ModelService.ModelNameComparator());
 
 		ArrayAdapter<Model> replacementAdapter = new ModelSpinnerAdapter(
 				this,
         		R.layout.fragment_model_spinner_item,
         		R.id.textView1,
-        		substList,
+        		modelList,
         		getLayoutInflater(),
         		EventFlag.MOVIE);
 		sp.setAdapter(replacementAdapter);
@@ -104,7 +107,7 @@ public class MovieModelSelectDialog extends Activity implements OnClickListener 
 		// select model to be modified/removed
 		if (mode == MODE_MODIFY) {
 			Model model = ModelService.getModelById(modelId);
-			int p = substList.indexOf(model);
+			int p = modelList.indexOf(model);
 			if (p < 0) p = 0;
 			sp.setSelection(p);
 		}

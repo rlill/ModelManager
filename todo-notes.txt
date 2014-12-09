@@ -29,7 +29,12 @@ Teams: hide empty
 
 New day progress dialog
 
+
 Inflationsfaktor
+- Events
+- Cars
+- Trainings
+
 
 Games (from pl)
 - 5 faces > select name (multiple choice, 4 options)

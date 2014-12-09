@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import de.rlill.modelmanager.model.Event;
+import de.rlill.modelmanager.service.PropertiesService;
 import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
 import de.rlill.modelmanager.struct.EventIcon;
@@ -33,6 +34,8 @@ public class EventDbAdapter extends DbAdapter {
 	public static final String KEY_FACTOR = "factor";
 	public static final String KEY_CHANCE = "chance";
 	public static final String KEY_USECOUNT = "usecount";
+
+	private static Double worthincreaseFactor = null;
 
 	public static final String CREATE_EVENT_TABLE = "create table " + TABLE_NAME_EVENT + "("
 			+ KEY_ID + " integer primary key autoincrement, "
@@ -128,6 +131,7 @@ public class EventDbAdapter extends DbAdapter {
     }
 
     private static Event readCursorLine(Cursor cursor) {
+    	if (worthincreaseFactor == null) worthincreaseFactor = PropertiesService.getWorthincrease();
     	Event event = new Event(cursor.getInt(0));
     	event.setSystemId(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SYSTEM_ID)));
     	event.setVersion(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_VERSION)));
@@ -138,8 +142,8 @@ public class EventDbAdapter extends DbAdapter {
     	event.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(KEY_DESCRIPTION)));
     	event.setNoteFile(cursor.getString(cursor.getColumnIndexOrThrow(KEY_NOTE_FILE)));
     	event.setNoteAcct(cursor.getString(cursor.getColumnIndexOrThrow(KEY_NOTE_ACCT)));
-    	event.setAmountMin(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_AMOUNT_MIN)));
-    	event.setAmountMax(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_AMOUNT_MAX)));
+    	event.setAmountMin((int)(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_AMOUNT_MIN)) * worthincreaseFactor));
+    	event.setAmountMax((int)(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_AMOUNT_MAX)) * worthincreaseFactor));
     	event.setMaxpercent(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_MAXPERCENT)));
     	event.setFactor(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_FACTOR)));
     	event.setChance(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CHANCE)));
