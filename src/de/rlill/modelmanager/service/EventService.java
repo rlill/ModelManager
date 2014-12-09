@@ -58,6 +58,17 @@ public class EventService {
 		return today;
 	}
 
+	public static Today inDeptEvent(int balance) {
+		Event event = EventDbAdapter.getAllEvents(EventClass.NOTIFICATION, EventFlag.BUSTED).get(0);
+
+		Today today = new Today();
+		today.setStatus(TodayStatus.NEW);
+		today.setAmount1(balance);
+		today.setEventId(event.getId());
+
+		return today;
+	}
+
 	public static Today applicationEvent(int modelId) {
 		Event event = EventDbAdapter.getAllEvents(EventClass.APPLICATION, EventFlag.HIRE).get(0);
 
@@ -138,6 +149,11 @@ public class EventService {
 		int tid = TodayDbAdapter.addToday(today);
 
 		return TodayDbAdapter.getEvent(tid);
+	}
+
+	public static Today currentNotification(int modelId, EventFlag flag) {
+		Event event = EventDbAdapter.getAllEvents(EventClass.NOTIFICATION, flag).get(0);
+		return TodayDbAdapter.getEvent(event.getId(), modelId);
 	}
 
 	public static Today newCarAccidentEvent(int modelId) {

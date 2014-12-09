@@ -23,19 +23,11 @@ insufficient offer: redisplay form with previous values
 - OUT/LOSS-PAYVAR (offer)
 
 
-(test) car dlg: list models without car
-
 Diary logging duplicates, formulation
 
 Teams: hide empty
 
-Automatic teamwork
--> Teamleader payment notification Zusammenfassen, TL Name!
-
 New day progress dialog
-
-Movie-production
-- clean-keeper: model status movieproduction/hired on add/remove
 
 Inflationsfaktor
 
@@ -45,5 +37,9 @@ Games (from pl)
 - 5 faces > type in name, compare after reducing the spelling
 - bet amount for each question (1 000 .. 10 000 000)
 
-Blocking layer on today fragment if account in dept
+(test) Blocking layer on today fragment if account in dept
+
+Total refactoring of Services: use instances instead of static,
+- initialize in MainActivity
+- get rid of MessageService
 

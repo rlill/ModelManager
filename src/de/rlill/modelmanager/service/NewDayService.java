@@ -91,15 +91,16 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				MovieService.setMovieStatus(mpr.getId(), MovieStatus.IN_PROGRESS);
 			}
 
-			// daily production cost
-			Event event = EventDbAdapter.getAllEvents(EventClass.MOVIE_PROGRESS, flag).get(0);
-			Log.i(LOG_TAG, "MOVIE PROGRESS: " + event);
-			int prodCost = Util.niceRandom(event.getAmountMin(), event.getAmountMax());
-			String msg = event.getDescription().replace("%M", mpr.getName());
-			TransactionService.transfer(0, -1, prodCost, msg);
+			if (DiaryService.todayWeekday() != Weekday.SUNDAY) {
+				// daily production cost
+				Event event = EventDbAdapter.getAllEvents(EventClass.MOVIE_PROGRESS, flag).get(0);
+				Log.i(LOG_TAG, "MOVIE PROGRESS: " + event);
+				int prodCost = Util.niceRandom(event.getAmountMin(), event.getAmountMax());
+				String msg = event.getDescription().replace("%M", mpr.getName());
+				TransactionService.transfer(0, -1, prodCost, msg);
 
-			DiaryService.log(msg, EventClass.MOVIE_PROGRESS, flag, mpr.getId(), prodCost);
-
+				DiaryService.log(msg, EventClass.MOVIE_PROGRESS, flag, mpr.getId(), prodCost);
+			}
 			for (MovieModel mm : MovieService.getModelsForMovie(mpr.getId(), DiaryService.today())) {
 				Log.i(LOG_TAG, "PARTICIPATE: " + mm.getModelId());
 				movieParticipation.put(mm.getModelId(), mm);
@@ -281,13 +282,14 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 					Movieproduction mpr = MovieService.getMovie(mm.getMovieId());
 					Log.i(LOG_TAG, "MOVIE # # # " + model.getFullname() + " in movie " + mpr.getName());
 
-					// pay, log
-					Event event = EventDbAdapter.getAllEvents(EventClass.MOVIE_CAST, EventFlag.MOVIE).get(0);
-					String msg = event.getDescription().replace("%M", mpr.getName());
-					TransactionService.transfer(0, model.getId(), mm.getPrice(), msg);
+					if (DiaryService.todayWeekday() != Weekday.SUNDAY) {
+						// pay, log
+						Event event = EventDbAdapter.getAllEvents(EventClass.MOVIE_CAST, EventFlag.MOVIE).get(0);
+						String msg = event.getDescription().replace("%M", mpr.getName());
+						TransactionService.transfer(0, model.getId(), mm.getPrice(), msg);
 
-					DiaryService.log(msg, EventClass.MOVIE_CAST, EventFlag.MOVIE, model.getId(), mm.getPrice());
-
+						DiaryService.log(msg, EventClass.MOVIE_CAST, EventFlag.MOVIE, model.getId(), mm.getPrice());
+					}
 					// plan model for same movie tomorrow
 					MovieService.addModelForMovie(mm.getMovieId(), model.getId(), DiaryService.today() + 1, mm.getPrice());
 				}

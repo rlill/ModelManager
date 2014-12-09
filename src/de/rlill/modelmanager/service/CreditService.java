@@ -74,6 +74,7 @@ public class CreditService {
 		}
 
 		// cache
+		if (creditMap == null) getCreditBalanceForModel(0);
 		creditMap.put(modelId, loan.getAmount());
 
 		return true;

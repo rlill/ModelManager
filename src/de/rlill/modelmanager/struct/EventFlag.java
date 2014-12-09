@@ -32,7 +32,8 @@ public enum EventFlag {
 	CHANGETEAM(28),
 	MOVIE_ENTERTAIN(29),
 	MOVIE_EROTIC(30),
-	MOVIE_PORN(31);
+	MOVIE_PORN(31),
+	BUSTED(32);
 
 	private int index;
 	EventFlag(int i) { index = i; }

@@ -197,7 +197,7 @@ public class MovieproductionDialog extends Activity implements View.OnClickListe
 				tv = new TextView(this);
 				tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 				tv.setPadding(5,  5,  5,  5);
-				tv.setText("20 Monate á 12345.-");
+				tv.setText(getResources().getString(R.string.labelRentalConditions) + " " + Util.amount(movieValue / 5));
 				tr.addView(tv);
 			}
 

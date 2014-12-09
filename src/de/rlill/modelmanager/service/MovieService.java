@@ -211,6 +211,11 @@ public class MovieService {
 		return MovieModelDbAdapter.getMovieModels(0, modelId, 0);
 	}
 
+	public static MovieModel getCurrentMovieForModel(int modelId) {
+		List<MovieModel> mml = MovieModelDbAdapter.getMovieModels(0, modelId, DiaryService.today() + 1);
+		return (mml.size() > 0) ? mml.get(0) : null;
+	}
+
 	public static List<MovieModel> getModelsInMovieTomorrow() {
 		return MovieModelDbAdapter.getMovieModels(0, 0, DiaryService.today() + 1);
 	}

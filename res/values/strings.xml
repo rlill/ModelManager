@@ -158,6 +158,7 @@
     <string name="labelDailyPayment">tägliche Gage</string>
     <string name="labelActor">Darstellerin</string>
     <string name="labelEngagementForDay">Engage-\nment für Tag</string>
+    <string name="labelRentalConditions">10 Wochenraten á</string>
 
     <string name="labelQualityPhoto">Fotomodell</string>
     <string name="labelQualityMovie">Filmmodell</string>

@@ -414,7 +414,18 @@ public class ModelService {
 
 		if (tw.earnings > 0) {
 			int bonus = tw.earnings * team.getBonus() / 100;
-			Today t = EventService.newNotification(leader.getId(), EventFlag.GROUPWORK, tw.earnings, bonus);
+
+			// look for active notification to re-use
+			Today t = EventService.currentNotification(leader.getId(), EventFlag.GROUPWORK);
+			if (t != null) {
+				// update
+				t.setAmount1(t.getAmount1() + tw.earnings);
+				t.setAmount2(t.getAmount2() + bonus);
+				TodayDbAdapter.updateToday(t);
+			}
+			else {
+				t = EventService.newNotification(leader.getId(), EventFlag.GROUPWORK, tw.earnings, bonus);
+			}
 			Log.i(LOG_TAG, "Team " + team.getId() + " has performed " + tw.bookings + " bookings and earned *" + tw.earnings + ".- Leader " + leader.getFullname() + " gets *" + bonus + ".-");
 			TransactionService.transfer(0, leader.getId(), bonus, t.getNoteAcct());
 			DiaryService.log(t);

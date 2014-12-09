@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.Toast;
@@ -49,10 +50,13 @@ public class TodayService {
 
 				if (newWI > currWI) {
 					Log.i(LOG_TAG, String.format("Worthincrease changed from %5.2f to %5.2f", currWI, newWI));
+
+					// write to Database
 					PropertiesService.setWorthincrease(newWI);
-					SharedPreferences sharedPref = ctx.getPreferences(Context.MODE_PRIVATE);
+
+					// also write to preferences
+					SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
 					SharedPreferences.Editor editor = sharedPref.edit();
-					// FIXME: this doesn't work!
 					editor.putString(ctx.getResources().getString(R.string.worthincrease), String.format("%5.2f", newWI));
 					editor.commit();
 				}
@@ -618,7 +622,11 @@ public class TodayService {
 	}
 
 	private static void triggerTeamwork() {
-		for (Team team : ModelService.getAllTeams()) {
+		// arbitrary order
+		List<Team> teams = ModelService.getAllTeams();
+		int [] mix = Util.randomArray(teams.size());
+		for (int i = 0; i < mix.length; i++) {
+			Team team = teams.get(mix[i]);
 			ModelService.teamwork(team);
 		}
 	}

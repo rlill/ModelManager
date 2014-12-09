@@ -18,6 +18,7 @@ import de.rlill.modelmanager.adapter.StatusBarFragmentAdapter;
 import de.rlill.modelmanager.model.Today;
 import de.rlill.modelmanager.persistance.TodayDbAdapter;
 import de.rlill.modelmanager.service.EventService;
+import de.rlill.modelmanager.service.TransactionService;
 
 public class DailyBusinessFragment extends Fragment implements OnItemClickListener {
 
@@ -53,18 +54,26 @@ public class DailyBusinessFragment extends Fragment implements OnItemClickListen
         return fragmentView;
 	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
-	    listItems.clear();
-	    listItems.addAll(TodayDbAdapter.getAllEvents());
-	    if (listItems.size() < 1) {
-	    	Today t = EventService.nextDayEvent();
-	    	listItems.add(t);
-	    }
-        adapter.notifyDataSetChanged();
-        StatusBarFragmentAdapter.initStatusBar(fragmentView);
-    }
+	@Override
+	public void onResume() {
+		super.onResume();
+		listItems.clear();
+
+		int balance = TransactionService.getBalance(0);
+		if (balance < 0) {
+			Today t = EventService.inDeptEvent(balance);
+			listItems.add(t);
+		}
+		else {
+			listItems.addAll(TodayDbAdapter.getAllEvents());
+		}
+		if (listItems.size() < 1) {
+			Today t = EventService.nextDayEvent();
+			listItems.add(t);
+		}
+		adapter.notifyDataSetChanged();
+		StatusBarFragmentAdapter.initStatusBar(fragmentView);
+	}
 
     @Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,11 +36,14 @@ import de.rlill.modelmanager.model.CompanyCar;
 import de.rlill.modelmanager.model.Diary;
 import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.model.ModelTraining;
+import de.rlill.modelmanager.model.MovieModel;
+import de.rlill.modelmanager.model.Movieproduction;
 import de.rlill.modelmanager.model.Training;
 import de.rlill.modelmanager.persistance.ModelTrainingDbAdapter;
 import de.rlill.modelmanager.service.CarService;
 import de.rlill.modelmanager.service.DiaryService;
 import de.rlill.modelmanager.service.ModelService;
+import de.rlill.modelmanager.service.MovieService;
 import de.rlill.modelmanager.service.TodayService;
 import de.rlill.modelmanager.service.TrainingService;
 import de.rlill.modelmanager.service.TransactionService;
@@ -85,7 +89,20 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 
 	private void displayModelData() {
 
-    	Model model = ModelService.getModelById(modelId);
+		Model model = ModelService.getModelById(modelId);
+
+		// status correction
+		Movieproduction mpr = null;
+		if (model.getStatus() == ModelStatus.MOVIEPROD) {
+			MovieModel mm = MovieService.getCurrentMovieForModel(modelId);
+			if (mm == null) {
+				Log.e(LOG_TAG, "Resetting " + model + "'s status from MOVIEPROD to HIRED");
+				ModelService.setModelStatus(modelId, ModelStatus.HIRED);
+			}
+			else {
+				mpr = MovieService.getMovie(mm.getMovieId());
+			}
+		}
 
 		int ir = getResources().getIdentifier(model.getImage(), "drawable", getPackageName());
 		ImageView iv = (ImageView)findViewById(R.id.imageView1);
@@ -193,7 +210,9 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 
 		// Status
 		String label = getResources().getString(R.string.labelStatus);
-		tl.addView(mkTextRow(label, model.getStatus().getName()));
+		String value = model.getStatus().getName();
+		if (mpr != null) value = value + " \"" + mpr.getName() + "\"";
+		tl.addView(mkTextRow(label, value));
 
 		if (hired) {
 			// hired since

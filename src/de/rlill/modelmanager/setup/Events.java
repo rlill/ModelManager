@@ -801,12 +801,12 @@ public class Events {
 		event.setChance(0);	// can only be picked explicitely
 		result.add(event);
 
-		event = new Event(1070, 5);
+		event = new Event(1070, 6);
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.GROUPWORK);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Das Team %T hat heute Einnahmen in Höhe von %A erwirtschaftet. Die Leiterin erhält dafür %B als Bonus.");
-		event.setNoteFile("Das Team %T hat heute Einnahmen in Höhe von %A erwirtschaftet. Die Leiterin erhält dafür %B als Bonus.");
+		event.setDescription("Das Team %T hat heute Einnahmen in Höhe von %A erwirtschaftet. Die Leiterin %N erhält dafür %B als Bonus.");
+		event.setNoteFile("Das Team %T hat heute Einnahmen in Höhe von %A erwirtschaftet. Die Leiterin %N erhält dafür %B als Bonus.");
 		event.setNoteAcct("Prämie für Koordination der Aufträge im Team %T");
 		result.add(event);
 
@@ -953,6 +953,13 @@ public class Events {
 		event.setIcon(EventIcon.MOVIECAM);
 		event.setDescription("Mitarbeit an den Dreharbeiten zum Film %M.");
 		event.setAmountMin(1000);
+		result.add(event);
+
+		event = new Event(1087, 2);
+		event.setEclass(EventClass.NOTIFICATION);
+		event.setFlag(EventFlag.BUSTED);
+		event.setIcon(EventIcon.LIGHTENING);
+		event.setDescription("Ihr Konto ist um %A überzogen. Nehmen Sie bei einem Model einen Kredit auf, um weiterarbeiten zu können.");
 		result.add(event);
 
 		return result;

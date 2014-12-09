@@ -46,6 +46,23 @@ public class TodayDbAdapter extends DbAdapter {
 		return today;
 	}
 
+	// Getting a certain event
+	public static Today getEvent(int eventId, int modelId) {
+		SQLiteDatabase db = open();
+		Cursor cursor = db.query(
+				TABLE_NAME_TODAY,
+				null,
+				KEY_EVENT_ID + "=? AND " + KEY_MODEL_ID + "=?",
+				new String[] { String.valueOf(eventId), String.valueOf(modelId) },
+				null, null, null, null);
+
+		Today today = null;
+		if (cursor.moveToFirst()) today = readCursorLine(cursor);
+		cursor.close();
+
+		return today;
+	}
+
     /**
      * List all events
      */
