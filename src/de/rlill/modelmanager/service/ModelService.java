@@ -611,6 +611,7 @@ public class ModelService {
 	public static int getAverageSalary(int modelId) {
 		Model model = getModelById(modelId);
 		int qualitySum = model.getQuality_movie() + model.getQuality_photo() + model.getQuality_tlead();
+//		Log.d(LOG_TAG, "QM:" + model.getQuality_movie() + " QP:" + model.getQuality_photo() + " QT:" + model.getQuality_tlead() + " S:" + qualitySum + "  " + model);
 		int salarySum = 0;
 		int salaryCnt = 0;
 		int range = 10;
@@ -621,16 +622,17 @@ public class ModelService {
 			hiredModels = 0;
 			for (int i = 0; i < modelsArray.size(); i++) {
 				Model m = modelsArray.valueAt(i);
-				if (!isModelHired(model)) continue;
+				if (!isModelHired(m)) continue;
 
 				hiredModels++;
 				int qsum = m.getQuality_movie() + m.getQuality_photo() + m.getQuality_tlead();
-				if (qsum >= qualitySum - range && qsum <= qualitySum + range) {
+//				Log.d(LOG_TAG, "QM:" + m.getQuality_movie() + " QP:" + m.getQuality_photo() + " QT:" + m.getQuality_tlead() + " S:" + qsum + "  " + m);
+				if (qualitySum >= qsum - range && qualitySum <= qsum + range) {
 					salarySum += m.getSalary();
 					salaryCnt++;
 				}
 			}
-//			Log.i(LOG_TAG, "Found " + salaryCnt + " models with qualitySum " + qualitySum + " +- " + range);
+//			Log.i(LOG_TAG, "Found " + salaryCnt + "/" + hiredModels + " models with qualitySum " + qualitySum + " +- " + range);
 			range *= 3;
 		} while (range < 270 && (salaryCnt < 3 || salaryCnt < (hiredModels + 9) / 10));
 		if (salaryCnt > 0) return salarySum / salaryCnt;

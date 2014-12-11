@@ -44,9 +44,14 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 	private MainActivity context;
 	private ViewElements viewElements;
 
-	public NewDayService(MainActivity ctx, ViewElements ve) {
+	private boolean notificationSalary;
+	private boolean notificationSickness;
+
+	public NewDayService(MainActivity ctx, ViewElements ve, boolean noteSal, boolean noteSick) {
 		context = ctx;
 		viewElements = ve;
+		notificationSalary = noteSal;
+		notificationSickness = noteSick;
 	}
 
 	@Override
@@ -164,8 +169,17 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				// become sick
 				if ((DiaryService.todayWeekday() != Weekday.SUNDAY) && (Util.rnd(model.getHealth()) < 5)) {
 					ModelService.reportSick(model.getId());
-					Today t = EventService.newNotification(model.getId(), EventFlag.SICK, 0);
-					DiaryService.log(t);
+					if (notificationSickness) {
+						Today t = EventService.newNotification(model.getId(), EventFlag.SICK, 0);
+						DiaryService.log(t);
+					}
+					else {
+						Event event = EventDbAdapter.getAllEvents(EventClass.NOTIFICATION, EventFlag.SICK).get(0);
+						Today today = new Today();
+						today.setModelId(model.getId());
+						today.setEventId(event.getId());
+						DiaryService.log(today);
+					}
 				}
 
 				break;
@@ -191,13 +205,14 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 						Movieproduction mpr = MovieService.getMovie(mm.getMovieId());
 						Log.i(LOG_TAG, "MOVIE # # # " + model.getFullname() + " in movie " + mpr.getName());
 
-						// pay, log
-						Event event = EventDbAdapter.getAllEvents(EventClass.MOVIE_CAST, EventFlag.MOVIE).get(0);
-						String msg = event.getDescription().replace("%M", mpr.getName());
-						TransactionService.transfer(0, model.getId(), prevPrice, msg);
+						if (DiaryService.todayWeekday() != Weekday.SUNDAY) {
+							// pay, log
+							Event event = EventDbAdapter.getAllEvents(EventClass.MOVIE_CAST, EventFlag.MOVIE).get(0);
+							String msg = event.getDescription().replace("%M", mpr.getName());
+							TransactionService.transfer(0, model.getId(), prevPrice, msg);
 
-						DiaryService.log(msg, EventClass.MOVIE_CAST, EventFlag.MOVIE, model.getId(), prevPrice);
-
+							DiaryService.log(msg, EventClass.MOVIE_CAST, EventFlag.MOVIE, model.getId(), prevPrice);
+						}
 					}
 					else
 						ModelService.setModelStatus(model.getId(), ModelStatus.HIRED);
@@ -266,8 +281,17 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				if (Util.rnd(model.getHealth()) < 4) {
 					// become sick
 					ModelService.reportSick(model.getId());
-					Today t = EventService.newNotification(model.getId(), EventFlag.SICK, 0);
-					DiaryService.log(t);
+					if (notificationSickness) {
+						Today t = EventService.newNotification(model.getId(), EventFlag.SICK, 0);
+						DiaryService.log(t);
+					}
+					else {
+						Event event = EventDbAdapter.getAllEvents(EventClass.NOTIFICATION, EventFlag.SICK).get(0);
+						Today today = new Today();
+						today.setModelId(model.getId());
+						today.setEventId(event.getId());
+						DiaryService.log(today);
+					}
 
 					// store salary=0 for today
 					int oldPrice = mm.getPrice();
@@ -299,9 +323,20 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 
 			// paycheck - spendings
 			if (model.getPayday() == DiaryService.todayWeekday()) {
-				Today t = EventService.newNotification(model.getId(), EventFlag.PAYCHECK, model.getSalary());
-				TransactionService.transfer(0, model.getId(), model.getSalary(), t.getEvent().getNoteAcct());
-				DiaryService.log(t);
+				if (notificationSalary) {
+					Today t = EventService.newNotification(model.getId(), EventFlag.PAYCHECK, model.getSalary());
+					TransactionService.transfer(0, model.getId(), model.getSalary(), t.getEvent().getNoteAcct());
+					DiaryService.log(t);
+				}
+				else {
+					Event event = EventDbAdapter.getAllEvents(EventClass.NOTIFICATION, EventFlag.PAYCHECK).get(0);
+					TransactionService.transfer(0, model.getId(), model.getSalary(), event.getNoteAcct());
+					Today today = new Today();
+					today.setModelId(model.getId());
+					today.setEventId(event.getId());
+					today.setAmount1(model.getSalary());
+					DiaryService.log(today);
+				}
 
 				// spendings
 				int spendings = Util.rnd(model.getSalary() / 2) + model.getSalary() / 2;
@@ -371,6 +406,15 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 					TodayDbAdapter.addToday(t);
 				}
 
+				// request raise
+				int avgCompareSalary = (int)(ModelService.getAverageSalary(model.getId())
+						* ((double)1 + model.getAmbition() / 400));
+				if (ModelService.isModelHired(model) && model.getSalary() <= avgCompareSalary && Util.rnd(model.getAmbition()) > 10) {
+					int expectMin = (int)(model.getSalary() * 1.05);
+					EventService.newRaiseSalaryRequest(model.getId(),
+							Util.niceRandom(expectMin, (int)(avgCompareSalary * 1.2)), expectMin);
+				}
+
 				if (model.getStatus() != ModelStatus.HIRED) continue;
 
 				// car broken/stolen
@@ -406,14 +450,6 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 						ModelService.setCar(model.getId(), 0);
 						break;
 					}
-				}
-
-				// request raise
-				int avgCompareSalary = ModelService.getAverageSalary(model.getId());
-				if (model.getSalary() <= avgCompareSalary && Util.rnd(model.getAmbition()) > 20) {
-					int expectMin = (int)(model.getSalary() * 1.05);
-					EventService.newRaiseSalaryRequest(model.getId(),
-							Util.niceRandom(expectMin, (int)(avgCompareSalary * 1.2)), expectMin);
 				}
 
 				// request bonus

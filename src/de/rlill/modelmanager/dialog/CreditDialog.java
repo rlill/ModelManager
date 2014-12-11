@@ -100,6 +100,8 @@ public class CreditDialog extends Activity implements View.OnClickListener {
 
 		EditText et = (EditText)findViewById(R.id.editTextRequest);
 		et.setText(Integer.toString(maxCredit));
+
+		StatusBarFragmentAdapter.initStatusBar(findViewById(R.id.status_bar_include));
 	}
 
 	@Override

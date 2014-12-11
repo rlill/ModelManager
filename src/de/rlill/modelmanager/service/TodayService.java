@@ -617,7 +617,11 @@ public class TodayService {
 		CreditService.newDay();
 		EventService.resetEventHistory();
 
-		NewDayService nd = new NewDayService(ctx, ve);
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
+		boolean noteSal = sharedPref.getBoolean("notifyPaycheck", true);
+		boolean noteSick = sharedPref.getBoolean("notifySick", true);
+
+		NewDayService nd = new NewDayService(ctx, ve, noteSal, noteSick);
 		nd.execute(null, null, null);
 	}
 

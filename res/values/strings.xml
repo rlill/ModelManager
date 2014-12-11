@@ -173,7 +173,9 @@
     <string name="labelOperationChart">Auslastungsplan</string>
 
     <string name="labelNotifyPaycheck">Benachrichtigung bei Gehaltszahlung</string>
+    <string name="notifyPaycheck">notifyPaycheck</string>
     <string name="labelNotifySick">Benachrichtigung bei Krankmeldung</string>
+    <string name="notifySick">notifySick</string>
     <string name="labelWorthIncrease">Wertsteigerungsfaktor</string>
     <string name="worthincrease">worthincrease</string>
 
