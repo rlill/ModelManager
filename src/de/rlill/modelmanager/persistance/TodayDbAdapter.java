@@ -11,7 +11,7 @@ import de.rlill.modelmanager.struct.TodayStatus;
 
 public class TodayDbAdapter extends DbAdapter {
 
-	private static final String LOG_TAG = TodayDbAdapter.class.getSimpleName();
+	private static final String LOG_TAG = "MM*" + TodayDbAdapter.class.getSimpleName();
 
 	public static final String TABLE_NAME_TODAY = "tbl_today";
 

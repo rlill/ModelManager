@@ -296,10 +296,10 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 					// store salary=0 for today
 					int oldPrice = mm.getPrice();
 					mm.setPrice(0);
+					MovieModelDbAdapter.updateMovieModel(mm);
 
 					// plan model for same movie tomorrow
 					MovieService.addModelForMovie(mm.getMovieId(), model.getId(), DiaryService.today() + 1, oldPrice);
-					MovieModelDbAdapter.updateMovieModel(mm);
 
 				}
 				else {
@@ -550,6 +550,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 							}
 						}
 						else {
+							today.setModelId(-1);
 							today.setAmount1(price);
 							today.setAmount2(pmax);
 							TodayDbAdapter.addToday(today);
@@ -606,6 +607,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 							Log.i(LOG_TAG, "Team " + model.getTeamId() + " event " + tw.bookings + " " + Util.amount(pmax) + " - " + model);
 						}
 						else {
+							today.setModelId(-1);
 							today.setAmount1(price);
 							today.setAmount2(pmax);
 							TodayDbAdapter.addToday(today);
