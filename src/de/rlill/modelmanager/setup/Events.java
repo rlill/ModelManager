@@ -731,12 +731,12 @@ public class Events {
 		event.setChance(25);
 		result.add(event);
 
-		event = new Event(1064, 6);
+		event = new Event(1064, 7);
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYOPT_PERSON);
 		event.setIcon(EventIcon.MONEY);
 		event.setDescription("%N möchte %A extra Taschengeld.");
-		event.setNoteFile("Taschengeld");
+		event.setNoteFile("Taschengeld %A");
 		event.setNoteAcct("Taschengeld %N");
 		event.setAmountMin(10000);
 		event.setAmountMax(160000);

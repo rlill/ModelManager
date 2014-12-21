@@ -360,8 +360,10 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 				}
 				break;
 			case MOVIE_CAST:
-				sumCost += diary.getAmount();
-				modelOperation.put(diary.getDay(), Operation.MOVIE);
+				if (diary.getEventFlag() == EventFlag.MOVIE) {
+					sumCost += diary.getAmount();
+					modelOperation.put(diary.getDay(), Operation.MOVIE);
+				}
 			default:
 			}
 		}
@@ -676,8 +678,8 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 					companyCarId = CarService.buyCar(carTypeId);
 				}
 				ModelService.setCar(modelId, companyCarId);
-				CarService.log(companyCarId, CarAction.TAKEAWAY,
-						getResources().getString(R.string.logmessage_car_takeaway),
+				CarService.log(companyCarId, CarAction.ASSIGN,
+						getResources().getString(R.string.logmessage_car_assign, model.getFullname()),
 						CarService.getCarValue(companyCarId));
 
 				String msg = getResources().getString(R.string.logmessage_car_assign, CarService.getCarInfo(companyCarId));

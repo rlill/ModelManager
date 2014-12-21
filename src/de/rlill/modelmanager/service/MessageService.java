@@ -77,6 +77,7 @@ public class MessageService {
 		String msg = messages.get(id, null);
 		if (msg == null) return String.format("Error (%08x)", id);
 		msg = msg.replace("%N", model.getFullname());
+		msg = msg.replace("%1s", model.getFullname());
 		return msg;
 	}
 

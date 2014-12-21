@@ -23,6 +23,7 @@ import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.service.DiaryService;
 import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.struct.DiaryIterator;
+import de.rlill.modelmanager.struct.EventFlag;
 import de.rlill.modelmanager.struct.Operation;
 import de.rlill.modelmanager.struct.Weekday;
 
@@ -141,7 +142,8 @@ public class OperationchartFragment extends Fragment {
 				}
 				break;
 			case MOVIE_CAST:
-				modelOperation.put(diary.getDay(), Operation.MOVIE);
+				if (diary.getEventFlag() == EventFlag.MOVIE)
+					modelOperation.put(diary.getDay(), Operation.MOVIE);
 			default:
 			}
 		}

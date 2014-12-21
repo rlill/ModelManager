@@ -306,7 +306,10 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 					Movieproduction mpr = MovieService.getMovie(mm.getMovieId());
 					Log.i(LOG_TAG, "MOVIE # # # " + model.getFullname() + " in movie " + mpr.getName());
 
-					if (DiaryService.todayWeekday() != Weekday.SUNDAY) {
+					if (DiaryService.todayWeekday() == Weekday.SUNDAY) {
+						MovieModelDbAdapter.deleteMovieModel(mm.getId());
+					}
+					else {
 						// pay, log
 						Event event = EventDbAdapter.getAllEvents(EventClass.MOVIE_CAST, EventFlag.MOVIE).get(0);
 						String msg = event.getDescription().replace("%M", mpr.getName());

@@ -115,7 +115,7 @@ public class TodayService {
 				if (carId <= 0)  break;
 				ModelService.setCar(today.getModelId(), carId);
 				CarService.log(carId, CarAction.ASSIGN,
-						MessageService.getMessage(R.string.logmessage_car_assign),
+						MessageService.getMessage(R.string.logmessage_car_assign, today.getModel()),
 						CarService.getCarValue(carId));
 
 				today.setAmount1(Util.atoi(formularData.get(R.string.labelPrice)));
@@ -297,7 +297,7 @@ public class TodayService {
 				}
 				ModelService.setCar(today.getModelId(), companyCarId);
 				CarService.log(companyCarId, CarAction.ASSIGN,
-						MessageService.getMessage(R.string.logmessage_car_assign),
+						MessageService.getMessage(R.string.logmessage_car_assign, today.getModel()),
 						CarService.getCarValue(companyCarId));
 
 				String msg = ctx.getString(R.string.logmessage_car_assign, CarService.getCarInfo(companyCarId));
