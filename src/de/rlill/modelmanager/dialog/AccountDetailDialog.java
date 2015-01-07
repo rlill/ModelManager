@@ -184,14 +184,34 @@ public class AccountDetailDialog extends Activity implements OnClickListener {
 	public void modelViewDetails(View view) {
 		Intent intent = new Intent(this, ModelNegotiationDialog.class);
 		intent.putExtra(ModelNegotiationDialog.EXTRA_MODEL_ID, modelId);
-		startActivity(intent);
+		startActivityForResult(intent, 1);
 	}
 
 	@Override
 	public void onClick(View v) {
 		Intent intent = new Intent(this, CreditDialog.class);
 		intent.putExtra(CreditDialog.EXTRA_MODEL_ID, modelId);
-		startActivity(intent);
+		startActivityForResult(intent, 1);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		int stmtcnt = 0;
+		TableLayout tl = (TableLayout)findViewById(R.id.account_transaction_list);
+		while (tl.getChildCount() > 1) tl.removeViewAt(1);
+		for (Transaction t : TransactionDbAdapter.getTransactions(modelId)) {
+			String p2 = "";
+			if (t.getPerson2() > 0) {
+				Model model = ModelService.getModelById(t.getPerson2());
+				if (model != null) p2 = model.getFullname();
+			}
+			stmtcnt++;
+			tl.addView(mkrow(t.getDay(), t.getDescription(), t.getAmount(), t.getBalance(), p2));
+		}
+		if (stmtcnt == 0)
+			tl.addView(mkrow(0, getResources().getString(R.string.display_account_no_statements), 0, 0, ""));
 	}
 
 }
