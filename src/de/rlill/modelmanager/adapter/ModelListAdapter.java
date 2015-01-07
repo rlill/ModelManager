@@ -72,18 +72,25 @@ public class ModelListAdapter extends ArrayAdapter<Model> {
 		viewElements.setBalance(TransactionService.getBalance(model.getId()));
 
 		Statistics st = ModelService.getStatistics(model.getId());
-		String ts = "";
+		StringBuilder ts = new StringBuilder();
 		if (st.movieToday > 0) {
 			String msess = appContext.getResources().getString(
 					(st.movieToday == 1) ? R.string.labelMovieSession_si : R.string.labelMovieSession_pl);
-			ts = Integer.toString(st.movieToday) + " " + msess;
+			ts.append(st.movieToday).append(" ").append(msess);
 		}
 		if (st.photoToday > 0) {
 			String msess = appContext.getResources().getString(
 					(st.photoToday == 1) ? R.string.labelPhotoSession_si : R.string.labelPhotoSession_pl);
-			ts = Integer.toString(st.photoToday) + " " + msess;
+			if (ts.length() > 0) ts.append(", ");
+			ts.append(st.photoToday).append(" ").append(msess);
 		}
-		viewElements.setToday(ts);
+		if (st.teamleadToday > 0) {
+			String msess = appContext.getResources().getString(
+					(st.teamleadToday == 1) ? R.string.labelTeamleadWork_si : R.string.labelTeamleadWork_pl);
+			if (ts.length() > 0) ts.append(", ");
+			ts.append(st.teamleadToday).append(" ").append(msess);
+		}
+		viewElements.setToday(ts.toString());
 
 		viewElements.setOnBoard((model.getStatus() == ModelStatus.FREE) ? ""
 				: "#" + model.getHireday() + " (" + Util.duration(appContext, (DiaryService.today() - model.getHireday())) + ")");

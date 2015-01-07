@@ -83,7 +83,10 @@ public class MovieService {
 		msg = MessageService.getMessage(R.string.display_msg_movie_sold).replace("%M", mpr.getName());
 		TransactionService.transfer(-1, 0, price, msg);
 
-		setMovieStatus(movieId, MovieStatus.SOLD, price);
+		mpr.setStatus(MovieStatus.SOLD);
+		mpr.setPrice(price);
+		mpr.setEndDay(DiaryService.today());
+		MovieproductionDbAdapter.updateMovieproduction(mpr);
 	}
 
 	public static void rentMovie(int movieId) {
@@ -97,12 +100,16 @@ public class MovieService {
 		int fcost = Util.niceRandom(e.getAmountMin(), e.getAmountMax());
 		msg = e.getDescription().replace("%M", mpr.getName());
 		DiaryService.log(msg, EventClass.MOVIE_FINISH, flag, movieId, fcost);
+		TransactionService.transfer(0, -1, fcost, msg);
 
 		int price = getMovieValue(movieId);
 		msg = MessageService.getMessage(R.string.display_msg_movie_rented).replace("%M", mpr.getName());
 		TransactionService.transfer(-1, 0, price / 10, msg);	// 10% as first rate
 
-		setMovieStatus(movieId, MovieStatus.RENTAL, price);
+		mpr.setStatus(MovieStatus.RENTAL);
+		mpr.setPrice(price);
+		mpr.setEndDay(DiaryService.today());
+		MovieproductionDbAdapter.updateMovieproduction(mpr);
 	}
 
 	public static void abortMovie(int movieId) {
@@ -111,7 +118,9 @@ public class MovieService {
 		String msg = MessageService.getMessage(R.string.display_msg_movie_abort);
 		DiaryService.log(msg.replace("%M", mpr.getName()), EventClass.MOVIE_FINISH, flag, movieId, 0);
 
-		setMovieStatus(movieId, MovieStatus.CANCELED, 0);
+		mpr.setStatus(MovieStatus.CANCELED);
+		mpr.setEndDay(DiaryService.today());
+		MovieproductionDbAdapter.updateMovieproduction(mpr);
 	}
 
 	public static Movieproduction getMovie(int movieId) {
@@ -128,7 +137,9 @@ public class MovieService {
 		Movieproduction mpr = getMovie(movieId);
 		int expenses = 0;
 		for (Diary diary : DiaryDbAdapter.listEvents(movieId, mpr.getStartDay())) {
-			if ((diary.getEventClass() == EventClass.MOVIE_START || diary.getEventClass() == EventClass.MOVIE_PROGRESS)
+			if ((diary.getEventClass() == EventClass.MOVIE_START
+					|| diary.getEventClass() == EventClass.MOVIE_PROGRESS
+					|| diary.getEventClass() == EventClass.MOVIE_FINISH)
 				&& diary.getModelId() == movieId) {
 				expenses += diary.getAmount();
 			}

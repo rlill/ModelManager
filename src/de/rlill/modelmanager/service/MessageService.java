@@ -61,6 +61,7 @@ public class MessageService {
 		translate(res, R.string.display_msg_movie_abort);
 		translate(res, R.string.display_msg_movie_sold);
 		translate(res, R.string.display_msg_movie_rented);
+		translate(res, R.string.display_msg_movie_finished);
 	}
 
 	private static void translate(Resources res, int id) {

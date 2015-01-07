@@ -119,6 +119,8 @@
     <string name="labelPhotoSession_pl">Fotosessions</string>
     <string name="labelMovieSession_si">Filmsession</string>
     <string name="labelMovieSession_pl">Filmsessions</string>
+    <string name="labelTeamleadWork_si">Teamleiteraufgabe</string>
+    <string name="labelTeamleadWork_pl">Teamleiteraufgaben</string>
     <string name="labelSession_si">Session</string>
     <string name="labelSession_pl">Sessions</string>
     <string name="labelNotification_si">Benachrichtigung</string>
