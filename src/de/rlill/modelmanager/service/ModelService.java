@@ -128,7 +128,7 @@ public class ModelService {
 		statusFilters.add(ModelStatus.TRAINING);
 		statusFilters.add(ModelStatus.MOVIEPROD);
 
-		return ModelService.getAllModels(statusFilters);
+		return getAllModels(statusFilters);
 	}
 
     public static void initTeamSpinner(Context ctx, Spinner sp, int selectedTeamId) {
@@ -166,12 +166,12 @@ public class ModelService {
 		if (t == null) return "-invalid team id " + teamId + "-";
 		RomanNumeral rn = new RomanNumeral(teamId);
 		if (t.getLeader1() > 0) {
-			Model m = ModelService.getModelById(t.getLeader1());
+			Model m = getModelById(t.getLeader1());
 			if (m != null)
 				return rn.toString() + " (" + m.getFullname() + ")";
 		}
 		if (t.getLeader2() > 0) {
-			Model m = ModelService.getModelById(t.getLeader2());
+			Model m = getModelById(t.getLeader2());
 			if (m != null)
 				return rn.toString() + " (" + m.getFullname() + ")";
 		}
@@ -285,10 +285,10 @@ public class ModelService {
 	public static void teamwork(Team team) {
 
 		// check if first leader is active
-		Model leader = ModelService.getModelById(team.getLeader1());
+		Model leader = getModelById(team.getLeader1());
 		if (leader.getStatus() != ModelStatus.HIRED) {
 			// check if second leader is active
-			leader = ModelService.getModelById(team.getLeader2());
+			leader = getModelById(team.getLeader2());
 		}
 		if (leader.getStatus() != ModelStatus.HIRED) {
 			Log.w(LOG_TAG, "No Teamwork in team " + team.getId() + " because no leader is available");
@@ -296,7 +296,7 @@ public class ModelService {
 		}
 
 		// collect requests
-		List<Model> substList = ModelService.getTeamMembers(team.getId());
+		List<Model> substList = getTeamMembers(team.getId());
 		List<Today> photoRequests = new ArrayList<Today>();
 		List<Today> movieRequests = new ArrayList<Today>();
 		for (Today today : TodayDbAdapter.getAllEvents()) {
@@ -331,15 +331,15 @@ public class ModelService {
 
 		// movies
 		TeamWork tw = new TeamWork();
-		Collections.sort(substList, new ModelService.ModelQualityComparator(Quality.MOVIE));
+		Collections.sort(substList, new ModelQualityComparator(Quality.MOVIE));
 		for (Today t : movieRequests) {
 			Model match = null;
 			for (Model m : substList) {
 				if (m.getStatus() != ModelStatus.HIRED) continue;
-				if (ModelService.isActiveTeamLeader(m.getId())) continue;
-				RejectReasons rr = ModelService.bookingRejectReasons(m.getId());
+				if (isActiveTeamLeader(m.getId())) continue;
+				RejectReasons rr = bookingRejectReasons(m.getId());
 				if (rr.willReject()) continue;
-				if (ModelService.isModelBookableToday(m.getId(), EventFlag.MOVIE)) {
+				if (isModelBookableToday(m.getId(), EventFlag.MOVIE)) {
 					match = m;
 					break;
 				}
@@ -358,9 +358,10 @@ public class ModelService {
 
 				t.setAmount1(newPrice);
 				t.setModelId(match.getId());
-				ModelService.reportBooking(t);
+				reportBooking(t);
 				TransactionService.transfer(-1, 0, newPrice, t.getNoteAcct());
 				DiaryService.log(t);
+				reportTeamleadWork(leader.getId());
 				TodayDbAdapter.removeToday(t.getId());
 
 				tw.bookings++;
@@ -372,15 +373,15 @@ public class ModelService {
 		}
 
 		// photosessions
-		Collections.sort(substList, new ModelService.ModelQualityComparator(Quality.PHOTO));
+		Collections.sort(substList, new ModelQualityComparator(Quality.PHOTO));
 		for (Today t : photoRequests) {
 			Model match = null;
 			for (Model m : substList) {
 				if (m.getStatus() != ModelStatus.HIRED) continue;
-				if (ModelService.isActiveTeamLeader(m.getId())) continue;
-				RejectReasons rr = ModelService.bookingRejectReasons(m.getId());
+				if (isActiveTeamLeader(m.getId())) continue;
+				RejectReasons rr = bookingRejectReasons(m.getId());
 				if (rr.willReject()) continue;
-				if (ModelService.isModelBookableToday(m.getId(), EventFlag.PHOTO)) {
+				if (isModelBookableToday(m.getId(), EventFlag.PHOTO)) {
 					match = m;
 					break;
 				}
@@ -399,9 +400,10 @@ public class ModelService {
 
 				t.setAmount1(newPrice);
 				t.setModelId(match.getId());
-				ModelService.reportBooking(t);
+				reportBooking(t);
 				TransactionService.transfer(-1, 0, newPrice, t.getNoteAcct());
 				DiaryService.log(t);
+				reportTeamleadWork(leader.getId());
 				TodayDbAdapter.removeToday(t.getId());
 
 				tw.bookings++;
@@ -444,12 +446,13 @@ public class ModelService {
 			st.updateDay = DiaryService.today();
 			st.movieToday = 0;
 			st.photoToday = 0;
+			st.teamleadToday = 0;
 		}
 		return st;
 	}
 
 	public static int getExpectedBonus(int modelId) {
-		Statistics st = ModelService.getStatistics(modelId);
+		Statistics st = getStatistics(modelId);
 		Model model = getModelById(modelId);
 		int expectBonus = (st.w4photoEarnings + st.w4movieEarnings) / 100
 				* (model.getAmbition() / 5 + 10);
@@ -731,7 +734,7 @@ public class ModelService {
 			improveMood(modelId, satisfaction);
 		}
 		else if (expect > 0) {
-			int fairExpect = ModelService.getExpectedBonus(modelId);
+			int fairExpect = getExpectedBonus(modelId);
 			int expectrange = expect - fairExpect;
 			if (expectrange < 1) expectrange = 1;
 
@@ -847,15 +850,21 @@ public class ModelService {
 
 		// bad mood if model has no car or small car
 		if (today.getModel().getCarId() <= 0) {
-			ModelService.improveMood(today.getModelId(), -20);
+			improveMood(today.getModelId(), -20);
 		}
 		else {
 			CompanyCar cc = CarService.getCompanyCar(today.getModel().getCarId());
 			if (cc.getStatus() != CarStatus.IN_USE)
-				ModelService.improveMood(today.getModelId(), -20);
+				improveMood(today.getModelId(), -20);
 			else if (cc.getCarType().getCclass() == CarClass.SMALL)
-				ModelService.improveMood(today.getModelId(), -10);
+				improveMood(today.getModelId(), -10);
 		}
+	}
+
+	public static void reportTeamleadWork(int teamleaderModelId) {
+		// FIXME: implement
+		Statistics st = getStatistics(teamleaderModelId);
+		st.teamleadToday++;
 	}
 
 	/**
@@ -1040,6 +1049,7 @@ public class ModelService {
 			Statistics st = modelStatistics.valueAt(i);
 			st.photoToday = 0;
 			st.movieToday = 0;
+			st.teamleadToday = 0;
 		}
 	}
 
@@ -1090,9 +1100,10 @@ public class ModelService {
 		public int photoToday;
 		public int latestMovie;
 		public int movieToday;
+		public int teamleadToday;
 		public int lastVacation;
 		public int lastTraining;
-		public int latestQuit; // TODO: use in findModelForEvent()
+		public int latestQuit;
 		public int latestUnavailable;
 		public int latestAvailable;
 

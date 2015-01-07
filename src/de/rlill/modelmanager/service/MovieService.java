@@ -77,9 +77,12 @@ public class MovieService {
 		Event e = EventDbAdapter.getAllEvents(EventClass.MOVIE_FINISH, flag).get(0);
 		int fcost = Util.niceRandom(e.getAmountMin(), e.getAmountMax());
 		msg = e.getDescription().replace("%M", mpr.getName());
-		DiaryService.log(msg, EventClass.MOVIE_FINISH, flag, movieId, fcost);
 
+		// determine price before paying finishing cost
 		int price = getMovieValue(movieId);
+		DiaryService.log(msg, EventClass.MOVIE_FINISH, flag, movieId, fcost);
+		TransactionService.transfer(0, -1, fcost, msg);
+
 		msg = MessageService.getMessage(R.string.display_msg_movie_sold).replace("%M", mpr.getName());
 		TransactionService.transfer(-1, 0, price, msg);
 
@@ -99,12 +102,14 @@ public class MovieService {
 		Event e = EventDbAdapter.getAllEvents(EventClass.MOVIE_FINISH, flag).get(0);
 		int fcost = Util.niceRandom(e.getAmountMin(), e.getAmountMax());
 		msg = e.getDescription().replace("%M", mpr.getName());
+
+		// determine price before paying finishing cost
+		int price = getMovieValue(movieId);
 		DiaryService.log(msg, EventClass.MOVIE_FINISH, flag, movieId, fcost);
 		TransactionService.transfer(0, -1, fcost, msg);
 
-		int price = getMovieValue(movieId);
 		msg = MessageService.getMessage(R.string.display_msg_movie_rented).replace("%M", mpr.getName());
-		TransactionService.transfer(-1, 0, price / 10, msg);	// 10% as first rate
+		TransactionService.transfer(-1, 0, price / 5, msg);	// 20% as first rate
 
 		mpr.setStatus(MovieStatus.RENTAL);
 		mpr.setPrice(price);
@@ -162,12 +167,12 @@ public class MovieService {
 		case EROTIC:
 			limit1 = 10;
 			limit2 = 16;
-			limit3 = 24;
+			limit3 = 20;
 			break;
 		case PORN:
 			limit1 = 7;
 			limit2 = 12;
-			limit3 = 18;
+			limit3 = 15;
 			break;
 		default:
 		}

@@ -161,6 +161,7 @@
     <string name="labelActor">Darstellerin</string>
     <string name="labelEngagementForDay">Engage-\nment für Tag</string>
     <string name="labelRentalConditions">10 Wochenraten á</string>
+    <string name="labelInRentalFor">vermietet für wöchentlich</string>
 
     <string name="labelQualityPhoto">Fotomodell</string>
     <string name="labelQualityMovie">Filmmodell</string>

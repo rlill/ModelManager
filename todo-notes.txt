@@ -45,7 +45,7 @@ Total refactoring of Services: use instances instead of static,
 - get rid of MessageService
 
 
-BUG: sometimes booking-request (officially impossible) can be accepted
+(test) BUG: sometimes booking-request (officially impossible) can be accepted
 
 
 Account Detail view:
@@ -56,3 +56,6 @@ Account Detail view:
 		o pager
 	: ID >0 :
 		o show everything
+
+(test) Accounts - detail - ModelNegDlg - payBonus - return to Accounts - detail: need refresh!
+

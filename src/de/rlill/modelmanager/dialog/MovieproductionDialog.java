@@ -55,111 +55,24 @@ public class MovieproductionDialog extends Activity implements View.OnClickListe
 		Movieproduction mpr = MovieService.getMovie(movieId);
 
 		// Movie Name, Type
-		TableRow tr = new TableRow(this);
-		tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
-		TextView tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
-		tv.setText(R.string.labelName);
-		tr.addView(tv);
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setTextSize(22);
-		tv.setText(mpr.getName());
-		tr.addView(tv);
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
-		tv.setText(R.string.labelMovieType);
-		tr.addView(tv);
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setText(mpr.getType().getName());
-		tr.addView(tv);
-
 		TableLayout tab = (TableLayout) findViewById(R.id.tableMovieDetails);
-		tab.addView(tr);
+		addDetailRow(tab, R.string.labelName, mpr.getName(), R.string.labelMovieType, mpr.getType().getName());
 
 		// Movie start, end
-		tr = new TableRow(this);
-		tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
-		tv.setText(R.string.labelStartDay);
-		tr.addView(tv);
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setTextSize(22);
-		String day = getResources().getString(R.string.display_day_si);
-		tv.setText(day + " " + mpr.getStartDay() + " (" + Util.weekday(mpr.getStartDay()).getName().substring(0, 2) + ")");
-		tr.addView(tv);
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
-		tv.setText(R.string.labelEndDay);
-		tr.addView(tv);
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setTextSize(22);
-		if (mpr.getEndDay() > 0)
-			tv.setText(day + " " + mpr.getEndDay() + " (" + Util.weekday(mpr.getEndDay()).getName().substring(0, 2) + ")");
-		tr.addView(tv);
-
-		tab.addView(tr);
-
-		// Movie value, cost
-		tr = new TableRow(this);
-		tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
-		tv.setText(R.string.labelValueSale);
-		tr.addView(tv);
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		int movieValue = MovieService.getMovieValue(movieId);
-		tv.setText(Util.amount(movieValue));
-		tr.addView(tv);
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
-		tv.setText(R.string.labelCost);
-		tr.addView(tv);
-
-		tv = new TextView(this);
-		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-		tv.setPadding(5,  5,  5,  5);
-		tv.setText(Util.amount(MovieService.getMovieCost(movieId)));
-		tr.addView(tv);
-
-		tab.addView(tr);
+		String sday = getResources().getString(R.string.display_day_si) + " " + mpr.getStartDay()
+				+ " (" + Util.weekday(mpr.getStartDay()).getName().substring(0, 2) + ")";
+		String eday = (mpr.getEndDay() > 0) ? getResources().getString(R.string.display_day_si) + " " + mpr.getEndDay()
+				+ " (" + Util.weekday(mpr.getEndDay()).getName().substring(0, 2) + ")" : "";
+		addDetailRow(tab, R.string.labelStartDay, sday, R.string.labelEndDay, eday);
 
 		if (mpr.getStatus() == MovieStatus.PLANNED || mpr.getStatus() == MovieStatus.IN_PROGRESS) {
+
+			// Movie value, cost
+			int movieValue = MovieService.getMovieValue(movieId);
+			addDetailRow(tab, R.string.labelValueSale, Util.amount(movieValue), R.string.labelCost, Util.amount(MovieService.getMovieCost(movieId)));
+
 			// Button abort, sell, rent / rental conditions
-			tr = new TableRow(this);
+			TableRow tr = new TableRow(this);
 			tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
 			if (movieValue == 0) {
@@ -194,7 +107,7 @@ public class MovieproductionDialog extends Activity implements View.OnClickListe
 				b.setOnClickListener(this);
 				tr.addView(b);
 
-				tv = new TextView(this);
+				TextView tv = new TextView(this);
 				tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 				tv.setPadding(5,  5,  5,  5);
 				tv.setText(getResources().getString(R.string.labelRentalConditions) + " " + Util.amount(movieValue / 5));
@@ -202,6 +115,12 @@ public class MovieproductionDialog extends Activity implements View.OnClickListe
 			}
 
 			tab.addView(tr);
+		}
+		else if (mpr.getStatus() == MovieStatus.SOLD) {
+			addDetailRow(tab, R.string.labelValueSale, Util.amount(mpr.getPrice()), R.string.labelCost, Util.amount(MovieService.getMovieCost(movieId)));
+		}
+		else if (mpr.getStatus() == MovieStatus.RENTAL) {
+			addDetailRow(tab, R.string.labelInRentalFor, Util.amount(mpr.getPrice() / 5), R.string.labelCost, Util.amount(MovieService.getMovieCost(movieId)));
 		}
 
 	}
@@ -356,6 +275,43 @@ public class MovieproductionDialog extends Activity implements View.OnClickListe
 		return frame;
 	}
 
+	private void addDetailRow(TableLayout tab, int label1Id, String value1, int label2Id, String value2) {
+
+		// Movie value, cost
+		TableRow tr = new TableRow(this);
+		tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+
+		TextView tv = new TextView(this);
+		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+		tv.setPadding(5,  5,  5,  5);
+		tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
+		tv.setText(label1Id);
+		tr.addView(tv);
+
+		tv = new TextView(this);
+		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+		tv.setPadding(5,  5,  5,  5);
+		tv.setTextSize(22);
+		tv.setText(value1);
+		tr.addView(tv);
+
+		tv = new TextView(this);
+		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+		tv.setPadding(5,  5,  5,  5);
+		tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
+		tv.setText(label2Id);
+		tr.addView(tv);
+
+		tv = new TextView(this);
+		tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+		tv.setPadding(5,  5,  5,  5);
+		tv.setTextSize(22);
+		tv.setText(value2);
+		tr.addView(tv);
+
+		tab.addView(tr);
+	}
+
 	@Override
 	public void onClick(View v) {
 
@@ -370,12 +326,15 @@ public class MovieproductionDialog extends Activity implements View.OnClickListe
 				break;
 			case ABORT:
 				MovieService.abortMovie(movieId);
+				finish();
 				break;
 			case SELL:
 				MovieService.sellMovie(movieId);
+				finish();
 				break;
 			case RENT:
 				MovieService.rentMovie(movieId);
+				finish();
 				break;
 			}
 		}
