@@ -59,3 +59,6 @@ Account Detail view:
 
 (test) Accounts - detail - ModelNegDlg - payBonus - return to Accounts - detail: need refresh!
 
+Movie-rental & Movie-sale: finishing cost intransparently added afterwards!!!
+
+

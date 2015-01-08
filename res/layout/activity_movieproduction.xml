@@ -16,7 +16,7 @@
     <TableLayout
         android:id="@+id/tableMovieDetails"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="240dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/status_bar_include"
     />

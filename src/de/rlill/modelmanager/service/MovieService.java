@@ -181,9 +181,9 @@ public class MovieService {
 		if (duration < limit1) return 0;
 
 		int expenses = getMovieCost(movieId);
-		if (duration < limit2) return (int)(expenses * 0.75);
-		if (duration < limit3) return (int)(expenses * 1.1);
-		return (int)(expenses * 1.5);
+		if (duration < limit2) return (int)(expenses * 0.85);
+		if (duration < limit3) return (int)(expenses * 1.25);
+		return (int)(expenses * 1.7);
 	}
 
 	public static void addModelForMovie(int movieId, int modelId, int day, int price) {

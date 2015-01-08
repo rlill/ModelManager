@@ -69,7 +69,8 @@ public class MovieproductionDialog extends Activity implements View.OnClickListe
 
 			// Movie value, cost
 			int movieValue = MovieService.getMovieValue(movieId);
-			addDetailRow(tab, R.string.labelValueSale, Util.amount(movieValue), R.string.labelCost, Util.amount(MovieService.getMovieCost(movieId)));
+			int movieCost = MovieService.getMovieCost(movieId);
+			addDetailRow(tab, R.string.labelValueSale, Util.amount(movieValue), R.string.labelCostSoFar, Util.amount(movieCost));
 
 			// Button abort, sell, rent / rental conditions
 			TableRow tr = new TableRow(this);
@@ -87,6 +88,16 @@ public class MovieproductionDialog extends Activity implements View.OnClickListe
 				tr.addView(b);
 			}
 			else {
+				// estimate finishing cost
+				int appFinishCost = MovieService.movieFinishCostAvg(mpr.getType());
+				addDetailRow(tab,
+						R.string.display_msg_movie_finish_cost,
+						getResources().getString(R.string.labelApproximately) + " "
+								+ Util.amount(appFinishCost),
+						R.string.labelTotalCost,
+						getResources().getString(R.string.labelApproximately) + " "
+								+ Util.amount(movieCost + appFinishCost));
+
 				Button b = new Button(this);
 				b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 				b.setText(R.string.labelSell);

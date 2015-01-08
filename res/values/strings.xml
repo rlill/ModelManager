@@ -149,6 +149,8 @@
     <string name="labelCreditRequest">Kreditanfrage</string>
     <string name="labelCreditPayback">Rückzahlung</string>
     <string name="labelCost">Kosten</string>
+    <string name="labelTotalCost">Gesamtkosten</string>
+    <string name="labelCostSoFar">Kosten bisher</string>
     <string name="labelApproximately">ca.</string>
 
     <string name="labelMovieproduction">Filmproduktion</string>
