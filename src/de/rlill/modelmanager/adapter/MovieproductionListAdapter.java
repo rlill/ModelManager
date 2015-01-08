@@ -46,7 +46,7 @@ public class MovieproductionListAdapter extends ArrayAdapter<Movieproduction> {
 		viewElements.setName(mpr.getName());
 		viewElements.setType(mpr.getType());
 		viewElements.setStartDay(mpr.getStartDay());
-		viewElements.setDetails(mpr.getStatus().toString());
+		viewElements.setDetails(mpr.getStatus().getName());
 
 		return convertView;
 	}

@@ -38,6 +38,7 @@ import de.rlill.modelmanager.service.TodayService;
 import de.rlill.modelmanager.struct.CarClass;
 import de.rlill.modelmanager.struct.CarStatus;
 import de.rlill.modelmanager.struct.ModelStatus;
+import de.rlill.modelmanager.struct.MovieStatus;
 import de.rlill.modelmanager.struct.MovieType;
 import de.rlill.modelmanager.struct.TrainingStatus;
 import de.rlill.modelmanager.struct.ViewElements;
@@ -198,7 +199,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		TrainingStatus.translate(ctx);
 		MessageService.translate(ctx);
 		MovieType.translate(ctx);
-
+		MovieStatus.translate(ctx);
 
 
 		ModelService.setUndefinedModel(getResources().getString(R.string.displaySomeModel),

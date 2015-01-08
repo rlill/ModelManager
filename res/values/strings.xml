@@ -321,6 +321,12 @@
     <string name="training_state_finished">abgeschlossen</string>
     <string name="training_state_failed">abgebrochen</string>
 
+    <string name="movie_state_planned">geplant</string>
+    <string name="movie_state_in_progress">in Arbeit</string>
+    <string name="movie_state_rental">vermietet</string>
+    <string name="movie_state_sold">verkauft</string>
+    <string name="movie_state_canceled">abgebrochen</string>
+
     <string name="typename_small_car">Kleinwagen</string>
     <string name="typename_medium_car">Mittelklasse</string>
     <string name="typename_large_car">Oberklasse</string>
