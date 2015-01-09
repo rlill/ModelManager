@@ -247,6 +247,7 @@ public class AccountDetailDialog extends Activity
 
 		EditText et = (EditText)v;
 		filterDescription = et.getText().toString();
+		if (filterDescription != null && filterDescription.length() == 0) filterDescription = null;
 		refreshTransactionList();
 		return false;
 	}

@@ -190,6 +190,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		}
 
 		Context ctx = getApplicationContext();
+		MessageService.setContext(ctx);
 		DbAdapter.init(ctx);
 
 		Weekday.translate(ctx);
@@ -197,7 +198,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		CarClass.translate(ctx);
 		CarStatus.translate(ctx);
 		TrainingStatus.translate(ctx);
-		MessageService.translate(ctx);
 		MovieType.translate(ctx);
 		MovieStatus.translate(ctx);
 

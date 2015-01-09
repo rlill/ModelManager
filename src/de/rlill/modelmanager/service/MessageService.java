@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.text.TextUtils;
-import android.util.SparseArray;
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.model.CompanyCar;
@@ -23,59 +21,20 @@ import de.rlill.modelmanager.struct.RejectReasons;
 
 public class MessageService {
 
-	private static SparseArray<String> messages = new SparseArray<String>();
+	private static Context ctx;
 
-	public static void translate(Context ctx) {
-		Resources res = ctx.getResources();
-
-		translate(res, R.string.accountmessage_bonus);
-		translate(res, R.string.accountmessage_company_car_costs);
-		translate(res, R.string.accountmessage_reclaim);
-		translate(res, R.string.accountmessage_credit_pay);
-		translate(res, R.string.accountmessage_credit_payback);
-
-		translate(res, R.string.logmessage_bonus);
-		translate(res, R.string.logmessage_sick_today);
-		translate(res, R.string.logmessage_training_today);
-		translate(res, R.string.logmessage_vacation_today);
-		translate(res, R.string.logmessage_become_unavailable);
-		translate(res, R.string.logmessage_become_available);
-		translate(res, R.string.logmessage_dismissal_imm);
-		translate(res, R.string.logmessage_change_team);
-		translate(res, R.string.logmessage_model_quit);
-		translate(res, R.string.logmessage_car_repair2);
-		translate(res, R.string.logmessage_car_repair3);
-		translate(res, R.string.logmessage_car_sale2);
-		translate(res, R.string.logmessage_car_trash);
-		translate(res, R.string.logmessage_car_breakdown);
-		translate(res, R.string.logmessage_car_accident);
-		translate(res, R.string.logmessage_car_wrecked);
-		translate(res, R.string.logmessage_car_stolen);
-		translate(res, R.string.logmessage_car_takeaway);
-		translate(res, R.string.logmessage_car_assign);
-		translate(res, R.string.logmessage_car_deassign);
-		translate(res, R.string.logmessage_car_buy);
-		translate(res, R.string.logmessage_movie_assign);
-		translate(res, R.string.logmessage_movie_deassign);
-
-		translate(res, R.string.display_msg_movie_abort);
-		translate(res, R.string.display_msg_movie_sold);
-		translate(res, R.string.display_msg_movie_rented);
-		translate(res, R.string.display_msg_movie_finished);
-	}
-
-	private static void translate(Resources res, int id) {
-		messages.put(id, res.getString(id));
+	public static void setContext(Context c) {
+		ctx = c;
 	}
 
 	public static String getMessage(int id) {
-		String msg = messages.get(id, null);
+		String msg = ctx.getResources().getString(id);
 		if (msg == null) return String.format("Error (%08x)", id);
 		return msg;
 	}
 
 	public static String getMessage(int id, Model model) {
-		String msg = messages.get(id, null);
+		String msg = ctx.getResources().getString(id);
 		if (msg == null) return String.format("Error (%08x)", id);
 		msg = msg.replace("%N", model.getFullname());
 		msg = msg.replace("%1s", model.getFullname());
@@ -83,14 +42,14 @@ public class MessageService {
 	}
 
 	public static String getMessage(int id, CompanyCar cc) {
-		String msg = messages.get(id, null);
+		String msg = ctx.getResources().getString(id);
 		if (msg == null) return String.format("Error (%08x)", id);
 		msg = msg.replace("%C", cc.getLicensePlate());
 		return msg;
 	}
 
 	public static String getMessage(int id, Model model, Training training) {
-		String msg = messages.get(id, null);
+		String msg = ctx.getResources().getString(id);
 		if (msg == null) return String.format("Error (%08x)", id);
 		msg = msg.replace("%N", model.getFullname());
 		msg = msg.replace("%U", training.getDescription());
