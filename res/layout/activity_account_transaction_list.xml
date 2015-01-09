@@ -43,12 +43,27 @@
 		android:layout_toRightOf="@id/buttonCredit"
 	/>
 
+    <HorizontalScrollView
+        android:id="@+id/account_dayselect_scroll"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+	    android:layout_below="@id/viewAccountChart"
+	>
+		<LinearLayout
+	        android:id="@+id/account_dayselect_list"
+	        android:orientation="horizontal"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		/>
+	</HorizontalScrollView>
+	
     <ScrollView
         android:id="@+id/account_transaction_scroll"
 	    android:layout_width="wrap_content"
 	    android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-	    android:layout_below="@id/viewAccountChart"
+	    android:layout_below="@id/account_dayselect_scroll"
 	    >
 	
 	    <TableLayout
@@ -79,6 +94,14 @@
 			        android:padding="4dp"
 			        android:textAppearance="?android:attr/textAppearanceSmall"
 		            />
+
+		       <EditText
+		            android:id="@+id/editTextFilter"
+		            android:layout_width="100dp"
+		            android:layout_height="wrap_content"
+		            android:padding="2dp"
+		            android:inputType="text"
+				/>
 
 		       <TextView 
 			        android:layout_width="wrap_content"

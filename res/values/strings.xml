@@ -302,6 +302,7 @@
 
     <string name="display_state_available">verfügbar</string>
     <string name="display_account_no_statements">Keine Umsätze vorhanden</string>
+    <string name="display_account_no_filtermatch">Filter liefert kein Ergebnis</string>
     <string name="display_offer_other_model">anderes Model wählen</string>
 
     <string name="model_state_free">frei</string>

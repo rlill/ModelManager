@@ -100,6 +100,28 @@ public class TransactionDbAdapter extends DbAdapter {
 		return result;
 	}
 
+	// Read all transactions for person on day
+	public static List<Transaction> getTransactions(int personId, int day) {
+		List<Transaction> result = new ArrayList<Transaction>();
+		SQLiteDatabase db = open();
+		Cursor cursor = db.query(
+				TABLE_NAME_TRANSACTION,
+				null,
+				KEY_PERSON1 + "=? AND " + KEY_DAY + "=?",
+				new String[] { String.valueOf(personId), String.valueOf(day) },
+				null, null, KEY_ID + " desc", null);
+
+		if (cursor.moveToFirst()) {
+			do {
+				Transaction tr = readCursorLine(cursor);
+				result.add(tr);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+
+		return result;
+	}
+
     /**
      * Query transactions for person since startDay.
      */

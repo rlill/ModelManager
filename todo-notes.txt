@@ -49,7 +49,7 @@ Total refactoring of Services: use instances instead of static,
 
 
 Account Detail view:
-- search slot: filter
+- search slot: filter... Umlauts!!!
 - decide ID 0 / >0
 	: ID 0 :
 		o show one day per page

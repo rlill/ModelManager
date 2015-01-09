@@ -1,5 +1,7 @@
 package de.rlill.modelmanager.dialog;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,10 +12,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.SparseIntArray;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,12 +34,15 @@ import de.rlill.modelmanager.service.DiaryService;
 import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.struct.TransactionIterator;
 
-public class AccountDetailDialog extends Activity implements OnClickListener {
+public class AccountDetailDialog extends Activity
+	implements OnClickListener, OnKeyListener {
 
 //	private static final String LOG_TAG = AccountDetailDialog.class.getSimpleName();
 
 	private int modelId;
 	public final static String EXTRA_MODEL_ID = "account.detail.dialog.model.id";
+	private int filterDay;
+	private String filterDescription;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +61,8 @@ public class AccountDetailDialog extends Activity implements OnClickListener {
 
 		// face icon
 		ImageView image = (ImageView)findViewById(R.id.messageImage);
-
+		// credit button
+		Button b = (Button)findViewById(R.id.buttonCredit);
 
 		if (modelId > 0) {
 			Model model = ModelService.getModelById(modelId);
@@ -59,30 +70,22 @@ public class AccountDetailDialog extends Activity implements OnClickListener {
 			int ir = getResources().getIdentifier(model.getImage(), "drawable", getPackageName());
 			image.setVisibility(ImageView.VISIBLE);
 			image.setImageResource(ir);
+
+			// opens credit dialog
+			b.setOnClickListener(this);
 		}
-		else
+		else {
+			// no image
 			image.setVisibility(ImageView.INVISIBLE);
 
-		int stmtcnt = 0;
-		TableLayout tl = (TableLayout)findViewById(R.id.account_transaction_list);
-		for (Transaction t : TransactionDbAdapter.getTransactions(modelId)) {
-			String p2 = "";
-			if (t.getPerson2() > 0) {
-				Model model = ModelService.getModelById(t.getPerson2());
-				if (model != null) p2 = model.getFullname();
-			}
-			stmtcnt++;
-			tl.addView(mkrow(t.getDay(), t.getDescription(), t.getAmount(), t.getBalance(), p2));
-		}
-		if (stmtcnt == 0)
-			tl.addView(mkrow(0, getResources().getString(R.string.display_account_no_statements), 0, 0, ""));
+			// set actual day filter for player account
+			filterDay = DiaryService.today();
 
-		Button b = (Button)findViewById(R.id.buttonCredit);
-		if (modelId == 0)
+			// no credit button
 			b.setVisibility(View.GONE);
-		else
-			b.setOnClickListener(this);
+		}
 
+		refreshTransactionList();
 
 
 		// Paint a histogram
@@ -143,6 +146,31 @@ public class AccountDetailDialog extends Activity implements OnClickListener {
 
 		View v = findViewById(R.id.viewAccountChart);
 		v.setBackgroundDrawable(new BitmapDrawable(getResources(), bg));
+
+
+		EditText et = (EditText)findViewById(R.id.editTextFilter);
+		et.setOnKeyListener(this);
+
+
+		if (modelId == 0) {
+			// day pager
+			LinearLayout ll = (LinearLayout)findViewById(R.id.account_dayselect_list);
+			for (int i = 1; i < DiaryService.today(); i++) {
+				TextView tv = new TextView(this);
+				tv.setText(Integer.toString(i));
+				tv.setTextColor(0xFF0000FF);
+				tv.setPadding(4, 4, 4, 4);
+				tv.setOnClickListener(this);
+				tv.setTag(Integer.valueOf(i));
+				ll.addView(tv);
+			}
+			final HorizontalScrollView hv = (HorizontalScrollView)findViewById(R.id.account_dayselect_scroll);
+			hv.postDelayed(new Runnable() {
+			    public void run() {
+			        hv.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
+			    }
+			}, 100L);
+		}
 	}
 
 	private TableRow mkrow(int day, String description, int amount, int balance, String person2) {
@@ -157,6 +185,11 @@ public class AccountDetailDialog extends Activity implements OnClickListener {
 		tv.setText(description);
 		tv.setPadding(5, 4, 5, 4);
 		tr.addView(tv);
+
+		// colspan
+		TableRow.LayoutParams params = (TableRow.LayoutParams) tv.getLayoutParams();
+		params.span = 2;
+		tv.setLayoutParams(params);
 
 		tv = new TextView(this);
 		tv.setText(Util.amount(amount));
@@ -189,19 +222,48 @@ public class AccountDetailDialog extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent(this, CreditDialog.class);
-		intent.putExtra(CreditDialog.EXTRA_MODEL_ID, modelId);
-		startActivityForResult(intent, 1);
+		if (v.getId() == R.id.buttonCredit) {
+			Intent intent = new Intent(this, CreditDialog.class);
+			intent.putExtra(CreditDialog.EXTRA_MODEL_ID, modelId);
+			startActivityForResult(intent, 1);
+		}
+		else if (v instanceof TextView) {
+			Integer day = (Integer)v.getTag();
+			if (day > 0) {
+				filterDay = day;
+				refreshTransactionList();
+			}
+		}
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		refreshTransactionList();
+	}
+
+	@Override
+	public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+		EditText et = (EditText)v;
+		filterDescription = et.getText().toString();
+		refreshTransactionList();
+		return false;
+	}
+
+	private void refreshTransactionList() {
 
 		int stmtcnt = 0;
 		TableLayout tl = (TableLayout)findViewById(R.id.account_transaction_list);
 		while (tl.getChildCount() > 1) tl.removeViewAt(1);
-		for (Transaction t : TransactionDbAdapter.getTransactions(modelId)) {
+		List<Transaction> tlist = null;
+		if (filterDay > 0)
+			tlist = TransactionDbAdapter.getTransactions(modelId, filterDay);
+		else
+			tlist = TransactionDbAdapter.getTransactions(modelId);
+		for (Transaction t : tlist) {
+			if (filterDescription != null &&
+					!t.getDescription().toLowerCase().contains(filterDescription)) continue;
 			String p2 = "";
 			if (t.getPerson2() > 0) {
 				Model model = ModelService.getModelById(t.getPerson2());
@@ -211,7 +273,11 @@ public class AccountDetailDialog extends Activity implements OnClickListener {
 			tl.addView(mkrow(t.getDay(), t.getDescription(), t.getAmount(), t.getBalance(), p2));
 		}
 		if (stmtcnt == 0)
-			tl.addView(mkrow(0, getResources().getString(R.string.display_account_no_statements), 0, 0, ""));
+			tl.addView(mkrow(0,
+					getResources().getString(
+							(filterDescription != null) ? R.string.display_account_no_filtermatch : R.string.display_account_no_statements),
+					0, 0, ""));
+
 	}
 
 }
