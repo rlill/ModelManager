@@ -40,17 +40,15 @@ Games (from pl)
 - bet amount for each question (1 000 .. 10 000 000)
 
 
-Total refactoring of Services: use instances instead of static,
-- initialize in MainActivity
-- get rid of MessageService
+(test) Total refactoring of Services: use instances instead of static, initialize in MainActivity
 
 
 (test) BUG: sometimes booking-request (officially impossible) can be accepted
 
 
 Account Detail view:
-- search slot: filter... Umlauts!!!
-- decide ID 0 / >0
+- (test) search slot: filter... Umlauts!!!
+- (test) decide ID 0 / >0
 	: ID 0 :
 		o show one day per page
 		o pager

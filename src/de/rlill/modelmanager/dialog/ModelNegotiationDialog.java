@@ -312,6 +312,9 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 				case TRAINING_FIN:
 					sumCost += diary.getAmount();
 					break;
+				case GROUPWORK:
+					sumEarn += diary.getAmount();
+					break;
 				default:
 				}
 				break;
