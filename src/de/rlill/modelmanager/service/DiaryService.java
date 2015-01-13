@@ -43,6 +43,10 @@ public class DiaryService {
 		return log(t.getDescription(), t.getEvent().getEclass(), t.getEvent().getFlag(), t.getModelId(), t.getAmount1());
 	}
 
+	public static int fileLog(Today t) {
+		return log(t.getNoteFile(), t.getEvent().getEclass(), t.getEvent().getFlag(), t.getModelId(), t.getAmount1());
+	}
+
 	public static void logAccept(Today t) {
 		String msg = t.getNoteFile();
 		if (msg == null) msg = t.getDescription();

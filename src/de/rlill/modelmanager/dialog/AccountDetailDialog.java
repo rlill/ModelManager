@@ -95,7 +95,7 @@ public class AccountDetailDialog extends Activity
 		int maxBalance = 0;
 		TransactionIterator ti = TransactionDbAdapter.listTransactionsSince(0, modelId);
 
-		int startDay = DiaryService.today() - 60;
+		int startDay = DiaryService.today() - 68;
 		if (startDay < 1) startDay = 1;
 
 		while (ti.hasNext()) {
@@ -133,8 +133,8 @@ public class AccountDetailDialog extends Activity
 
 			int a = dailyBalance.get(day, 0);
 			if (a == 0) a = prevA;
-			int h = (int)((double)a * 100 / maxBalance);
-			canvas.drawLine(5 * day, 100, 5 * day, 100 - h, redLine);
+			int h = (int)((double)a * 180 / maxBalance);
+			canvas.drawLine(5 * day, 190, 5 * day, 190 - h, redLine);
 			prevA = a;
 		}
 

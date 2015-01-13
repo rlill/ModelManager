@@ -6,7 +6,6 @@ Events:
 Model negDlg
 	- balance summary
 		o (test) correct sums
-		  -> teamleader count booking prices
 		o vertical bars in color
 
 "1 Tage Resturlaub" - Singular!
@@ -54,10 +53,10 @@ Account Detail view:
 		o pager
 	: ID >0 :
 		o show everything
-- ugly history graph
+- (test) ugly history graph
 
 (test) Accounts - detail - ModelNegDlg - payBonus - return to Accounts - detail: need refresh!
 
 (test) Movie-rental & Movie-sale: finishing cost intransparently added afterwards!!!
 
-
+First-time startup: set worthincrease factor = 1
