@@ -247,6 +247,18 @@ public class EventService {
 		return today;
 	}
 
+	public static Today newGambleEvent() {
+		Event event = EventDbAdapter.getAllEvents(EventClass.GAMBLE, EventFlag.WIN).get(0);
+
+		Today today = new Today();
+		today.setStatus(TodayStatus.NEW);
+		today.setModelId(0);
+		today.setEventId(event.getId());
+		TodayDbAdapter.addToday(today);
+
+		return today;
+	}
+
 	public static void rejectBooking(Today today) {
 		if (today.getEvent().getEclass() != EventClass.BOOKING) throw new IllegalArgumentException("rejectBooking called with " + today.getEvent().getEclass());
 		Event event = EventDbAdapter.getAllEvents(EventClass.BOOKREJECT, today.getEvent().getFlag()).get(0);

@@ -27,9 +27,8 @@ Today: "soll gebucht werden" -> Diary "wurde gebucht"
 
 Teams: hide empty
 
-New day progress dialog
-
-[ ] Benachrichtigung bei Trainingsabschluﬂ
+New day progress dialog:
+(test) [ ] Benachrichtigung bei Trainingsabschluﬂ
 
 
 Games (from pl)

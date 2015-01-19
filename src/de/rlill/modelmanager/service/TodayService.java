@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import de.rlill.modelmanager.MainActivity;
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.Util;
+import de.rlill.modelmanager.dialog.GameFacedetectDialog;
 import de.rlill.modelmanager.model.Diary;
 import de.rlill.modelmanager.model.Event;
 import de.rlill.modelmanager.model.Model;
@@ -94,9 +96,11 @@ public class TodayService {
 				ModelService.clearTodaysBookings(today.getModelId(), EventFlag.PHOTO);
 				break;
 			case TRAINING:
-				ModelService.sendToTraining(today.getModelId(),
-						Util.atoi(formularData.get(R.string.labelTraining)));
-				TodayDbAdapter.removeToday(today.getId());
+				int tid = Util.atoi(formularData.get(R.string.labelTraining));
+				if (tid > 0) {
+					ModelService.sendToTraining(today.getModelId(), tid);
+					TodayDbAdapter.removeToday(today.getId());
+				}
 				break;
 			case RAISE:
 				int newSalary = today.getAmount1();
@@ -190,6 +194,31 @@ public class TodayService {
 				TodayDbAdapter.removeToday(today.getId());
 			}
 			break;
+		case GAMBLE:
+			int game = ve.getContextInt();
+			int bet = 0;
+			Intent intent;
+			switch (game) {
+			case 1:
+				bet = Util.atoi(formularData.get(R.string.labelBet1));
+				intent = new Intent(ctx, GameFacedetectDialog.class);
+				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
+				ctx.startActivity(intent);
+				break;
+			case 2:
+				bet = Util.atoi(formularData.get(R.string.labelBet2));
+				intent = new Intent(ctx, GameFacedetectDialog.class);
+				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
+				ctx.startActivity(intent);
+				break;
+			case 3:
+				bet = Util.atoi(formularData.get(R.string.labelBet3));
+				intent = new Intent(ctx, GameFacedetectDialog.class);
+				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
+				ctx.startActivity(intent);
+				break;
+			}
+			break;
 		default:
 			TodayDbAdapter.removeToday(today.getId());
 		}
@@ -243,12 +272,14 @@ public class TodayService {
 			break;
 		case APPLICATION:
 		case BOOKING:
+		case GAMBLE:
 			TodayDbAdapter.removeToday(today.getId());
 			break;
 		case BOOKREJECT:
 			ModelService.clearBooking(today);
 			break;
 		default:
+			Log.e(LOG_TAG, "Can not reject " + today.getEvent().getEclass());
 		}
 		// anything else is not rejectable!
 	}
@@ -620,8 +651,9 @@ public class TodayService {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
 		boolean noteSal = sharedPref.getBoolean("notifyPaycheck", true);
 		boolean noteSick = sharedPref.getBoolean("notifySick", true);
+		boolean noteTrain = sharedPref.getBoolean("notifyTrain", true);
 
-		NewDayService nd = new NewDayService(ctx, ve, noteSal, noteSick);
+		NewDayService nd = new NewDayService(ctx, ve, noteSal, noteSick, noteTrain);
 		nd.execute(null, null, null);
 	}
 

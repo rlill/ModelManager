@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/labelPlayGame1"
+			android:textStyle="bold"
+			android:padding="4dp"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+		/>
+
+		<LinearLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		>
+
+	        <TextView
+				android:id="@+id/textViewDescriptionBet1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/labelTheBet"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall"
+	        />
+
+	        <EditText
+	            android:id="@+id/editTextBet1"
+	            android:layout_width="100dp"
+	            android:layout_height="wrap_content"
+	            android:padding="4dp"
+	            android:inputType="numberDecimal"
+			/>
+
+		</LinearLayout>
+
+        <Button
+			android:id="@+id/buttonPlay1"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_green"
+            android:text="@string/labelPlay" 
+            android:onClick="dailyBusinessAccept"
+            />
+
+	</TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/labelPlayGame2"
+			android:textStyle="bold"
+			android:padding="4dp"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+		/>
+
+		<LinearLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		>
+
+	        <TextView
+				android:id="@+id/textViewDescriptionBet2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/labelTheBet"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall"
+	        />
+
+	        <EditText
+	            android:id="@+id/editTextBet2"
+	            android:layout_width="100dp"
+	            android:layout_height="wrap_content"
+	            android:padding="4dp"
+	            android:inputType="numberDecimal"
+			/>
+
+		</LinearLayout>
+
+        <Button
+			android:id="@+id/buttonPlay2"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_green"
+            android:text="@string/labelPlay" 
+            android:onClick="dailyBusinessAccept"
+            />
+
+	</TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/labelPlayGame3"
+			android:textStyle="bold"
+			android:padding="4dp"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+		/>
+
+		<LinearLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		>
+
+	        <TextView
+				android:id="@+id/textViewDescriptionBet3"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/labelTheBet"
+	            android:padding="4dp"
+	            android:textAppearance="?android:attr/textAppearanceSmall"
+	        />
+
+	        <EditText
+	            android:id="@+id/editTextBet3"
+	            android:layout_width="100dp"
+	            android:layout_height="wrap_content"
+	            android:padding="4dp"
+	            android:inputType="numberDecimal"
+			/>
+
+		</LinearLayout>
+
+        <Button
+			android:id="@+id/buttonPlay3"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_green"
+            android:text="@string/labelPlay" 
+            android:onClick="dailyBusinessAccept"
+            />
+
+	</TableRow>
+
+</merge>

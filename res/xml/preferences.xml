@@ -7,6 +7,9 @@
     <CheckBoxPreference
         android:key="notifySick"
         android:title="@string/labelNotifySick" />
+    <CheckBoxPreference
+        android:key="notifyTraining"
+        android:title="@string/labelNotifyTraining" />
     <EditTextPreference
         android:key="worthincrease"
         android:title="@string/labelWorthIncrease" />

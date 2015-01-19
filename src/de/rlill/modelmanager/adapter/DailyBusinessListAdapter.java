@@ -267,6 +267,45 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 				viewElements.setBonus((rememberBonus > 0) ? rememberBonus : ModelService.getExpectedBonus(model.getId()));
 			}
 
+			// Gambling
+			if (today.getEvent().getEclass() == EventClass.GAMBLE) {
+				Button b = (Button)convertView.findViewById(R.id.buttonPlay1);
+				ViewElements ve = new ViewElements(b) {
+
+					@Override
+					public SparseArray<String> getFormularData() {
+						SparseArray<String> result = new SparseArray<String>();
+						result.put(R.string.labelBet1, "999");
+						return result;
+					}
+
+				};
+				ve.setContextToday(today);
+				ve.setContextInt(1);
+				b.setTag(ve);
+
+				b = (Button)convertView.findViewById(R.id.buttonPlay2);
+				ve = new ViewElements(b) {
+
+					@Override
+					public SparseArray<String> getFormularData() {
+						SparseArray<String> result = new SparseArray<String>();
+						result.put(R.string.labelBet1, "999");
+						return result;
+					}
+
+				};
+				ve.setContextToday(today);
+				ve.setContextInt(2);
+				b.setTag(ve);
+
+				b = (Button)convertView.findViewById(R.id.buttonPlay3);
+				ve = new ViewElements(b) { };
+				ve.setContextToday(today);
+				ve.setContextInt(3);
+				b.setTag(ve);
+			}
+
 		}
 
 		return convertView;
@@ -287,6 +326,9 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 				break;
 			case APPLICATION:
 				view = mInflater.inflate(R.layout.fragment_dailytask_hiring, null);
+				break;
+			case GAMBLE:
+				view = mInflater.inflate(R.layout.fragment_dailytask_gamble, null);
 				break;
 			case REQUEST:
 				switch (today.getEvent().getFlag()) {
@@ -503,6 +545,14 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 				if (m != null)
 					result.put(R.string.labelSubstitute, Integer.toString(m.getId()));
 			}
+
+			// Gambling
+			et = (EditText)adaptedView.findViewById(R.id.editTextBet1);
+			if (et != null) result.put(R.string.labelBet1, et.getText().toString());
+			et = (EditText)adaptedView.findViewById(R.id.editTextBet2);
+			if (et != null) result.put(R.string.labelBet2, et.getText().toString());
+			et = (EditText)adaptedView.findViewById(R.id.editTextBet3);
+			if (et != null) result.put(R.string.labelBet3, et.getText().toString());
 
     		return result;
     	}

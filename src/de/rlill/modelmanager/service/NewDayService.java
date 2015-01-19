@@ -46,12 +46,15 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 
 	private boolean notificationSalary;
 	private boolean notificationSickness;
+	private boolean notificationTraining;
 
-	public NewDayService(MainActivity ctx, ViewElements ve, boolean noteSal, boolean noteSick) {
+	public NewDayService(MainActivity ctx, ViewElements ve,
+			boolean noteSal, boolean noteSick, boolean noteTrain) {
 		context = ctx;
 		viewElements = ve;
 		notificationSalary = noteSal;
 		notificationSickness = noteSick;
+		notificationTraining = noteTrain;
 	}
 
 	@Override
@@ -232,6 +235,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				ModelTraining mt = TrainingService.getCurrentTraining(model.getId());
 				if (mt != null) {
 					if (mt.getStartDay() <= DiaryService.today() && mt.getEndDay() >= DiaryService.today()) {
+						// training continues
 						if (DiaryService.todayWeekday() != Weekday.SATURDAY && DiaryService.todayWeekday() != Weekday.SUNDAY) {
 							ModelService.reportTraining(model.getId());
 							DiaryService.log(MessageService.getMessage(R.string.logmessage_training_today, model, mt.getTraining()),
@@ -239,11 +243,14 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 						}
 					}
 					else {
+						// training finished
 						TrainingService.setTrainingStatus(mt.getId(), TrainingStatus.FINISHED);
 						String msg = MessageService.trainingFinishedReport(context, model, mt.getTraining());
 						ModelService.returnFromTraining(model.getId(), mt);
 						int logId = DiaryService.log(msg, EventClass.NOTIFICATION, EventFlag.TRAINING_FIN, model.getId(), mt.getPrice());
-						EventService.newNotification(model.getId(), EventFlag.TRAINING_FIN, mt.getPrice(), logId);
+						if (notificationTraining) {
+							EventService.newNotification(model.getId(), EventFlag.TRAINING_FIN, mt.getPrice(), logId);
+						}
 					}
 				}
 				break;
@@ -657,6 +664,9 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				DiaryService.log(t);
 			}
 		} // not on Sunday
+
+		// TODO: randomly
+		EventService.newGambleEvent();
 
 		// Costs for company cars
 		if (DiaryService.todayWeekday() == Weekday.MONDAY) {

@@ -771,14 +771,14 @@ public class Events {
 		result.add(event);
 
 		event = new Event(1067, 1);
-		event.setEclass(EventClass.GAME);
+		event.setEclass(EventClass.GAMBLE);
 		event.setFlag(EventFlag.WIN);
 		event.setIcon(EventIcon.LIGHTENING);
 		event.setDescription("Glücksspiel.");
 		event.setNoteFile("Glücksspiel");
 		event.setNoteAcct("Glücksspiel");
-		event.setAmountMin(1000000);
-		event.setAmountMax(7500000);
+		event.setAmountMin(1000);
+		event.setAmountMax(10000000);
 		event.setChance(100);
 		result.add(event);
 

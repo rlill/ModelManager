@@ -67,6 +67,15 @@
     <string name="labelSave">speichern</string>
     <string name="labelAbort">abbrechen</string>
     <string name="labelRent">vermieten</string>
+    <string name="labelPlay">spielen</string>
+    <string name="labelTheBet">Spieleinsatz</string>
+    <string name="labelBet1">Spieleinsatz1</string>
+    <string name="labelBet2">Spieleinsatz2</string>
+    <string name="labelBet3">Spieleinsatz3</string>
+    <string name="labelPlayGame1">Namen zum Gesicht</string>
+    <string name="labelPlayGame2">Gesicht zum Namen</string>
+    <string name="labelPlayGame3">Namen erraten</string>
+    <string name="labelGameFacedetect">Gesicht zum Namen</string>
 
     <string name="labelBalance">Kontostand</string>
     <string name="labelCompanyCars">Firmenwagen im Fuhrpark</string>
@@ -181,6 +190,8 @@
     <string name="notifyPaycheck">notifyPaycheck</string>
     <string name="labelNotifySick">Benachrichtigung bei Krankmeldung</string>
     <string name="notifySick">notifySick</string>
+    <string name="labelNotifyTraining">Benachrichtigung bei Abschluß einer Fortbildung</string>
+    <string name="notifyTraining">notifyTraining</string>
     <string name="labelWorthIncrease">Wertsteigerungsfaktor</string>
     <string name="worthincrease">worthincrease</string>
 
