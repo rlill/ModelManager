@@ -770,7 +770,7 @@ public class Events {
 		event.setChance(100);
 		result.add(event);
 
-		event = new Event(1067, 1);
+		event = new Event(1067, 2);
 		event.setEclass(EventClass.GAMBLE);
 		event.setFlag(EventFlag.WIN);
 		event.setIcon(EventIcon.LIGHTENING);

@@ -75,7 +75,16 @@
     <string name="labelPlayGame1">Namen zum Gesicht</string>
     <string name="labelPlayGame2">Gesicht zum Namen</string>
     <string name="labelPlayGame3">Namen erraten</string>
+    <string name="labelGameNamedetect">Namen zum Gesicht</string>
     <string name="labelGameFacedetect">Gesicht zum Namen</string>
+    <string name="labelGameGuessName">Namen erraten</string>
+
+    <string name="descriptionGameFacedetect">Wählen Sie das richtige Gesicht zum Namen.</string>
+
+    <string name="descriptionGameConditions" formatted="false">Sie haben bisher %1s gewonnen.\n
+        Mit dem "zurück" Button beenden Sie die Spielrunde.\n
+        Wenn Sie richtig raten, bekommen Sie %2s\n
+        Wenn Sie falsch raten, kostet Sie das %3s</string>
 
     <string name="labelBalance">Kontostand</string>
     <string name="labelCompanyCars">Firmenwagen im Fuhrpark</string>

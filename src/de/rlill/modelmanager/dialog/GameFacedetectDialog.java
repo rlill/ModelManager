@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +20,9 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 	private static final String LOG_TAG = "MM*" + GameFacedetectDialog.class.getSimpleName();
 
 	private int guess;
+	private int firstbet;
 	private int bet;
+	private int winsum;
 	public final static String EXTRA_BET = "game.facedetect.bet";
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,8 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 		StatusBarFragmentAdapter.initStatusBar(findViewById(R.id.status_bar_include));
 
 		Intent intent = getIntent();
-		bet = intent.getIntExtra(EXTRA_BET, 0);
+		firstbet = intent.getIntExtra(EXTRA_BET, 0);
+		bet = firstbet;
 
 		// TODO: what if bet < 1 ?
 
@@ -76,6 +80,12 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 		iv.setTag(Integer.valueOf(model.getId()));
 		iv.setOnClickListener(this);
 
+		tv = (TextView)findViewById(R.id.textViewDescription);
+		tv.setText(R.string.descriptionGameFacedetect);
+
+		tv = (TextView)findViewById(R.id.textViewCondition);
+		tv.setText(getResources().getString(R.string.descriptionGameConditions,
+				Util.amount(winsum), Util.amount(bet), Util.amount(bet)));
 	}
 
 	@Override
@@ -83,13 +93,14 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 
 		Integer t = (Integer)v.getTag();
 		if (t == null) return;
+		Log.i(LOG_TAG, String.format("correct: %d, guessed: %d", guess, t));
 
 		if (t == guess) {
-
+			winsum += bet;
+			bet += firstbet;
 			newGame();
 		}
 		else {
-
 			finish();
 		}
 	}

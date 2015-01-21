@@ -15,7 +15,7 @@ public abstract class ViewElements {
     private SparseArray<TextView> attributeTextViews;
     private Model contextModel;
     private Today contextToday;
-    private int contextInt;
+    protected int contextInt;
     private Fragment updateableView;
 
 	public ViewElements(View view) {

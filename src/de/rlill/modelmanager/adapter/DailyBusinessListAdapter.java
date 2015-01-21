@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -270,37 +271,22 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 			// Gambling
 			if (today.getEvent().getEclass() == EventClass.GAMBLE) {
 				Button b = (Button)convertView.findViewById(R.id.buttonPlay1);
-				ViewElements ve = new ViewElements(b) {
-
-					@Override
-					public SparseArray<String> getFormularData() {
-						SparseArray<String> result = new SparseArray<String>();
-						result.put(R.string.labelBet1, "999");
-						return result;
-					}
-
-				};
+				GameButtonViewElements ve = new GameButtonViewElements(b);
+				ve.setContextView(convertView);
 				ve.setContextToday(today);
 				ve.setContextInt(1);
 				b.setTag(ve);
 
 				b = (Button)convertView.findViewById(R.id.buttonPlay2);
-				ve = new ViewElements(b) {
-
-					@Override
-					public SparseArray<String> getFormularData() {
-						SparseArray<String> result = new SparseArray<String>();
-						result.put(R.string.labelBet1, "999");
-						return result;
-					}
-
-				};
+				ve = new GameButtonViewElements(b);
+				ve.setContextView(convertView);
 				ve.setContextToday(today);
 				ve.setContextInt(2);
 				b.setTag(ve);
 
 				b = (Button)convertView.findViewById(R.id.buttonPlay3);
-				ve = new ViewElements(b) { };
+				ve = new GameButtonViewElements(b);
+				ve.setContextView(convertView);
 				ve.setContextToday(today);
 				ve.setContextInt(3);
 				b.setTag(ve);
@@ -385,6 +371,34 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 			view = mInflater.inflate(R.layout.fragment_dailytask_preview, null);
 		}
 		return view;
+	}
+
+	private class GameButtonViewElements extends ViewElements {
+
+		public GameButtonViewElements(View view) {
+			super(view);
+		}
+
+		public void setContextView(View v) {
+			adaptedView = v;
+		}
+
+		@Override
+		public SparseArray<String> getFormularData() {
+			Log.d(LOG_TAG, "collecting bets in GameButton");
+			SparseArray<String> result = new SparseArray<String>();
+			EditText et = (EditText)adaptedView.findViewById(R.id.editTextBet1);
+			Log.d(LOG_TAG, "bet1: " + et.getText().toString());
+			result.put(R.string.labelBet1, et.getText().toString());
+			et = (EditText)adaptedView.findViewById(R.id.editTextBet2);
+			Log.d(LOG_TAG, "bet2: " + et.getText().toString());
+			result.put(R.string.labelBet2, et.getText().toString());
+			et = (EditText)adaptedView.findViewById(R.id.editTextBet3);
+			Log.d(LOG_TAG, "bet3: " + et.getText().toString());
+			result.put(R.string.labelBet3, et.getText().toString());
+			return result;
+		}
+
 	}
 
     private class DailyBusinessViewElements extends ViewElements {
@@ -545,14 +559,6 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 				if (m != null)
 					result.put(R.string.labelSubstitute, Integer.toString(m.getId()));
 			}
-
-			// Gambling
-			et = (EditText)adaptedView.findViewById(R.id.editTextBet1);
-			if (et != null) result.put(R.string.labelBet1, et.getText().toString());
-			et = (EditText)adaptedView.findViewById(R.id.editTextBet2);
-			if (et != null) result.put(R.string.labelBet2, et.getText().toString());
-			et = (EditText)adaptedView.findViewById(R.id.editTextBet3);
-			if (et != null) result.put(R.string.labelBet3, et.getText().toString());
 
     		return result;
     	}
