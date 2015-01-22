@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -385,16 +384,12 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 
 		@Override
 		public SparseArray<String> getFormularData() {
-			Log.d(LOG_TAG, "collecting bets in GameButton");
 			SparseArray<String> result = new SparseArray<String>();
 			EditText et = (EditText)adaptedView.findViewById(R.id.editTextBet1);
-			Log.d(LOG_TAG, "bet1: " + et.getText().toString());
 			result.put(R.string.labelBet1, et.getText().toString());
 			et = (EditText)adaptedView.findViewById(R.id.editTextBet2);
-			Log.d(LOG_TAG, "bet2: " + et.getText().toString());
 			result.put(R.string.labelBet2, et.getText().toString());
 			et = (EditText)adaptedView.findViewById(R.id.editTextBet3);
-			Log.d(LOG_TAG, "bet3: " + et.getText().toString());
 			result.put(R.string.labelBet3, et.getText().toString());
 			return result;
 		}

@@ -20,6 +20,7 @@
 
     <string name="button_refresh">Aktualisieren</string>
     <string name="button_save">Speichern</string>
+    <string name="questionmark">\?</string>
 
     <string name="title_model_detail">Personalakte</string>
     <string name="title_account_detail">Kontoauszug</string>
@@ -78,13 +79,25 @@
     <string name="labelGameNamedetect">Namen zum Gesicht</string>
     <string name="labelGameFacedetect">Gesicht zum Namen</string>
     <string name="labelGameGuessName">Namen erraten</string>
+    <string name="labelGameNext">Weiterspielen</string>
 
     <string name="descriptionGameFacedetect">Wählen Sie das richtige Gesicht zum Namen.</string>
+    <string name="descriptionGameLost">Sie haben leider falsch geraten.</string>
+    <string name="descriptionGameWon">Richtig!</string>
 
-    <string name="descriptionGameConditions" formatted="false">Sie haben bisher %1s gewonnen.\n
+    <string name="descriptionGameConditions" formatted="false">
+        Sie haben bisher %1s gewonnen.\n
         Mit dem "zurück" Button beenden Sie die Spielrunde.\n
         Wenn Sie richtig raten, bekommen Sie %2s\n
         Wenn Sie falsch raten, kostet Sie das %3s</string>
+
+    <string name="descriptionGameContinue" formatted="false">
+        Sie haben bisher %1s gewonnen.\n
+        Mit dem "zurück" Button beenden Sie die Spielrunde.</string>
+
+    <string name="descriptionGameSummary" formatted="false">
+        Sie haben insgesamt %1s verloren.\n
+        Mit dem "zurück" Button beenden Sie die Spielrunde.</string>
 
     <string name="labelBalance">Kontostand</string>
     <string name="labelCompanyCars">Firmenwagen im Fuhrpark</string>
@@ -246,6 +259,7 @@
     <string name="accountmessage_reclaim">Rückzahlung</string>
     <string name="accountmessage_credit_pay">Kreditauszahlung</string>
     <string name="accountmessage_credit_payback">Kreditrückzahlung</string>
+    <string name="accountmessage_gambling">Glücksspiel</string>
     
     <string name="display_msg_appl_intro">Ich bin ein erstklassiges Model mit hervorragenden Referenzen.</string>
     <string name="display_msg_appl_qualities">Meine besondere Stärke ist die Tätigkeit als</string>

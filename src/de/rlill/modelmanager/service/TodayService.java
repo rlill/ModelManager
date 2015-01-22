@@ -203,7 +203,6 @@ public class TodayService {
 			switch (game) {
 			case 1:
 				bet = Util.atoi(fd.get(R.string.labelBet1));
-				Log.d(LOG_TAG, "bet-1: " + bet);
 				if (bet < today.getEvent().getAmountMin()) break;
 				intent = new Intent(ctx, GameFacedetectDialog.class);
 				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
@@ -211,7 +210,6 @@ public class TodayService {
 				break;
 			case 2:
 				bet = Util.atoi(fd.get(R.string.labelBet2));
-				Log.d(LOG_TAG, "bet-2: " + bet);
 				if (bet < today.getEvent().getAmountMin()) break;
 				intent = new Intent(ctx, GameFacedetectDialog.class);
 				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
@@ -219,7 +217,6 @@ public class TodayService {
 				break;
 			case 3:
 				bet = Util.atoi(fd.get(R.string.labelBet3));
-				Log.d(LOG_TAG, "bet-3: " + bet);
 				if (bet < today.getEvent().getAmountMin()) break;
 				intent = new Intent(ctx, GameFacedetectDialog.class);
 				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
