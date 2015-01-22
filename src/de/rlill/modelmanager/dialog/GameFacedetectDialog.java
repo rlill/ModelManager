@@ -27,6 +27,7 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 	private int bet;
 	private int winsum;
 	private PlayMode playmode;
+	private List<Model> allModels;
 	public final static String EXTRA_BET = "game.facedetect.bet";
 
 	private List<GambleItem> gambleItems;
@@ -83,21 +84,22 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 		firstbet = intent.getIntExtra(EXTRA_BET, 0);
 		bet = firstbet;
 
+		allModels = ModelService.getHiredModels();
+
 		newGame();
 	}
 
 	private void newGame() {
 
-		List<Model> myModels = ModelService.getHiredModels();
 
 		// TODO: what if there are less than MIN models? (10?)
 
 
-		int[] mix = Util.randomArray(myModels.size());
+		int[] mix = Util.randomArray(allModels.size());
 
 		rightAnswer = Util.rnd(gambleItems.size());
 		int rightIndex = mix[rightAnswer];
-		Model model = ModelService.getModelById(rightIndex);
+		Model model = allModels.get(rightIndex);
 		TextView tv = (TextView)findViewById(R.id.textViewName);
 		tv.setText(model.getFullname());
 
@@ -107,7 +109,7 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 			gi.button.setBackgroundResource(R.drawable.button_blue);
 			gi.button.setText(R.string.questionmark);
 			gi.correct = (rightAnswer == i);
-			gi.model = ModelService.getModelById(mix[i]);
+			gi.model = allModels.get(mix[i]);
 			if (gi.model == null) {
 				Log.e(LOG_TAG, "no model @" + i + " with id " + mix[i]);
 				i++;
