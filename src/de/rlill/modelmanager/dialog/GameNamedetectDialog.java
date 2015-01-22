@@ -18,9 +18,9 @@ import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.service.TransactionService;
 
-public class GameFacedetectDialog extends Activity implements View.OnClickListener {
+public class GameNamedetectDialog extends Activity implements View.OnClickListener {
 
-	private static final String LOG_TAG = "MM*" + GameFacedetectDialog.class.getSimpleName();
+	private static final String LOG_TAG = "MM*" + GameNamedetectDialog.class.getSimpleName();
 
 	private int rightAnswer;
 	private int firstbet;
@@ -32,7 +32,7 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 
 	private List<GambleItem> gambleItems;
 
-	public GameFacedetectDialog() {
+	public GameNamedetectDialog() {
 		super();
 		gambleItems = new ArrayList<GambleItem>();
 	}
@@ -40,7 +40,7 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_game_facedetect_dialog);
+		setContentView(R.layout.activity_game_namedetect_dialog);
 
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -100,24 +100,24 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 		rightAnswer = Util.rnd(gambleItems.size());
 		int rightIndex = mix[rightAnswer];
 		Model model = allModels.get(rightIndex);
-		TextView tv = (TextView)findViewById(R.id.textViewName);
-		tv.setText(model.getFullname());
-
+		ImageView iv = (ImageView)findViewById(R.id.imageView1);
+		int ir = getResources().getIdentifier(model.getImage(), "drawable", getPackageName());
+		iv.setImageResource(ir);
+		iv.setVisibility(View.VISIBLE);
 
 		int i = 0;
 		for (GambleItem gi : gambleItems) {
-			gi.button.setBackgroundResource(R.drawable.button_blue);
-			gi.button.setText(R.string.questionmark);
-			gi.correct = (rightAnswer == i);
 			gi.model = allModels.get(mix[i]);
-			int ir = getResources().getIdentifier(gi.model.getImage(), "drawable", getPackageName());
-			gi.image.setImageResource(ir);
+			gi.button.setBackgroundResource(R.drawable.button_blue);
+			gi.button.setText(gi.model.getFullname());
+			gi.correct = (rightAnswer == i);
+			gi.image.setVisibility(View.GONE);
 			i++;
 		}
 
 
-		tv = (TextView)findViewById(R.id.textViewDescription);
-		tv.setText(R.string.descriptionGameFacedetect);
+		TextView tv = (TextView)findViewById(R.id.textViewDescription);
+		tv.setText(R.string.descriptionGameNamedetect);
 
 		tv = (TextView)findViewById(R.id.textViewCondition);
 		tv.setText(getResources().getString(R.string.descriptionGameConditions,
@@ -134,7 +134,9 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 		for (GambleItem gi : gambleItems) {
 			if (gi.correct)
 				gi.button.setBackgroundResource(R.drawable.button_green);
-			gi.button.setText(gi.model.getFullname());
+			int ir = getResources().getIdentifier(gi.model.getImage(), "drawable", getPackageName());
+			gi.image.setImageResource(ir);
+			gi.image.setVisibility(View.VISIBLE);
 		}
 
 		TextView tv = (TextView)findViewById(R.id.textViewDescription);
@@ -143,6 +145,9 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 		tv = (TextView)findViewById(R.id.textViewCondition);
 		tv.setText(getResources().getString(R.string.descriptionGameContinue,
 				Util.amount(winsum)));
+
+		ImageView iv = (ImageView)findViewById(R.id.imageView1);
+		iv.setVisibility(View.GONE);
 
 		Button b = (Button)findViewById(R.id.buttonOk);
 		b.setVisibility(View.VISIBLE);
@@ -158,9 +163,14 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 				gi.button.setBackgroundResource(R.drawable.button_green);
 			if (i == guess)
 				gi.button.setBackgroundResource(R.drawable.button_red);
-			gi.button.setText(gi.model.getFullname());
+			int ir = getResources().getIdentifier(gi.model.getImage(), "drawable", getPackageName());
+			gi.image.setImageResource(ir);
+			gi.image.setVisibility(View.VISIBLE);
 			i++;
 		}
+
+		ImageView iv = (ImageView)findViewById(R.id.imageView1);
+		iv.setVisibility(View.GONE);
 
 		TextView tv = (TextView)findViewById(R.id.textViewDescription);
 		tv.setText(R.string.descriptionGameLost);

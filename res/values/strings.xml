@@ -81,6 +81,7 @@
     <string name="labelGameGuessName">Namen erraten</string>
     <string name="labelGameNext">Weiterspielen</string>
 
+    <string name="descriptionGameNamedetect">Wählen Sie den richtigen Namen zum Gesicht.</string>
     <string name="descriptionGameFacedetect">Wählen Sie das richtige Gesicht zum Namen.</string>
     <string name="descriptionGameLost">Sie haben leider falsch geraten.</string>
     <string name="descriptionGameWon">Richtig!</string>

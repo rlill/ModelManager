@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/dialogNegotiation"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:descendantFocusability="beforeDescendants"
+	android:focusableInTouchMode="true"
+>
+
+	<include
+		android:id="@+id/status_bar_include"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"
+		layout="@layout/element_status_bar" />
+
+	<TextView
+		android:id="@+id/textViewTitle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="5dp"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:text="@string/labelGameFacedetect"
+	/>
+
+	<ImageView
+		android:id="@+id/imageView1"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:paddingTop="20dp"
+		android:layout_below="@id/textViewTitle"
+		android:layout_alignParentLeft="true"
+		android:contentDescription="@string/imageDescription"
+	/>
+
+	<TextView
+		android:id="@+id/textViewDescription"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="5dp"
+		android:layout_below="@id/imageView1"
+		android:layout_alignParentLeft="true"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+	/>
+	
+	<TableLayout
+		android:id="@+id/tableFaces"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/textViewDescription"
+		android:layout_alignParentLeft="true"
+	>
+
+		<TableRow
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+		>
+
+			<ImageView
+				android:id="@+id/imageViewFace1"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:paddingTop="20dp"
+				android:contentDescription="@string/imageDescription"
+			/>
+		
+			<ImageView
+				android:id="@+id/imageViewFace2"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:paddingTop="20dp"
+				android:contentDescription="@string/imageDescription"
+			/>
+
+			<ImageView
+				android:id="@+id/imageViewFace3"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:paddingTop="20dp"
+				android:contentDescription="@string/imageDescription"
+			/>
+
+			<ImageView
+				android:id="@+id/imageViewFace4"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:paddingTop="20dp"
+				android:contentDescription="@string/imageDescription"
+			/>
+
+			<ImageView
+				android:id="@+id/imageViewFace5"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:paddingTop="20dp"
+				android:contentDescription="@string/imageDescription"
+			/>
+
+		</TableRow>
+
+		<TableRow
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+		>
+
+			<Button
+				android:id="@+id/buttonPlay1"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/button_blue"
+				android:text="@string/questionmark"
+			/>
+
+			<Button
+				android:id="@+id/buttonPlay2"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/button_blue"
+				android:text="@string/questionmark"
+			/>
+
+			<Button
+				android:id="@+id/buttonPlay3"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/button_blue"
+				android:text="@string/questionmark"
+			/>
+
+			<Button
+				android:id="@+id/buttonPlay4"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/button_blue"
+				android:text="@string/questionmark"
+			/>
+
+			<Button
+				android:id="@+id/buttonPlay5"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_width="200dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/button_blue"
+				android:text="@string/questionmark"
+			/>
+
+		</TableRow>
+
+	</TableLayout>
+
+	<TextView
+		android:id="@+id/textViewCondition"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="5dp"
+		android:layout_below="@id/tableFaces"
+		android:layout_alignParentLeft="true"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+	/>
+
+	<Button
+		android:id="@+id/buttonOk"
+		style="?android:attr/buttonBarButtonStyle"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:background="@drawable/button_blue"
+		android:layout_below="@id/textViewCondition"
+		android:layout_alignParentLeft="true"
+		android:text="@string/labelGameNext"
+	/>
+
+</RelativeLayout>

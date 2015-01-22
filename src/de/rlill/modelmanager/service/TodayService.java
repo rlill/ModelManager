@@ -14,6 +14,7 @@ import de.rlill.modelmanager.MainActivity;
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.dialog.GameFacedetectDialog;
+import de.rlill.modelmanager.dialog.GameNamedetectDialog;
 import de.rlill.modelmanager.model.Diary;
 import de.rlill.modelmanager.model.Event;
 import de.rlill.modelmanager.model.Model;
@@ -204,7 +205,7 @@ public class TodayService {
 			case 1:
 				bet = Util.atoi(fd.get(R.string.labelBet1));
 				if (bet < today.getEvent().getAmountMin()) break;
-				intent = new Intent(ctx, GameFacedetectDialog.class);
+				intent = new Intent(ctx, GameNamedetectDialog.class);
 				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
 				ctx.startActivity(intent);
 				break;

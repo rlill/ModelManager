@@ -85,6 +85,14 @@
                 android:value="de.rlill.helloworld.MainActivity" />
         </activity>
         <activity
+            android:name="de.rlill.modelmanager.dialog.GameNamedetectDialog"
+            android:label="@string/labelPlayGame1"
+            android:parentActivityName="de.rlill.modelmanager.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.rlill.helloworld.MainActivity" />
+        </activity>
+        <activity
             android:name="de.rlill.modelmanager.dialog.GameFacedetectDialog"
             android:label="@string/labelPlayGame2"
             android:parentActivityName="de.rlill.modelmanager.MainActivity" >
