@@ -24,7 +24,7 @@
 		android:layout_alignParentTop="true"
 		android:layout_alignParentLeft="true"
 		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:text="@string/labelGameFacedetect"
+		android:text="@string/labelGameNamedetect"
 	/>
 
 	<ImageView

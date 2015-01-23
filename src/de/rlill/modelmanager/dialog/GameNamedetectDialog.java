@@ -21,6 +21,7 @@ import de.rlill.modelmanager.service.TransactionService;
 public class GameNamedetectDialog extends Activity implements View.OnClickListener {
 
 	private static final String LOG_TAG = "MM*" + GameNamedetectDialog.class.getSimpleName();
+	private static final int MIN_MODELS_FOR_GAME = 10;
 
 	private int rightAnswer;
 	private int firstbet;
@@ -28,9 +29,10 @@ public class GameNamedetectDialog extends Activity implements View.OnClickListen
 	private int winsum;
 	private PlayMode playmode;
 	private List<Model> allModels;
+	private List<GambleItem> gambleItems;
+
 	public final static String EXTRA_BET = "game.facedetect.bet";
 
-	private List<GambleItem> gambleItems;
 
 	public GameNamedetectDialog() {
 		super();
@@ -46,6 +48,9 @@ public class GameNamedetectDialog extends Activity implements View.OnClickListen
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		StatusBarFragmentAdapter.initStatusBar(findViewById(R.id.status_bar_include));
+
+		allModels = ModelService.getHiredModels();
+		if (allModels.size() < MIN_MODELS_FOR_GAME) return;
 
 		GambleItem gi = new GambleItem();
 		gi.button = (Button)findViewById(R.id.buttonPlay1);
@@ -84,16 +89,10 @@ public class GameNamedetectDialog extends Activity implements View.OnClickListen
 		firstbet = intent.getIntExtra(EXTRA_BET, 0);
 		bet = firstbet;
 
-		allModels = ModelService.getHiredModels();
-
 		newGame();
 	}
 
 	private void newGame() {
-
-
-		// TODO: what if there are less than MIN models? (10?)
-
 
 		int[] mix = Util.randomArray(allModels.size());
 
