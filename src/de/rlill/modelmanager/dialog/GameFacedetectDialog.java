@@ -11,7 +11,6 @@ import de.rlill.modelmanager.struct.GameFaceDetect;
 public class GameFacedetectDialog extends Activity implements View.OnClickListener {
 
 	private static final String LOG_TAG = "MM*" + GameFacedetectDialog.class.getSimpleName();
-
 	public final static String EXTRA_BET = "game.facedetect.bet";
 
 	private static Game game = null;
