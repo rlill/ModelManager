@@ -628,6 +628,9 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 					}
 				}
 
+				// TODO: randomly
+				EventService.newGambleEvent();
+
 			} // for each model
 
 			// pay the team leaders
@@ -664,9 +667,6 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				DiaryService.log(t);
 			}
 		} // not on Sunday
-
-		// TODO: randomly
-		EventService.newGambleEvent();
 
 		// Costs for company cars
 		if (DiaryService.todayWeekday() == Weekday.MONDAY) {

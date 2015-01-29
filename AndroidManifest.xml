@@ -33,7 +33,7 @@
             android:parentActivityName="de.rlill.modelmanager.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.rlill.helloworld.MainActivity" />
+                android:value="de.rlill.modelmanager.MainActivity" />
         </activity>
         <activity
             android:name="de.rlill.modelmanager.dialog.ModelNegotiationDialog"
@@ -41,7 +41,7 @@
             android:parentActivityName="de.rlill.modelmanager.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.rlill.helloworld.MainActivity" />
+                android:value="de.rlill.modelmanager.MainActivity" />
         </activity>
         <activity
             android:name="de.rlill.modelmanager.dialog.CreditDialog"
@@ -49,7 +49,7 @@
             android:parentActivityName="de.rlill.modelmanager.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.rlill.helloworld.MainActivity" />
+                android:value="de.rlill.modelmanager.MainActivity" />
         </activity>
         <activity
             android:name="de.rlill.modelmanager.dialog.CarMaintenanceDialog"
@@ -57,7 +57,7 @@
             android:parentActivityName="de.rlill.modelmanager.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.rlill.helloworld.MainActivity" />
+                android:value="de.rlill.modelmanager.MainActivity" />
         </activity>
         <activity
             android:name="de.rlill.modelmanager.dialog.CarShoppingDialog"
@@ -65,7 +65,7 @@
             android:parentActivityName="de.rlill.modelmanager.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.rlill.helloworld.MainActivity" />
+                android:value="de.rlill.modelmanager.MainActivity" />
         </activity>
         <activity
             android:name="de.rlill.modelmanager.dialog.MovieproductionDialog"
@@ -73,7 +73,7 @@
             android:parentActivityName="de.rlill.modelmanager.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.rlill.helloworld.MainActivity" />
+                android:value="de.rlill.modelmanager.MainActivity" />
         </activity>
         <activity
             android:name="de.rlill.modelmanager.dialog.MovieModelSelectDialog"
@@ -82,7 +82,7 @@
             android:parentActivityName="de.rlill.modelmanager.dialog.MovieproductionDialog" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.rlill.helloworld.MainActivity" />
+                android:value="de.rlill.modelmanager.MainActivity" />
         </activity>
         <activity
             android:name="de.rlill.modelmanager.dialog.GameNamedetectDialog"
@@ -90,7 +90,7 @@
             android:parentActivityName="de.rlill.modelmanager.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.rlill.helloworld.MainActivity" />
+                android:value="de.rlill.modelmanager.MainActivity" />
         </activity>
         <activity
             android:name="de.rlill.modelmanager.dialog.GameFacedetectDialog"
@@ -98,7 +98,7 @@
             android:parentActivityName="de.rlill.modelmanager.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.rlill.helloworld.MainActivity" />
+                android:value="de.rlill.modelmanager.MainActivity" />
         </activity>
 
 	</application>
