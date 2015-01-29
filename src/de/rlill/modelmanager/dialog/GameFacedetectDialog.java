@@ -12,6 +12,7 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 
 	private static final String LOG_TAG = "MM*" + GameFacedetectDialog.class.getSimpleName();
 	public final static String EXTRA_BET = "game.facedetect.bet";
+	public final static String RESET = "game.facedetect.reset";
 
 	private static Game game = null;
 
@@ -29,8 +30,10 @@ public class GameFacedetectDialog extends Activity implements View.OnClickListen
 
 		Intent intent = getIntent();
 		int bet = intent.getIntExtra(EXTRA_BET, 0);
+		int reset = intent.getIntExtra(RESET, 0);
 
-		if (game == null) game = new GameFaceDetect(this, bet);
+		if (game == null || reset == 1) game = new GameFaceDetect(this, bet);
+		intent.putExtra(RESET, 0);
 
 		game.registerControls(this,  this);
 

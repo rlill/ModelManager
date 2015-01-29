@@ -206,7 +206,8 @@ public class TodayService {
 				bet = Util.atoi(fd.get(R.string.labelBet1));
 				if (bet < today.getEvent().getAmountMin()) break;
 				intent = new Intent(ctx, GameNamedetectDialog.class);
-				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
+				intent.putExtra(GameNamedetectDialog.EXTRA_BET, bet);
+				intent.putExtra(GameNamedetectDialog.RESET, 1);
 				ctx.startActivity(intent);
 				break;
 			case 2:
@@ -214,6 +215,7 @@ public class TodayService {
 				if (bet < today.getEvent().getAmountMin()) break;
 				intent = new Intent(ctx, GameFacedetectDialog.class);
 				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
+				intent.putExtra(GameFacedetectDialog.RESET, 1);
 				ctx.startActivity(intent);
 				break;
 			case 3:
