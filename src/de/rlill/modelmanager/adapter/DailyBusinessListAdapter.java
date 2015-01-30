@@ -282,13 +282,6 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 				ve.setContextToday(today);
 				ve.setContextInt(2);
 				b.setTag(ve);
-
-				b = (Button)convertView.findViewById(R.id.buttonPlay3);
-				ve = new GameButtonViewElements(b);
-				ve.setContextView(convertView);
-				ve.setContextToday(today);
-				ve.setContextInt(3);
-				b.setTag(ve);
 			}
 
 		}
@@ -389,8 +382,6 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 			result.put(R.string.labelBet1, et.getText().toString());
 			et = (EditText)adaptedView.findViewById(R.id.editTextBet2);
 			result.put(R.string.labelBet2, et.getText().toString());
-			et = (EditText)adaptedView.findViewById(R.id.editTextBet3);
-			result.put(R.string.labelBet3, et.getText().toString());
 			return result;
 		}
 

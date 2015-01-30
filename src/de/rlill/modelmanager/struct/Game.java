@@ -20,6 +20,7 @@ public abstract class Game {
 
 	private static final int GUESSING_POSITIONS = 5;
 	public final static String EXTRA_BET = "game.facedetect.bet";
+	public final static int MIN_GAME_MODELS = 10;
 
 	protected int firstbet;
 	protected int bet;

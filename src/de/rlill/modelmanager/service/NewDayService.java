@@ -28,6 +28,7 @@ import de.rlill.modelmanager.struct.CarAction;
 import de.rlill.modelmanager.struct.CarStatus;
 import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
+import de.rlill.modelmanager.struct.Game;
 import de.rlill.modelmanager.struct.ModelStatus;
 import de.rlill.modelmanager.struct.MovieStatus;
 import de.rlill.modelmanager.struct.RejectReasons;
@@ -628,8 +629,8 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 					}
 				}
 
-				// TODO: randomly
-				EventService.newGambleEvent();
+				if (allModels.size() >= Game.MIN_GAME_MODELS && Util.rnd(allModels.size()) < 3)
+					EventService.newGambleEvent();
 
 			} // for each model
 

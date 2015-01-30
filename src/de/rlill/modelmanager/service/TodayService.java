@@ -218,14 +218,8 @@ public class TodayService {
 				intent.putExtra(GameFacedetectDialog.RESET, 1);
 				ctx.startActivity(intent);
 				break;
-			case 3:
-				bet = Util.atoi(fd.get(R.string.labelBet3));
-				if (bet < today.getEvent().getAmountMin()) break;
-				intent = new Intent(ctx, GameFacedetectDialog.class);
-				intent.putExtra(GameFacedetectDialog.EXTRA_BET, bet);
-				ctx.startActivity(intent);
-				break;
 			}
+			TodayDbAdapter.removeToday(today.getId());
 			break;
 		default:
 			TodayDbAdapter.removeToday(today.getId());
@@ -668,6 +662,7 @@ public class TodayService {
 	private static void triggerTeamwork() {
 		// arbitrary order
 		List<Team> teams = ModelService.getAllTeams();
+		if (teams.size() < 1) return;
 		int [] mix = Util.randomArray(teams.size());
 		for (int i = 0; i < mix.length; i++) {
 			Team team = teams.get(mix[i]);
