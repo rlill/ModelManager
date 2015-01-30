@@ -22,8 +22,8 @@ public class TransactionSetup {
 		// insert
 		ContentValues values = new ContentValues();
 		values.put(TransactionDbAdapter.KEY_DAY, 0);
-		values.put(TransactionDbAdapter.KEY_AMOUNT, 1000000);
-		values.put(TransactionDbAdapter.KEY_BALANCE, 1000000);
+		values.put(TransactionDbAdapter.KEY_AMOUNT, 100000);
+		values.put(TransactionDbAdapter.KEY_BALANCE, 100000);
 		values.put(TransactionDbAdapter.KEY_PERSON1, 0);
 		values.put(TransactionDbAdapter.KEY_PERSON2, -1);
 		values.put(TransactionDbAdapter.KEY_DESCRIPTION, "START");
