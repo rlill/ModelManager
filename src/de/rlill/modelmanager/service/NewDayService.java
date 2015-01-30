@@ -146,7 +146,6 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 			int avgCompareSalary = ModelService.getAverageSalary(model.getId());
 			int expectedBonus = ModelService.getExpectedBonus(model.getId());
 
-			try { Thread.sleep(20); } catch (InterruptedException e) { }
 			progress.incrementProgressBy(1);
 
 			if (model.getStatus() != ModelStatus.TRAINING) {
@@ -371,7 +370,6 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 			for (int i = 0; i < allModels.size(); i++) {
 				Model model = allModels.get(mix[i]);
 
-				try { Thread.sleep(20); } catch (InterruptedException e) { }
 				progress.incrementProgressBy(1);
 
 				if (model.getStatus() == ModelStatus.FREE) {
@@ -655,7 +653,8 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 						leader = ModelService.getModelById(team.getLeader2());
 					}
 				}
-				if (leader == null || leader.getStatus() != ModelStatus.HIRED || tw.bookings == 0) {
+				if (teamId > 0 &&
+						(leader == null || leader.getStatus() != ModelStatus.HIRED || tw.bookings == 0)) {
 					Log.i(LOG_TAG, "Team #" + teamId + " is unmanaged");
 					EventService.newNotification(0, EventFlag.NO_GROUPWORK, 0, teamId);
 					continue;

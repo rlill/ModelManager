@@ -270,12 +270,12 @@ public class ModelService {
 		if (team.getLeader1() == modelId) return false;
 		// check if fist leader is active
 		Model leader = getModelById(team.getLeader1());
-		if (leader.getStatus() == ModelStatus.HIRED) return true;
+		if (leader != null && leader.getStatus() == ModelStatus.HIRED) return true;
 
 		if (team.getLeader2() == modelId) return false;
 		// check if second leader is active
 		leader = getModelById(team.getLeader2());
-		if (leader.getStatus() == ModelStatus.HIRED) return true;
+		if (leader != null && leader.getStatus() == ModelStatus.HIRED) return true;
 
 		// no active leader, act unmanaged
 		return false;
@@ -286,11 +286,11 @@ public class ModelService {
 
 		// check if first leader is active
 		Model leader = getModelById(team.getLeader1());
-		if (leader.getStatus() != ModelStatus.HIRED) {
+		if (leader == null || leader.getStatus() != ModelStatus.HIRED) {
 			// check if second leader is active
 			leader = getModelById(team.getLeader2());
 		}
-		if (leader.getStatus() != ModelStatus.HIRED) {
+		if (leader == null || leader.getStatus() != ModelStatus.HIRED) {
 			Log.w(LOG_TAG, "No Teamwork in team " + team.getId() + " because no leader is available");
 			return;
 		}
