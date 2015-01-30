@@ -32,6 +32,7 @@ import de.rlill.modelmanager.fragments.TeamFragment;
 import de.rlill.modelmanager.fragments.TrainingFragment;
 import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.persistance.DbAdapter;
+import de.rlill.modelmanager.service.DiaryService;
 import de.rlill.modelmanager.service.MessageService;
 import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.service.TodayService;
@@ -71,6 +72,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		DbAdapter.init(getApplicationContext());
 
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
@@ -150,14 +153,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			}
 		});
 
-		activityFragments.add(new ActivityFragmentProvider() {
-			public String getTitle(Resources res) {
-				return res.getString(R.string.title_section_movieproduction);
-			};
-			public Fragment getActivityFragment() {
-				return new MovieproductionFragment();
-			}
-		});
+		if (DiaryService.today() >= 28) {
+			activityFragments.add(new ActivityFragmentProvider() {
+				public String getTitle(Resources res) {
+					return res.getString(R.string.title_section_movieproduction);
+				};
+				public Fragment getActivityFragment() {
+					return new MovieproductionFragment();
+				}
+			});
+		}
 
 
 		// Create the adapter that will return a fragment for each of the three
@@ -191,7 +196,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 		Context ctx = getApplicationContext();
 		MessageService.setContext(ctx);
-		DbAdapter.init(ctx);
 
 		Weekday.translate(ctx);
 		ModelStatus.translate(ctx);
