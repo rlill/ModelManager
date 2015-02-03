@@ -47,12 +47,13 @@ public class PropertiesService {
 		if (wi < 1) wi = 1;
 		return wi;
 	}
-	public static void setWorthincrease(double inf) {
+	public static boolean setWorthincrease(double inf) {
 		double wi = getWorthincrease();
 		if (inf > wi * 1.2) {
 			Log.e(LOG_TAG, "A worthincrease from " + wi + " to " + inf + " is not realistic");
-			return;
+			return false;
 		}
 		setProperty(PROPERTY_WORTHINCREASE, Double.toString(inf));
+		return true;
 	}
 }

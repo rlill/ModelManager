@@ -199,6 +199,19 @@
 	        android:padding="10dp"
 	        />
 
+	    <!-- Legacy helper, to be removed: -->
+	    <Button 
+	        android:id="@+id/button3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/tableCompanyCarOverview"
+	        android:layout_below="@id/button2"
+	        android:text="@string/labelPreferences"
+	        android:background="@drawable/button_red"
+	        android:padding="10dp"
+	        android:onClick="openPreferences"
+	        />
+	    
     	<ListView
 	        android:id="@+id/listCompanyCars"
 	        android:layout_height="match_parent"

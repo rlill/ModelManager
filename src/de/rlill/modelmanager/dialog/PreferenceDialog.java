@@ -7,7 +7,6 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.util.Log;
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.service.PropertiesService;
@@ -44,12 +43,21 @@ public class PreferenceDialog extends PreferenceFragment implements
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		String overwriteValue = null;
 		if (key.equals(getResources().getString(R.string.worthincrease))) {
 			double wi = Util.atof(sharedPreferences.getString(key, "1"));
-			Log.i(LOG_TAG, "Worthincrease: " + wi);
-			PropertiesService.setWorthincrease(wi);
+			// format with 2 fraction digits
+			overwriteValue = String.format("%.2f", wi);
+			if (!PropertiesService.setWorthincrease(wi)) {
+				// setting new value failed, revert to previous
+				wi = PropertiesService.getWorthincrease();
+				overwriteValue = String.format("%.2f", wi);
+				SharedPreferences.Editor editor = sharedPreferences.edit();
+				editor.putString(key, overwriteValue);
+				editor.commit();
+			}
 		}
-		updatePreferences(findPreference(key));
+		updatePreferences(findPreference(key), overwriteValue);
 	}
 
 	private void initSummary(Preference p) {
@@ -59,14 +67,14 @@ public class PreferenceDialog extends PreferenceFragment implements
 				initSummary(cat.getPreference(i));
 			}
 		} else {
-			updatePreferences(p);
+			updatePreferences(p, null);
 		}
 	}
 
-	private void updatePreferences(Preference p) {
+	private void updatePreferences(Preference p, String overwriteValue) {
 		if (p instanceof EditTextPreference) {
 			EditTextPreference editTextPref = (EditTextPreference) p;
-			p.setSummary(editTextPref.getText());
+			p.setSummary((overwriteValue != null) ? overwriteValue : editTextPref.getText());
 		}
 	}
 }

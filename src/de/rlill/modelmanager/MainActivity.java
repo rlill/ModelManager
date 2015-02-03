@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import de.rlill.modelmanager.dialog.AccountDetailDialog;
+import de.rlill.modelmanager.dialog.CarShoppingDialog;
 import de.rlill.modelmanager.dialog.ModelNegotiationDialog;
 import de.rlill.modelmanager.fragments.AccountFragment;
 import de.rlill.modelmanager.fragments.CompanyCarFragment;
@@ -329,11 +330,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		}
 	}
 
-	// This method is called once the menu is selected
 	public void carShopping(View v) {
-		// TODO: replacement for debug-purposes - revert!
-//		Intent i = new Intent(this, CarShoppingDialog.class);
-//		startActivity(i);
+		Intent i = new Intent(this, CarShoppingDialog.class);
+		startActivity(i);
+	}
+
+	// TODO: legacy helper, to be removed!
+	public void openPreferences(View v) {
 		Intent intent = new Intent(this, PreferenceActivity.class);
 		startActivity(intent);
 	}

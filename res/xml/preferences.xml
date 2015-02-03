@@ -13,5 +13,8 @@
     <EditTextPreference
         android:key="worthincrease"
         android:title="@string/labelWorthIncrease" />
-
+    <CheckBoxPreference
+        android:key="geekMode"
+        android:title="@string/labelGeekMode" />
+    
 </PreferenceScreen>

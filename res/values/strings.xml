@@ -184,6 +184,7 @@
     <string name="labelTotalCost">Gesamtkosten</string>
     <string name="labelCostSoFar">Kosten bisher</string>
     <string name="labelApproximately">ca.</string>
+    <string name="labelPreferences">Einstellungen</string>
 
     <string name="labelMovieproduction">Filmproduktion</string>
     <string name="labelMovieType">Filmart</string>
@@ -217,6 +218,8 @@
     <string name="notifyTraining">notifyTraining</string>
     <string name="labelWorthIncrease">Wertsteigerungsfaktor</string>
     <string name="worthincrease">worthincrease</string>
+    <string name="labelGeekMode">Geek Mode</string>
+    <string name="geekMode">geekMode</string>
 
     <string name="questionQuitCompensation" formatted="false">Bei einer arbeitgeberseitigen Kündigung steht %1s eine Abfindung in Höhe von %2s zu. Entlassung durchführen?</string>
 
