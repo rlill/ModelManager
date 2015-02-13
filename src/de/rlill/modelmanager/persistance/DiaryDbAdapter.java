@@ -117,6 +117,21 @@ public class DiaryDbAdapter extends DbAdapter {
     	return result;
     }
 
+    public static void update(Diary diary) {
+    	final SQLiteDatabase db = open();
+
+    	ContentValues values = new ContentValues();
+//    	values.put(KEY_DAY, diary.getDay());
+//    	values.put(KEY_EVENT_CLASS, (diary.getEventClass() != null) ? diary.getEventClass().getIndex() : 0);
+//    	values.put(KEY_EVENT_FLAG, (diary.getEventFlag() != null) ? diary.getEventFlag().getIndex() : 0);
+//    	values.put(KEY_MODEL_ID, diary.getModelId());
+    	values.put(KEY_AMOUNT, diary.getAmount());
+    	values.put(KEY_DESCRIPTION, diary.getDescription());
+
+    	// update row
+    	db.update(TABLE_NAME_DIARY, values, KEY_ID + "=?", new String[] { Integer.toString(diary.getId()) } );
+    }
+
     public static Diary readCursorLine(Cursor cursor) {
     	Diary diary = new Diary(cursor.getInt(0));
 

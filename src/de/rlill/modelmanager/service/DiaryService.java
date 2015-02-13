@@ -53,6 +53,16 @@ public class DiaryService {
 		log(msg, EventClass.ACCEPT, t.getEvent().getFlag(), t.getModelId(), t.getAmount1());
 	}
 
+	public static void logUpdateFile(Today t) {
+		Diary d = DiaryDbAdapter.getDiaryEntry(t.getId());
+		if (d != null) {
+			d.setDescription(t.getNoteFile());
+			d.setAmount(t.getAmount1());
+			DiaryDbAdapter.update(d);
+		} else
+			log(t.getDescription(), t.getEvent().getEclass(), t.getEvent().getFlag(), t.getModelId(), t.getAmount1());
+	}
+
 	public static int log(String description, EventClass ec, EventFlag ef, int modelId, int amount) {
 		Diary diary = new Diary();
 		diary.setDay(today());

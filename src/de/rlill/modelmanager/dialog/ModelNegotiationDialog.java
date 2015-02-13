@@ -8,9 +8,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -265,14 +267,17 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
     	label = getResources().getString(R.string.labelHealth);
     	tl.addView(mkRatingRow(label, model.getHealth()));
 
-    	label = getResources().getString(R.string.labelAmbition);
-    	tl.addView(mkRatingRow(label, model.getAmbition()));
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		if (sharedPref.getBoolean("geekMode", false)) {
+	    	label = getResources().getString(R.string.labelAmbition);
+	    	tl.addView(mkRatingRow(label, model.getAmbition()));
 
-    	label = getResources().getString(R.string.labelCriminal);
-    	tl.addView(mkRatingRow(label, model.getCriminal()));
+	    	label = getResources().getString(R.string.labelCriminal);
+	    	tl.addView(mkRatingRow(label, model.getCriminal()));
 
-    	label = getResources().getString(R.string.labelMood);
-    	tl.addView(mkRatingRow(label, model.getMood()));
+	    	label = getResources().getString(R.string.labelMood);
+	    	tl.addView(mkRatingRow(label, model.getMood()));
+		}
 
     	// past events
 		StringBuilder pastEventLog = new StringBuilder();
@@ -293,6 +298,7 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 			pastEventLog.append('#').append(diary.getDay()).append(' ').append(diary.getDescription()).append("\n");
 		}
 
+		// collect data for chart
 		// reverse order
 		for (Diary diary : new ListReverser<Diary>(diaryList)) {
 
@@ -377,6 +383,7 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		tl.addView(mkChartRow(label, sumEarn, 0, Color.GREEN));
 
 
+		// create chart
 		if (startDay > 0) {
 			GridView operationChartGrid = (GridView)findViewById(R.id.gridOpChart);
 
