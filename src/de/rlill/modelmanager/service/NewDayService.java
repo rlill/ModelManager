@@ -551,7 +551,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 								today.setAmount1(pmax);
 								ModelService.reportBooking(today);
 								TransactionService.transfer(-1, 0, pmax, today.getNoteAcct());
-								DiaryService.log(today);
+								DiaryService.logUpdateFile(today);
 
 								tw.bookings++;
 								tw.earnings += pmax;
@@ -609,7 +609,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 							today.setAmount1(pmax);
 							ModelService.reportBooking(today);
 							TransactionService.transfer(-1, 0, pmax, today.getNoteAcct());
-							DiaryService.log(today);
+							DiaryService.logUpdateFile(today);
 
 							tw.bookings++;
 							tw.earnings += pmax;
