@@ -1,7 +1,9 @@
 package de.rlill.modelmanager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.AvoidXfermode;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.SparseArray;
@@ -141,6 +143,8 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 		}
 
 		int [] mix = Util.randomArray(allModels.size());
+        int hiredCount = 0;
+        int applicationCount = 0;
 		for (int i = 0; i < allModels.size(); i++) {
 			Model model = allModels.get(mix[i]);
 			int avgCompareSalary = ModelService.getAverageSalary(model.getId());
@@ -163,6 +167,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 			Statistics st;
 			switch (model.getStatus()) {
 			case HIRED:
+                hiredCount++;
 				// quit
 				if (model.getMood() < 20 && model.getSalary() < avgCompareSalary && expectedBonus > 0) {
 					ModelService.release(model.getId());
@@ -361,6 +366,11 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 
 		} // for each model
 
+        // set of models that could apply if they wanted.
+        // in case of new game, force some to apply while the number of hired
+        // models is very low
+        List<Model> hireables = new ArrayList<Model>();
+
 
 		if (DiaryService.todayWeekday() != Weekday.SUNDAY) {
 
@@ -374,7 +384,11 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 
 				if (model.getStatus() == ModelStatus.FREE) {
 					// maybe apply
-					if (Util.rnd(20) == 1) ModelService.makeApplication(model.getId());
+					if (Util.rnd(20) == 1) {
+                        ModelService.makeApplication(model.getId());
+                        applicationCount++;
+                    }
+                    else hireables.add(model);
 				}
 
 				// win/lose events
@@ -635,6 +649,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 			// pay the team leaders
 			for (int i = 0; i < teamWork.size(); i++) {
 				int teamId = teamWork.keyAt(i);
+                if (teamId == 0) continue;
 				Team team = ModelService.getTeam(teamId);
 				TeamWork tw = teamWork.valueAt(i);
 
@@ -667,6 +682,15 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				DiaryService.log(t);
 			}
 		} // not on Sunday
+
+        while (DiaryService.today() < 7 && hiredCount < 10 && applicationCount < 10
+                && hireables.size() > 0) {
+            int mi = Util.rnd(hireables.size());
+            Model m = hireables.get(mi);
+            ModelService.makeApplication(m.getId());
+            applicationCount++;
+            hireables.remove(mi);
+        }
 
 		// Costs for company cars
 		if (DiaryService.todayWeekday() == Weekday.MONDAY) {

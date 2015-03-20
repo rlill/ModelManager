@@ -28,7 +28,7 @@ Today: "soll gebucht werden" -> Diary "wurde gebucht"
 Teams: hide empty
 
 New day progress dialog:
-(test) [ ] Benachrichtigung bei Trainingsabschluﬂ
+(test) [ ] Benachrichtigung bei Trainingsabschlu√ü
 
 
 Games (from pl)
@@ -59,3 +59,10 @@ Account Detail view:
 (test) Movie-rental & Movie-sale: finishing cost intransparently added afterwards!!!
 
 First-time startup: set worthincrease factor = 1
+
+
+New game: ensure applications on first day
+
+(test) sick-report + salary-report in spite of deselected option
+
+Car defect - Notification with repair cost

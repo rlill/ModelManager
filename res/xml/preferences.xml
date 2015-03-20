@@ -3,18 +3,22 @@
 
     <CheckBoxPreference
         android:key="notifyPaycheck"
-        android:title="@string/labelNotifyPaycheck" />
+        android:title="@string/labelNotifyPaycheck"
+        android:defaultValue="true" />
     <CheckBoxPreference
         android:key="notifySick"
-        android:title="@string/labelNotifySick" />
+        android:title="@string/labelNotifySick"
+        android:defaultValue="true" />
     <CheckBoxPreference
         android:key="notifyTraining"
-        android:title="@string/labelNotifyTraining" />
+        android:title="@string/labelNotifyTraining"
+        android:defaultValue="true" />
     <EditTextPreference
         android:key="worthincrease"
         android:title="@string/labelWorthIncrease" />
     <CheckBoxPreference
         android:key="geekMode"
-        android:title="@string/labelGeekMode" />
+        android:title="@string/labelGeekMode"
+        android:defaultValue="false" />
     
 </PreferenceScreen>

@@ -28,7 +28,7 @@ public class Trainings {
 		double worthincreaseFactor = PropertiesService.getWorthincrease();
 
 		Training training = new Training(1);
-		training.setDescription("Profitraining für Fotomodels");
+		training.setDescription("Profitraining fÃ¼r Fotomodels");
 		training.setDuration(4);
 		training.setPrice((int)(worthincreaseFactor * 12000));
 		training.setInc_qphoto(40);
@@ -37,7 +37,7 @@ public class Trainings {
 		trainingMap.put(training.getId(), training);
 
 		training = new Training(2);
-		training.setDescription("Profitraining für Filmmodels");
+		training.setDescription("Profitraining fÃ¼r Filmmodels");
 		training.setDuration(4);
 		training.setPrice((int)(worthincreaseFactor * 15000));
 		training.setInc_qmovie(40);
@@ -46,7 +46,7 @@ public class Trainings {
 		trainingMap.put(training.getId(), training);
 
 		training = new Training(3);
-		training.setDescription("Erotiktraining für Models");
+		training.setDescription("Erotiktraining fÃ¼r Models");
 		training.setDuration(3);
 		training.setPrice((int)(worthincreaseFactor * 18000));
 		training.setInc_erotic(40);

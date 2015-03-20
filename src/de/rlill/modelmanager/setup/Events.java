@@ -19,14 +19,14 @@ public class Events {
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.NEWDAY);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Tagesabschluß.");
+		event.setDescription("TagesabschluÃŸ.");
 		result.add(event);
 
 		event = new Event(1001, 2);
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.PAYCHECK);
 		event.setIcon(EventIcon.MONEY);
-		event.setDescription("%N hat heute ihr Gehalt in Höhe von %A bekommen.");
+		event.setDescription("%N hat heute ihr Gehalt in HÃ¶he von %A bekommen.");
 		event.setNoteAcct("Gehalt");
 		result.add(event);
 
@@ -34,7 +34,7 @@ public class Events {
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.QUIT);
 		event.setIcon(EventIcon.DOOR);
-		event.setDescription("%N hat gekündigt.");
+		event.setDescription("%N hat gekÃ¼ndigt.");
 		result.add(event);
 
 		event = new Event(1003, 1);
@@ -48,23 +48,23 @@ public class Events {
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.CAR_BROKEN);
 		event.setIcon(EventIcon.CAR);
-		event.setDescription("%N hat einen Blechschaden mit ihrem Auto (%C) verursacht. Es muß instandgesetzt werden.");
+		event.setDescription("%N hat einen Blechschaden mit ihrem Auto (%C) verursacht. Es muÃŸ instandgesetzt werden.");
 		result.add(event);
 
 		event = new Event(1005, 3);
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.CAR_STOLEN);
 		event.setIcon(EventIcon.CAR);
-		event.setDescription("%N wurde ihr Auto (%C) gestohlen. Um wieder für Fototermine gebucht werden zu können, braucht sie ein neues Auto.");
+		event.setDescription("%N wurde ihr Auto (%C) gestohlen. Um wieder fÃ¼r Fototermine gebucht werden zu kÃ¶nnen, braucht sie ein neues Auto.");
 		result.add(event);
 
 		event = new Event(1006, 2);
 		event.setEclass(EventClass.BOOKING);
 		event.setFlag(EventFlag.PHOTO);
 		event.setIcon(EventIcon.CAMERA);
-		event.setDescription("%N soll heute für %A für ein Fotoshooting gebucht werden.");
-		event.setNoteFile("Gebucht für Fotoshooting, Gage %A");
-		event.setNoteAcct("Gage für Fotoshooting %N");
+		event.setDescription("%N soll heute fÃ¼r %A fÃ¼r ein Fotoshooting gebucht werden.");
+		event.setNoteFile("Gebucht fÃ¼r Fotoshooting, Gage %A");
+		event.setNoteAcct("Gage fÃ¼r Fotoshooting %N");
 		event.setAmountMin(1000);
 		event.setAmountMax(2000);
 		event.setChance(100);
@@ -74,9 +74,9 @@ public class Events {
 		event.setEclass(EventClass.BOOKING);
 		event.setFlag(EventFlag.MOVIE);
 		event.setIcon(EventIcon.MOVIECAM);
-		event.setDescription("%N soll heute für %A für den Dreh eines Films gebucht werden.");
-		event.setNoteFile("Gebucht für Dreharbeiten, Gage %A");
-		event.setNoteAcct("Gage für Dreharbeiten %N");
+		event.setDescription("%N soll heute fÃ¼r %A fÃ¼r den Dreh eines Films gebucht werden.");
+		event.setNoteFile("Gebucht fÃ¼r Dreharbeiten, Gage %A");
+		event.setNoteAcct("Gage fÃ¼r Dreharbeiten %N");
 		event.setAmountMin(1500);
 		event.setAmountMax(3000);
 		result.add(event);
@@ -85,32 +85,32 @@ public class Events {
 		event.setEclass(EventClass.REQUEST);
 		event.setFlag(EventFlag.RAISE);
 		event.setIcon(EventIcon.MONEY);
-		event.setDescription("%N möchte eine Gehaltserhöhung von %S auf %A pro Woche.");
-		event.setNoteFile("Gehaltserhöhung von %S auf %A");
+		event.setDescription("%N mÃ¶chte eine GehaltserhÃ¶hung von %S auf %A pro Woche.");
+		event.setNoteFile("GehaltserhÃ¶hung von %S auf %A");
 		result.add(event);
 
 		event = new Event(1009, 2);
 		event.setEclass(EventClass.REQUEST);
 		event.setFlag(EventFlag.BONUS);
 		event.setIcon(EventIcon.MONEY);
-		event.setDescription("%N fordert eine Prämie in Höhe von %A.");
-		event.setNoteFile("Prämie %A");
-		event.setNoteAcct("Prämie %N");
+		event.setDescription("%N fordert eine PrÃ¤mie in HÃ¶he von %A.");
+		event.setNoteFile("PrÃ¤mie %A");
+		event.setNoteAcct("PrÃ¤mie %N");
 		result.add(event);
 
 		event = new Event(1010, 1);
 		event.setEclass(EventClass.REQUEST);
 		event.setFlag(EventFlag.QUIT);
 		event.setIcon(EventIcon.DOOR);
-		event.setDescription("%N will kündigen.");
-		event.setNoteFile("Kündigung");
+		event.setDescription("%N will kÃ¼ndigen.");
+		event.setNoteFile("KÃ¼ndigung");
 		result.add(event);
 
 		event = new Event(1011, 2);
 		event.setEclass(EventClass.REQUEST);
 		event.setFlag(EventFlag.VACATION);
 		event.setIcon(EventIcon.PALMTREE);
-		event.setDescription("%N möchte Urlaub nehmen. Sie hat %V Tage Resturlaub.");
+		event.setDescription("%N mÃ¶chte Urlaub nehmen. Sie hat %V Tage Resturlaub.");
 		event.setNoteFile("Urlaub");
 		result.add(event);
 
@@ -118,7 +118,7 @@ public class Events {
 		event.setEclass(EventClass.REQUEST);
 		event.setFlag(EventFlag.TRAINING);
 		event.setIcon(EventIcon.EDUCATION);
-		event.setDescription("%N möchte eine Fortbildung besuchen.");
+		event.setDescription("%N mÃ¶chte eine Fortbildung besuchen.");
 		event.setNoteFile("Fortbildung");
 		result.add(event);
 
@@ -126,7 +126,7 @@ public class Events {
 		event.setEclass(EventClass.REQUEST);
 		event.setFlag(EventFlag.CAR_UPDATE);
 		event.setIcon(EventIcon.CAR);
-		event.setDescription("%N möchte ein neues Auto. Derzeitiges Fahrzeug: %C");
+		event.setDescription("%N mÃ¶chte ein neues Auto. Derzeitiges Fahrzeug: %C");
 		event.setNoteFile("Neues Auto");
 		result.add(event);
 
@@ -134,7 +134,7 @@ public class Events {
 		event.setEclass(EventClass.APPLICATION);
 		event.setFlag(EventFlag.HIRE);
 		event.setIcon(EventIcon.CONTRACT);
-		event.setDescription("%N bewirbt sich um eine Anstellung. Sie möchte %A Gehalt pro Woche.");
+		event.setDescription("%N bewirbt sich um eine Anstellung. Sie mÃ¶chte %A Gehalt pro Woche.");
 		event.setNoteFile("Bewerbung");
 		event.setAmountMin(1000);
 		result.add(event);
@@ -143,7 +143,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Bei der Beseitigung der Leiche eines Drogendealers fallen Ihnen %A in die Hände.");
+		event.setDescription("Bei der Beseitigung der Leiche eines Drogendealers fallen Ihnen %A in die HÃ¶nde.");
 		event.setNoteAcct("Bareinzahlung");
 		event.setAmountMin(50000);
 		event.setAmountMax(250000);
@@ -154,7 +154,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Nach einer Party in Ihrem Haus bleibt ein anonymes Geldbündel von %A liegen.");
+		event.setDescription("Nach einer Party in Ihrem Haus bleibt ein anonymes GeldbÃ¼ndel von %A liegen.");
 		event.setNoteAcct("Bareinzahlung");
 		event.setAmountMin(50000);
 		event.setAmountMax(250000);
@@ -165,9 +165,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Für einen guten Bekannten gibt %N eine Sondervorstellung. Dieser bezahlt dafür %A");
+		event.setDescription("FÃ¼r einen guten Bekannten gibt %N eine Sondervorstellung. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Sondervorstellung mit %N");
+		event.setNoteAcct("Gage fÃ¼r Sondervorstellung mit %N");
 		event.setAmountMin(10000);
 		event.setAmountMax(40000);
 		event.setChance(60);
@@ -177,9 +177,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Für einen wichtigen Politiker gibt %N eine Sondervorstellung. Dieser bezahlt dafür %A");
+		event.setDescription("FÃ¼r einen wichtigen Politiker gibt %N eine Sondervorstellung. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Sondervorstellung mit %N");
+		event.setNoteAcct("Gage fÃ¼r Sondervorstellung mit %N");
 		event.setAmountMin(20000);
 		event.setAmountMax(60000);
 		event.setChance(50);
@@ -189,9 +189,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N gibt für einen Wirtschaftsboss eine Sondervorstellung. Dieser bezahlt dafür %A");
+		event.setDescription("%N gibt fÃ¼r einen Wirtschaftsboss eine Sondervorstellung. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Sondervorstellung mit %N");
+		event.setNoteAcct("Gage fÃ¼r Sondervorstellung mit %N");
 		event.setAmountMin(10000);
 		event.setAmountMax(40000);
 		event.setChance(50);
@@ -201,9 +201,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N gibt für einen Börsenmakler eine Sondervorstellung. Dieser bezahlt dafür %A");
+		event.setDescription("%N gibt fÃ¼r einen BÃ¶rsenmakler eine Sondervorstellung. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Sondervorstellung mit %N");
+		event.setNoteAcct("Gage fÃ¼r Sondervorstellung mit %N");
 		event.setAmountMin(20000);
 		event.setAmountMax(60000);
 		event.setChance(60);
@@ -213,8 +213,8 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N wird Model des Jahres in einem Männermagazin. Als Manager erhalten Sie einen Anteil des Preises in Höhe von %A");
-		event.setNoteFile("Preiskrönung Model des Jahres");
+		event.setDescription("%N wird Model des Jahres in einem MÃ¤nnermagazin. Als Manager erhalten Sie einen Anteil des Preises in HÃ¶he von %A");
+		event.setNoteFile("PreiskrÃ¶nung Model des Jahres");
 		event.setNoteAcct("Preisgeldanteil %N (Model des Jahres)");
 		event.setAmountMin(2000);
 		event.setAmountMax(10000);
@@ -225,9 +225,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N begleitet einen reichen Kunden auf einen Ball. Dieser bezahlt dafür %A");
+		event.setDescription("%N begleitet einen reichen Kunden auf einen Ball. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Begleitservice durch %N");
+		event.setNoteAcct("Gage fÃ¼r Begleitservice durch %N");
 		event.setAmountMin(5000);
 		event.setAmountMax(15000);
 		event.setChance(80);
@@ -237,9 +237,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N begleitet einen Scheich zum Golfen. Dieser bezahlt dafür %A");
+		event.setDescription("%N begleitet einen Scheich zum Golfen. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Begleitservice durch %N");
+		event.setNoteAcct("Gage fÃ¼r Begleitservice durch %N");
 		event.setAmountMin(25000);
 		event.setAmountMax(80000);
 		event.setChance(60);
@@ -249,9 +249,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N begleitet einen Millionär ins Theater. Dieser bezahlt dafür %A");
+		event.setDescription("%N begleitet einen MillionÃ¤r ins Theater. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Begleitservice durch %N");
+		event.setNoteAcct("Gage fÃ¼r Begleitservice durch %N");
 		event.setAmountMin(10000);
 		event.setAmountMax(25000);
 		event.setChance(80);
@@ -261,9 +261,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N begleitet einen Börsenmakler auf einen Ball. Dieser bezahlt dafür %A");
+		event.setDescription("%N begleitet einen BÃ¶rsenmakler auf einen Ball. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Begleitservice durch %N");
+		event.setNoteAcct("Gage fÃ¼r Begleitservice durch %N");
 		event.setAmountMin(5000);
 		event.setAmountMax(15000);
 		event.setChance(70);
@@ -273,9 +273,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N begleitet einen Wirtschaftsboss zum Golfen. Dieser bezahlt dafür %A");
+		event.setDescription("%N begleitet einen Wirtschaftsboss zum Golfen. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Begleitservice durch %N");
+		event.setNoteAcct("Gage fÃ¼r Begleitservice durch %N");
 		event.setAmountMin(4000);
 		event.setAmountMax(8000);
 		event.setChance(70);
@@ -285,9 +285,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N begleitet einen Scheich ins Theater. Dieser bezahlt dafür %A");
+		event.setDescription("%N begleitet einen Scheich ins Theater. Dieser bezahlt dafÃ¼r %A");
 		event.setNoteFile("Sondervorstellung, Gage %A");
-		event.setNoteAcct("Gage für Begleitservice durch %N");
+		event.setNoteAcct("Gage fÃ¼r Begleitservice durch %N");
 		event.setAmountMin(25000);
 		event.setAmountMax(80000);
 		event.setChance(50);
@@ -297,7 +297,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Dafür, daß Sie mit einer Gruppe Models auf seiner Party für Stimmung gesorgt haben, gibt Ihnen ein Bekannter %A");
+		event.setDescription("DafÃ¼r, daÃŸ Sie mit einer Gruppe Models auf seiner Party fÃ¼r Stimmung gesorgt haben, gibt Ihnen ein Bekannter %A");
 		event.setNoteAcct("Partyservice");
 		event.setAmountMin(5000);
 		event.setAmountMax(25000);
@@ -308,7 +308,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_IN);
 		event.setFlag(EventFlag.WIN);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Sie lassen einen Kumpel eine Party in Ihrem Haus schmeißen. Er gibt ihnen dafür %A");
+		event.setDescription("Sie lassen einen Kumpel eine Party in Ihrem Haus schmeiÃŸen. Er gibt ihnen dafÃ¼r %A");
 		event.setNoteAcct("Partyservice");
 		event.setAmountMin(5000);
 		event.setAmountMax(25000);
@@ -319,7 +319,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Eine neugierige Amtsperson stellt zu viele Fragen. Für einen Obulus von %A gibt sie sich zufrieden.");
+		event.setDescription("Eine neugierige Amtsperson stellt zu viele Fragen. FÃ¼r einen Obulus von %A gibt sie sich zufrieden.");
 		event.setNoteAcct("Barauszahlung");
 		event.setAmountMin(10000);
 		event.setAmountMax(30000);
@@ -331,7 +331,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Sie werden wegen Steuerhinterziehung angeklagt. Ihr Anwalt hilft Ihnen, Ihre Unschuld zu beweisen und will %A dafür.");
+		event.setDescription("Sie werden wegen Steuerhinterziehung angeklagt. Ihr Anwalt hilft Ihnen, Ihre Unschuld zu beweisen und will %A dafÃ¼r.");
 		event.setNoteAcct("Anwaltskosten Steuerhinterziehungsklage");
 		event.setAmountMin(5000);
 		event.setAmountMax(10000);
@@ -342,7 +342,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Sie werden wegen Urheberrechtsverletzung angeklagt. Ihr Anwalt hilft Ihnen, Ihre Unschuld zu beweisen und will %A dafür.");
+		event.setDescription("Sie werden wegen Urheberrechtsverletzung angeklagt. Ihr Anwalt hilft Ihnen, Ihre Unschuld zu beweisen und will %A dafÃ¼r.");
 		event.setNoteAcct("Anwaltskosten Urheberrechtsklage");
 		event.setAmountMin(4000);
 		event.setAmountMax(8000);
@@ -353,7 +353,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Wegen eines Verstoßes gegen die Wettbewerbsregeln müssen Sie einem Konkurrenten %A Schadensersatz leisten.");
+		event.setDescription("Wegen eines VerstoÃŸes gegen die Wettbewerbsregeln mÃ¼ssen Sie einem Konkurrenten %A Schadensersatz leisten.");
 		event.setNoteAcct("Schadensersatz Konkurrenz");
 		event.setAmountMin(4000);
 		event.setAmountMax(25000);
@@ -365,9 +365,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N hat bei einem Fotoshooting mutwillig eine Kamera beschädigt. Die Reparatur kostet %A.");
-		event.setNoteFile("Mutwillig Kamera beschädigt");
-		event.setNoteAcct("Schadensersatz Kamera beschädigt durch %N");
+		event.setDescription("%N hat bei einem Fotoshooting mutwillig eine Kamera beschÃ¤digt. Die Reparatur kostet %A.");
+		event.setNoteFile("Mutwillig Kamera beschÃ¤digt");
+		event.setNoteAcct("Schadensersatz Kamera beschÃ¤digt durch %N");
 		event.setAmountMin(12000);
 		event.setAmountMax(33000);
 		event.setChance(25);
@@ -377,9 +377,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Bei einem Fotoshooting hat %N mutwillig mehrere Scheinwerfer beschädigt. Der Preis für den Ersatz beläuft sich auf %A.");
-		event.setNoteFile("Mutwillig Scheinwerfer beschädigt");
-		event.setNoteAcct("Schadensersatz Scheinwerfer beschädigt durch %N");
+		event.setDescription("Bei einem Fotoshooting hat %N mutwillig mehrere Scheinwerfer beschÃ¤digt. Der Preis fÃ¼r den Ersatz belÃ¤uft sich auf %A.");
+		event.setNoteFile("Mutwillig Scheinwerfer beschÃ¤digt");
+		event.setNoteAcct("Schadensersatz Scheinwerfer beschÃ¤digt durch %N");
 		event.setAmountMin(10000);
 		event.setAmountMax(40000);
 		event.setChance(25);
@@ -413,9 +413,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N hat den Studioboden mit ihren Schuhen ruiniert. Es muß für %A neuer Parkett verlegt werden.");
-		event.setNoteFile("Studioeinrichtung beschädigt");
-		event.setNoteAcct("Schadensersatz Studioboden beschädigt durch %N");
+		event.setDescription("%N hat den Studioboden mit ihren Schuhen ruiniert. Es muÃŸ fÃ¼r %A neuer Parkett verlegt werden.");
+		event.setNoteFile("Studioeinrichtung beschÃ¤digt");
+		event.setNoteAcct("Schadensersatz Studioboden beschÃ¤digt durch %N");
 		event.setAmountMin(12000);
 		event.setAmountMax(60000);
 		event.setChance(50);
@@ -425,8 +425,8 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYFIX_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Bei einem Fotoshooting hat %N ihre Designerschuhe ruiniert. Sie müssen sie für %A ersetzen.");
-		event.setNoteFile("Schuhe beschädigt");
+		event.setDescription("Bei einem Fotoshooting hat %N ihre Designerschuhe ruiniert. Sie mÃ¼ssen sie fÃ¼r %A ersetzen.");
+		event.setNoteFile("Schuhe beschÃ¤digt");
 		event.setNoteAcct("Schadensersatz Schuhe %N");
 		event.setAmountMin(10000);
 		event.setAmountMax(20000);
@@ -437,8 +437,8 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYFIX_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Bei einem Fotoshooting hat %N ihr Kleid ruiniert. Sie müssen es für %A ersetzen.");
-		event.setNoteFile("Kleid beschädigt");
+		event.setDescription("Bei einem Fotoshooting hat %N ihr Kleid ruiniert. Sie mÃ¼ssen es fÃ¼r %A ersetzen.");
+		event.setNoteFile("Kleid beschÃ¤digt");
 		event.setNoteAcct("Schadensersatz Kleid %N");
 		event.setAmountMin(5000);
 		event.setAmountMax(15000);
@@ -449,8 +449,8 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYFIX_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Bei einem Fotoshooting hat %N ihren Badeanzug ruiniert. Sie müssen ihn für %A ersetzen.");
-		event.setNoteFile("Badeanzug beschädigt");
+		event.setDescription("Bei einem Fotoshooting hat %N ihren Badeanzug ruiniert. Sie mÃ¼ssen ihn fÃ¼r %A ersetzen.");
+		event.setNoteFile("Badeanzug beschÃ¤digt");
 		event.setNoteAcct("Schadensersatz Badenazug %N");
 		event.setAmountMin(500);
 		event.setAmountMax(2000);
@@ -461,8 +461,8 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYFIX_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Bei einem Fotoshooting hat %N ihre Handtasche ruiniert. Sie müssen sie für %A ersetzen.");
-		event.setNoteFile("Handtasche beschädigt");
+		event.setDescription("Bei einem Fotoshooting hat %N ihre Handtasche ruiniert. Sie mÃ¼ssen sie fÃ¼r %A ersetzen.");
+		event.setNoteFile("Handtasche beschÃ¤digt");
 		event.setNoteAcct("Schadensersatz Handtasche %N");
 		event.setAmountMin(2000);
 		event.setAmountMax(8000);
@@ -497,7 +497,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N wird wegen Verstoßes gegen das Betäubungsmittelgesetz angeklagt. Ihr Anwalt holt sie für %A da raus.");
+		event.setDescription("%N wird wegen VerstoÃŸes gegen das BetÃ¤ubungsmittelgesetz angeklagt. Ihr Anwalt holt sie fÃ¼r %A da raus.");
 		event.setNoteFile("Drogenmissbrauch");
 		event.setNoteAcct("Anwaltskosten Anklage gegen %N");
 		event.setAmountMin(20000);
@@ -509,7 +509,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.PAYVAR_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N will peinliche Fotos von Ihnen veröffentlichen, wenn Sie ihr nicht %A geben.");
+		event.setDescription("%N will peinliche Fotos von Ihnen verÃ¶ffentlichen, wenn Sie ihr nicht %A geben.");
 		event.setNoteFile("Erpressung mit Fotos");
 		event.setNoteAcct("Erpressungsgeld %N");
 		event.setAmountMin(50000);
@@ -535,8 +535,8 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N wird wegen Erregung öffentlichen Ärgernisses angezeigt. Für eine gemeinnützige Spende von %A wird die Anklage fallengelassen.");
-		event.setNoteFile("Erregung öffentlichen Ärgernisses");
+		event.setDescription("%N wird wegen Erregung Ã¶ffentlichen Ã„rgernisses angezeigt. FÃ¼r eine gemeinnÃ¼tzige Spende von %A wird die Anklage fallengelassen.");
+		event.setNoteFile("Erregung Ã¶ffentlichen Ã„rgernisses");
 		event.setNoteAcct("Spende keine Klage gegen %N");
 		event.setAmountMin(2000);
 		event.setAmountMax(12000);
@@ -547,7 +547,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.PAYFIX_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N hat Ihnen Bargeld in Höhe von %A gestohlen.");
+		event.setDescription("%N hat Ihnen Bargeld in HÃ¶he von %A gestohlen.");
 		event.setNoteFile("Bargelddiebstahl %A");
 		event.setNoteAcct("Bargelddiebstahl %N");
 		event.setAmountMin(10000);
@@ -560,9 +560,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Der Kosmetikkoffer von %N ist am Flughafen verlorengegangen. Sie benötigt kurzfristig neue Utensilien für %A.");
+		event.setDescription("Der Kosmetikkoffer von %N ist am Flughafen verlorengegangen. Sie benÃ¶tigt kurzfristig neue Utensilien fÃ¼r %A.");
 		event.setNoteFile("Kosmetikkoffer verloren");
-		event.setNoteAcct("Kosmetika für %N");
+		event.setNoteAcct("Kosmetika fÃ¼r %N");
 		event.setAmountMin(2000);
 		event.setAmountMax(12000);
 		event.setChance(15);
@@ -572,9 +572,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Der Kosmetikkoffer von %N ist bei einem Fototermin verlorengegangen. Sie benötigt kurzfristig neue Utensilien für %A.");
+		event.setDescription("Der Kosmetikkoffer von %N ist bei einem Fototermin verlorengegangen. Sie benÃ¶tigt kurzfristig neue Utensilien fÃ¼r %A.");
 		event.setNoteFile("Kosmetikkoffer verloren");
-		event.setNoteAcct("Kosmetika für %N");
+		event.setNoteAcct("Kosmetika fÃ¼r %N");
 		event.setAmountMin(2000);
 		event.setAmountMax(12000);
 		event.setChance(15);
@@ -584,9 +584,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Der Kosmetikkoffer von %N ist im Hotel verlorengegangen. Sie benötigt kurzfristig neue Utensilien für %A.");
+		event.setDescription("Der Kosmetikkoffer von %N ist im Hotel verlorengegangen. Sie benÃ¶tigt kurzfristig neue Utensilien fÃ¼r %A.");
 		event.setNoteFile("Kosmetikkoffer verloren");
-		event.setNoteAcct("Kosmetika für %N");
+		event.setNoteAcct("Kosmetika fÃ¼r %N");
 		event.setAmountMin(2000);
 		event.setAmountMax(12000);
 		event.setChance(15);
@@ -596,9 +596,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Der Kosmetikkoffer von %N wurde gestohlen. Sie benötigt kurzfristig neue Utensilien für %A.");
+		event.setDescription("Der Kosmetikkoffer von %N wurde gestohlen. Sie benÃ¶tigt kurzfristig neue Utensilien fÃ¼r %A.");
 		event.setNoteFile("Kosmetikkoffer verloren");
-		event.setNoteAcct("Kosmetika für %N");
+		event.setNoteAcct("Kosmetika fÃ¼r %N");
 		event.setAmountMin(2000);
 		event.setAmountMax(12000);
 		event.setChance(15);
@@ -621,9 +621,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Nach einer von %N organisierten Party in Ihrem Haus fallen für die Aufräumarbeiten Kosten in Höhe von %A an");
+		event.setDescription("Nach einer von %N organisierten Party in Ihrem Haus fallen fÃ¼r die AufrÃ¤umarbeiten Kosten in HÃ¶he von %A an");
 		event.setNoteFile("Chaotische Party gefeiert");
-		event.setNoteAcct("Aufräumen nach Party für %N");
+		event.setNoteAcct("AufrÃ¤umen nach Party fÃ¼r %N");
 		event.setAmountMin(5000);
 		event.setAmountMax(15000);
 		event.setChance(30);
@@ -645,9 +645,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N ist nicht zum Fototermin erschienen. Der Fotograf verlangt Schadensersatz in Höhe von %A");
-		event.setNoteFile("Fototermin verpaßt");
-		event.setNoteAcct("Shooting mit %N verpaßt");
+		event.setDescription("%N ist nicht zum Fototermin erschienen. Der Fotograf verlangt Schadensersatz in HÃ¶he von %A");
+		event.setNoteFile("Fototermin verpaÃŸt");
+		event.setNoteAcct("Shooting mit %N verpaÃŸt");
 		event.setAmountMin(20000);
 		event.setAmountMax(40000);
 		event.setChance(50);
@@ -657,7 +657,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.PAYVAR_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N hat Sie beim Schnüffeln in ihrer Unterwäsche erwischt. Sie will Sie anzeigen, wenn Sie ihr nicht %A geben.");
+		event.setDescription("%N hat Sie beim SchnÃ¼ffeln in ihrer UnterwÃ¤sche erwischt. Sie will Sie anzeigen, wenn Sie ihr nicht %A geben.");
 		event.setNoteFile("Erpressung mit intimen Details %A");
 		event.setNoteAcct("Erpressungsgeld %N");
 		event.setAmountMin(10000);
@@ -670,7 +670,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.PAYVAR_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N hat Sie beim Spielen mit ihren Schuhen erwischt. Sie will Sie bloßstellen, wenn Sie ihr nicht %A geben.");
+		event.setDescription("%N hat Sie beim Spielen mit ihren Schuhen erwischt. Sie will Sie bloÃŸstellen, wenn Sie ihr nicht %A geben.");
 		event.setNoteFile("Erpressung mit intimen Details %A");
 		event.setNoteAcct("Erpressungsgeld %N");
 		event.setAmountMin(50000);
@@ -683,8 +683,8 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYVAR_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N hat sich beim Fotoshooting 2 Fingernägel gebrochen. Sie fordert %A Schmerzensgeld.");
-		event.setNoteFile("Schmerzensgeld gebrochene Fingernägel");
+		event.setDescription("%N hat sich beim Fotoshooting 2 FingernÃ¤gel gebrochen. Sie fordert %A Schmerzensgeld.");
+		event.setNoteFile("Schmerzensgeld gebrochene FingernÃ¤gel");
 		event.setNoteAcct("Schmerzensgeld %N");
 		event.setAmountMin(1000);
 		event.setAmountMax(4000);
@@ -696,7 +696,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYVAR_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N hat sich beim Fotoshooting gestoßen und einen blauen Fleck bekommen. Sie fordert %A Schmerzensgeld.");
+		event.setDescription("%N hat sich beim Fotoshooting gestoÃŸen und einen blauen Fleck bekommen. Sie fordert %A Schmerzensgeld.");
 		event.setNoteFile("Schmerzensgeld blauer Fleck");
 		event.setNoteAcct("Schmerzensgeld %N");
 		event.setAmountMin(2000);
@@ -709,8 +709,8 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYVAR_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N hat sich beim Fotoshooting den Knöchel verstaucht. Sie fordert %A Schmerzensgeld.");
-		event.setNoteFile("Schmerzensgeld verstauchter Knöchel");
+		event.setDescription("%N hat sich beim Fotoshooting den KnÃ¶chel verstaucht. Sie fordert %A Schmerzensgeld.");
+		event.setNoteFile("Schmerzensgeld verstauchter KnÃ¶chel");
 		event.setNoteAcct("Schmerzensgeld %N");
 		event.setAmountMin(2000);
 		event.setAmountMax(8000);
@@ -735,7 +735,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYOPT_PERSON);
 		event.setIcon(EventIcon.MONEY);
-		event.setDescription("%N möchte %A extra Taschengeld.");
+		event.setDescription("%N mÃ¶chte %A extra Taschengeld.");
 		event.setNoteFile("Taschengeld %A");
 		event.setNoteAcct("Taschengeld %N");
 		event.setAmountMin(10000);
@@ -748,9 +748,9 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_LOSS);
 		event.setFlag(EventFlag.PAYOPT_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("%N hat ihre eigene Entführung inszeniert. Sie verlangt %A Lösegeld");
-		event.setNoteFile("Lösegeld %A");
-		event.setNoteAcct("Lösegeld %N");
+		event.setDescription("%N hat ihre eigene EntfÃ¼hrung inszeniert. Sie verlangt %A LÃ¶segeld");
+		event.setNoteFile("LÃ¶segeld %A");
+		event.setNoteAcct("LÃ¶segeld %N");
 		event.setAmountMin(100000);
 		event.setAmountMax(500000);
 		event.setMaxpercent(25);
@@ -761,7 +761,7 @@ public class Events {
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYFIX_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Die Spesenabrechnung von %N beläuft sich auf %A für Hotels, Flüge, Kosmetika, Kleidung und Schmuck.");
+		event.setDescription("Die Spesenabrechnung von %N belÃ¤uft sich auf %A fÃ¼r Hotels, FlÃ¼ge, Kosmetika, Kleidung und Schmuck.");
 		event.setNoteFile("Spesenabrechnung");
 		event.setNoteAcct("Spesenabrechnung %N");
 		event.setAmountMin(10000);
@@ -774,9 +774,9 @@ public class Events {
 		event.setEclass(EventClass.GAMBLE);
 		event.setFlag(EventFlag.WIN);
 		event.setIcon(EventIcon.LIGHTENING);
-		event.setDescription("Glücksspiel.");
-		event.setNoteFile("Glücksspiel");
-		event.setNoteAcct("Glücksspiel");
+		event.setDescription("GlÃ¼cksspiel.");
+		event.setNoteFile("GlÃ¼cksspiel");
+		event.setNoteAcct("GlÃ¼cksspiel");
 		event.setAmountMin(1000);
 		event.setAmountMax(10000000);
 		event.setChance(100);
@@ -786,14 +786,14 @@ public class Events {
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.CAR_WRECKED);
 		event.setIcon(EventIcon.CAR);
-		event.setDescription("%N hat ihr Auto (%C) zu Schrott gefahren. Um wieder zu Fototerminen anreisen zu können, braucht sie ein neues Auto.");
+		event.setDescription("%N hat ihr Auto (%C) zu Schrott gefahren. Um wieder zu Fototerminen anreisen zu kÃ¶nnen, braucht sie ein neues Auto.");
 		result.add(event);
 
 		event = new Event(SYSTEM_ID_CAR_ACCIDENT_COST, 2);
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.LOSE_PERSON);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Nach einem von %N verursachten Verkehrsunfall auf dem Arbeitsweg belaufen sich die Kosten für Versicherungsselbstbeteiligung und Reparaturen auf %A.");
+		event.setDescription("Nach einem von %N verursachten Verkehrsunfall auf dem Arbeitsweg belaufen sich die Kosten fÃ¼r Versicherungsselbstbeteiligung und Reparaturen auf %A.");
 		event.setNoteFile("Verkehrsunfall");
 		event.setNoteAcct("Selbstbeteiligung und Reparaturen nach Verkehrsunfall von %N");
 		event.setAmountMin(5000);
@@ -805,9 +805,9 @@ public class Events {
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.GROUPWORK);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Das Team %T hat heute Einnahmen in Höhe von %A erwirtschaftet. Die Leiterin %N erhält dafür %B als Bonus.");
-		event.setNoteFile("Das Team %T hat heute Einnahmen in Höhe von %A erwirtschaftet. Die Leiterin %N erhält dafür %B als Bonus.");
-		event.setNoteAcct("Prämie für Koordination der Aufträge im Team %T");
+		event.setDescription("Das Team %T hat heute Einnahmen in HÃ¶he von %A erwirtschaftet. Die Leiterin %N erhÃ¤lt dafÃ¼r %B als Bonus.");
+		event.setNoteFile("Das Team %T hat heute Einnahmen in HÃ¶he von %A erwirtschaftet. Die Leiterin %N erhÃ¤lt dafÃ¼r %B als Bonus.");
+		event.setNoteAcct("PrÃ¤mie fÃ¼r Koordination der AuftrÃ¤ge im Team %T");
 		result.add(event);
 
 		event = new Event(1071, 1);
@@ -821,14 +821,14 @@ public class Events {
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.NO_GROUPWORK);
 		event.setIcon(EventIcon.ARROW);
-		event.setDescription("Im Team %T konnten heute keine Aufträge abgearbeitet werden, da die Teamleiterin und ihre Stellvertreterin nicht verfügbar sind.");
+		event.setDescription("Im Team %T konnten heute keine AuftrÃ¤ge abgearbeitet werden, da die Teamleiterin und ihre Stellvertreterin nicht verfÃ¼gbar sind.");
 		result.add(event);
 
 		event = new Event(1073, 1);
 		event.setEclass(EventClass.EXTRA_OUT);
 		event.setFlag(EventFlag.PAYOPT_PERSON);
 		event.setIcon(EventIcon.MONEY);
-		event.setDescription("%N möchte einen Zuschuss für einen Immobilienkauf in Höhe von %A.");
+		event.setDescription("%N mÃ¶chte einen Zuschuss fÃ¼r einen Immobilienkauf in HÃ¶he von %A.");
 		event.setNoteFile("Immobilienkaufzuschuss %A");
 		event.setNoteAcct("Immobilienkaufzuschuss %N");
 		event.setAmountMin(100000);
@@ -854,7 +854,7 @@ public class Events {
 		event.setEclass(EventClass.BOOKREJECT);
 		event.setFlag(EventFlag.PHOTO);
 		event.setIcon(EventIcon.CAMERA);
-		event.setDescription("%N kann nicht an dem Fotoshooting mitarbeiten, für das sie für %A gebucht wurde.");
+		event.setDescription("%N kann nicht an dem Fotoshooting mitarbeiten, fÃ¼r das sie fÃ¼r %A gebucht wurde.");
 		event.setNoteFile("Absage Fotoshooting, Gage %A");
 		result.add(event);
 
@@ -862,7 +862,7 @@ public class Events {
 		event.setEclass(EventClass.BOOKREJECT);
 		event.setFlag(EventFlag.MOVIE);
 		event.setIcon(EventIcon.MOVIECAM);
-		event.setDescription("%N kann nicht an den Dreharbeiten des Films mitarbeiten, für die sie für %A gebucht wurde.");
+		event.setDescription("%N kann nicht an den Dreharbeiten des Films mitarbeiten, fÃ¼r die sie fÃ¼r %A gebucht wurde.");
 		event.setNoteFile("Absage Dreharbeiten, Gage %A");
 		result.add(event);
 
@@ -924,7 +924,7 @@ public class Events {
 		event.setEclass(EventClass.MOVIE_FINISH);
 		event.setFlag(EventFlag.MOVIE_ENTERTAIN);
 		event.setIcon(EventIcon.MOVIECAM);
-		event.setDescription("Abschluß der Dreharbeiten zum Film %M.");
+		event.setDescription("AbschluÃŸ der Dreharbeiten zum Film %M.");
 		event.setAmountMin(180000);
 		event.setAmountMax(250000);
 		result.add(event);
@@ -933,7 +933,7 @@ public class Events {
 		event.setEclass(EventClass.MOVIE_FINISH);
 		event.setFlag(EventFlag.MOVIE_EROTIC);
 		event.setIcon(EventIcon.MOVIECAM);
-		event.setDescription("Abschluß der Dreharbeiten zum Film %M.");
+		event.setDescription("AbschluÃŸ der Dreharbeiten zum Film %M.");
 		event.setAmountMin(120000);
 		event.setAmountMax(180000);
 		result.add(event);
@@ -942,7 +942,7 @@ public class Events {
 		event.setEclass(EventClass.MOVIE_FINISH);
 		event.setFlag(EventFlag.MOVIE_PORN);
 		event.setIcon(EventIcon.MOVIECAM);
-		event.setDescription("Abschluß der Dreharbeiten zum Film %M.");
+		event.setDescription("AbschluÃŸ der Dreharbeiten zum Film %M.");
 		event.setAmountMin(80000);
 		event.setAmountMax(130000);
 		result.add(event);
@@ -959,7 +959,7 @@ public class Events {
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.BUSTED);
 		event.setIcon(EventIcon.LIGHTENING);
-		event.setDescription("Ihr Konto ist um %A überzogen. Nehmen Sie bei einem Model einen Kredit auf, um weiterarbeiten zu können.");
+		event.setDescription("Ihr Konto ist um %A Ã¼berzogen. Nehmen Sie bei einem Model einen Kredit auf, um weiterarbeiten zu kÃ¶nnen.");
 		result.add(event);
 
 		return result;
