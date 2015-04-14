@@ -335,12 +335,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		startActivity(i);
 	}
 
-	// TODO: legacy helper, to be removed!
-	public void openPreferences(View v) {
-		Intent intent = new Intent(this, PreferenceActivity.class);
-		startActivity(intent);
-	}
-
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
