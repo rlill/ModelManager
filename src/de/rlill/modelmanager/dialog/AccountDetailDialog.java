@@ -155,7 +155,7 @@ public class AccountDetailDialog extends Activity
 		if (modelId == 0) {
 			// day pager
 			LinearLayout ll = (LinearLayout)findViewById(R.id.account_dayselect_list);
-			for (int i = 1; i < DiaryService.today(); i++) {
+			for (int i = 1; i <= DiaryService.today(); i++) {
 				TextView tv = new TextView(this);
 				tv.setText(Integer.toString(i));
 				tv.setTextColor(0xFF0000FF);

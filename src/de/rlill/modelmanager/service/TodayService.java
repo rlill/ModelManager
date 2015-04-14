@@ -72,7 +72,7 @@ public class TodayService {
 		case BOOKING:
 			TransactionService.transfer(-1, 0, today.getAmount1(), today.getNoteAcct());
 			ModelService.reportBooking(today);
-			DiaryService.logUpdateFile(today);
+			DiaryService.fileLog(today);
 			TodayDbAdapter.removeToday(today.getId());
 			triggerTeamwork();
 			break;

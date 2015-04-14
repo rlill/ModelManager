@@ -360,7 +360,7 @@ public class ModelService {
 				t.setModelId(match.getId());
 				reportBooking(t);
 				TransactionService.transfer(-1, 0, newPrice, t.getNoteAcct());
-				DiaryService.logUpdateFile(t);
+				DiaryService.fileLog(t);
 				reportTeamleadWork(leader.getId());
 				TodayDbAdapter.removeToday(t.getId());
 
@@ -402,7 +402,7 @@ public class ModelService {
 				t.setModelId(match.getId());
 				reportBooking(t);
 				TransactionService.transfer(-1, 0, newPrice, t.getNoteAcct());
-				DiaryService.logUpdateFile(t);
+				DiaryService.fileLog(t);
 				reportTeamleadWork(leader.getId());
 				TodayDbAdapter.removeToday(t.getId());
 
@@ -430,7 +430,7 @@ public class ModelService {
 			}
 			Log.i(LOG_TAG, "Team " + team.getId() + " has performed " + tw.bookings + " bookings and earned *" + tw.earnings + ".- Leader " + leader.getFullname() + " gets *" + bonus + ".-");
 			TransactionService.transfer(0, leader.getId(), bonus, t.getNoteAcct());
-			DiaryService.logUpdateFile(t);
+			DiaryService.fileLog(t);
 		}
 	}
 

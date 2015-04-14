@@ -53,14 +53,14 @@ public class DiaryService {
 		log(msg, EventClass.ACCEPT, t.getEvent().getFlag(), t.getModelId(), t.getAmount1());
 	}
 
-	public static void logUpdateFile(Today t) {
+	public static void logUpdateFile(Diary t) {
 		Diary d = DiaryDbAdapter.getDiaryEntry(t.getId());
 		if (d != null) {
-			d.setDescription(t.getNoteFile());
-			d.setAmount(t.getAmount1());
+			d.setDescription(t.getDescription());
+			d.setAmount(t.getAmount());
 			DiaryDbAdapter.update(d);
 		} else
-			log(t.getDescription(), t.getEvent().getEclass(), t.getEvent().getFlag(), t.getModelId(), t.getAmount1());
+			log(t.getDescription(), t.getEventClass(), t.getEventFlag(), t.getModelId(), t.getAmount());
 	}
 
 	public static int log(String description, EventClass ec, EventFlag ef, int modelId, int amount) {
