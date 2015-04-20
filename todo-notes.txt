@@ -45,14 +45,13 @@ Games (from pl)
 
 
 Account Detail view:
-- (test) search slot: filter... Umlauts!!!
+- search slot: filter... Umlauts!!!
 - (test) decide ID 0 / >0
 	: ID 0 :
 		o show one day per page
 		o pager
 	: ID >0 :
 		o show everything
-- (test) ugly history graph
 
 (test) Accounts - detail - ModelNegDlg - payBonus - return to Accounts - detail: need refresh!
 
@@ -61,8 +60,22 @@ Account Detail view:
 First-time startup: set worthincrease factor = 1
 
 
-New game: ensure applications on first day
+(test) New game: ensure applications on first day
 
 (test) sick-report + salary-report in spite of deselected option
 
 Car defect - Notification with repair cost
+
+
+
+DRAG & DROP in teams view:
+
+- droptarget "no team"
+- deassign teamleader if leader leaves
+- show "none"-symbol if leader position vacant
+- update display of leaders after drop action
+- update select lists after drop action
+
+
+
+

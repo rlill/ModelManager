@@ -5,7 +5,6 @@ import java.util.List;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.AvoidXfermode;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.DragEvent;
@@ -18,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,17 +35,19 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
     private Context context;
     private OnClickListener clickListener;
 
-    private final static int KEY_TARGET_TYPE = 1001;
-    private final static int KEY_TEAM_ID = 1002;
-    private final static int VALUE_TARGET_DROP = 2099;
+    Drawable enterShape;
+    Drawable normalShape;
 
-	public TeamListAdapter(Context context, int resource, int textViewResourceId,
+    public TeamListAdapter(Context context, int resource, int textViewResourceId,
 			List<Team> objects, LayoutInflater inflater,
 			OnClickListener listener) {
 		super(context, resource, textViewResourceId, objects);
         this.inflater = inflater;
         this.context = context;
         clickListener = listener;
+
+        enterShape = context.getResources().getDrawable(R.drawable.shape_droptarget);
+        normalShape = context.getResources().getDrawable(R.drawable.shape);
 	}
 
 	@Override
@@ -173,9 +175,12 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
     		tv.setText(model.getFullname().replace(' ', '\n'));
     		frame.addView(tv);
 
-    		LinearLayout ll = (LinearLayout) adaptedView.findViewById(R.id.teamImageList);
-            ll.setOnDragListener(new TeamDragListener());
+            LinearLayout ll = (LinearLayout) adaptedView.findViewById(R.id.teamImageList);
             ll.addView(frame);
+
+            View scroller = (HorizontalScrollView)adaptedView.findViewById(R.id.teamImageScroll);
+            scroller.setOnDragListener(new TeamDragListener(scroller, ll));
+
     	}
 
         public int getTeamId() {
@@ -199,35 +204,34 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
     }
 
     class TeamDragListener implements OnDragListener {
-        Drawable enterShape = context.getResources().getDrawable(R.drawable.shape_droptarget);
-        Drawable normalShape = context.getResources().getDrawable(R.drawable.shape);
+
+        private View scroller;
+        private LinearLayout container;
+        public TeamDragListener(View sc, LinearLayout ll) {
+            scroller = sc;
+            container = ll;
+        }
 
         @Override
         public boolean onDrag(View v, DragEvent event) {
             int action = event.getAction();
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    Log.w(LOG_TAG, "drag stat");
                     // do nothing
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    Log.w(LOG_TAG, "drag enter");
-                    v.setBackgroundDrawable(enterShape);
+                    scroller.setBackgroundDrawable(enterShape);
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
-                    Log.w(LOG_TAG, "drag exit");
-                    v.setBackgroundDrawable(normalShape);
+                    scroller.setBackgroundDrawable(normalShape);
                     break;
                 case DragEvent.ACTION_DROP:
-                    Log.w(LOG_TAG, "drag drop");
                     // Dropped, reassign View to ViewGroup
                     View view = (View) event.getLocalState();
                     ViewGroup owner = (ViewGroup) view.getParent();
-                    LinearLayout container = (LinearLayout) v;
 
                     // check whether container is valid
-                    if (!(view.getTag() instanceof Model)
-                            || !(container.getTag() instanceof TeamListViewElements)) return false;
+                    if (!(view.getTag() instanceof Model)) return false;
 
                     TeamListViewElements tve = (TeamListViewElements)container.getTag();
                     int tteam = tve.getTeamId();
@@ -246,12 +250,10 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    Log.w(LOG_TAG, "drag end");
+                    // make item visible again if dropped outside a valid target view
                     view = (View) event.getLocalState();
                     view.setVisibility(View.VISIBLE);
-                    v.setBackgroundDrawable(normalShape);
-                default:
-                    break;
+                    scroller.setBackgroundDrawable(normalShape);
             }
             return true;
         }
