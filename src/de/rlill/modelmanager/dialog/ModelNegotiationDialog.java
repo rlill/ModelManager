@@ -697,7 +697,9 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 			}
 		}
 
-		displayModelData();
+        StatusBarFragmentAdapter.initStatusBar(findViewById(R.id.status_bar_include));
+
+        displayModelData();
 	}
 
 }
