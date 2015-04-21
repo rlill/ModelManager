@@ -91,13 +91,19 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 
 		// 1st and 2nd leader
 		Model model = ModelService.getModelById(team.getLeader1());
-		if (model != null) viewElements.addTeamMember(model);
+		if (model != null && model.getTeamId() == team.getId()) viewElements.addTeamMember(model);
 		model = ModelService.getModelById(team.getLeader2());
-		if (model != null) viewElements.addTeamMember(model);
+		if (model != null && model.getTeamId() == team.getId()) viewElements.addTeamMember(model);
 
 		for (Model m : ModelService.getTeamMembers(team.getId())) {
 			if (m.getId() != team.getLeader1() && m.getId() != team.getLeader2())
 				viewElements.addTeamMember(m);
+		}
+
+		if (ModelService.getTeamMembers(team.getId()).size() == 0) {
+			View scroller = (HorizontalScrollView) v.findViewById(R.id.teamImageScroll);
+			LinearLayout ll = (LinearLayout) scroller.findViewById(R.id.teamImageList);
+			scroller.setOnDragListener(new TeamDragListener(scroller, ll));
 		}
 	}
 
