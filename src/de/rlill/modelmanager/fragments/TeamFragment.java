@@ -101,7 +101,9 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 		selectedTeam = ModelService.getTeam(teamId);
 
         Spinner sp = (Spinner)fragmentView.findViewById(R.id.selectTeamLeader);
-		List<Model> substList = ModelService.getTeamMembers(teamId);
+		List<Model> substList = new ArrayList<Model>();
+		substList.add(ModelService.getModelById(ModelService.UNDEFINED_MODEL));
+		substList.addAll(ModelService.getTeamMembers(teamId));
 		ArrayAdapter<Model> replacementAdapter = new ModelSpinnerAdapter(
 				context,
         		R.layout.fragment_model_spinner_item,

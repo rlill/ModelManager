@@ -25,6 +25,7 @@ import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.dialog.ModelNegotiationDialog;
 import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.model.Team;
+import de.rlill.modelmanager.persistance.TeamDbAdapter;
 import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.struct.ViewElements;
 
@@ -242,17 +243,26 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
                     TeamListViewElements tve = (TeamListViewElements)container.getTag();
                     int tteam = tve.getTeamId();
                     Model model = (Model)view.getTag();
-                    int mid = model.getId();
 
-                    Log.i(LOG_TAG, "Assign model " + model.getFullname() + " #" + mid + " to team #" + tteam);
+                    Log.i(LOG_TAG, "Assign model " + model.getFullname() + " #" + model.getId() + " to team #" + tteam);
 
                     // transfer icon
                     owner.removeView(view);
                     container.addView(view);
                     view.setVisibility(View.VISIBLE);
 
+                    // quit leadership if app.
+                    Team team = ModelService.getTeam(model.getTeamId());
+                    if (team != null && team.getLeader1() == model.getId()) {
+	                    team.setLeader1(0);
+	                    TeamDbAdapter.updateTeam(team);
+                    }
+                    if (team != null && team.getLeader2() == model.getId()) {
+	                    team.setLeader2(0);
+	                    TeamDbAdapter.updateTeam(team);
+                    }
                     // assignment to new team
-                    ModelService.setTeam(mid, tteam);
+                    ModelService.setTeam(model.getId(), tteam);
 
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:

@@ -70,8 +70,6 @@ Car defect - Notification with repair cost
 
 DRAG & DROP in teams view:
 
-- deassign teamleader if leader leaves
-- show "none"-symbol if leader position vacant
 - update display of leaders after drop action
 - update select lists after drop action
 

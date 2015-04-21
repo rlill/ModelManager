@@ -62,6 +62,8 @@ public class ModelService {
 		model.setImage(image);
 		model.setQuality_photo(20);
 		model.setQuality_movie(20);
+		model.setQuality_tlead(0);
+		model.setStatus(ModelStatus.UNAVAILABLE);
 		modelsArray.put(-1, model);
 	}
 
