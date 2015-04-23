@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.dialog.ModelNegotiationDialog;
+import de.rlill.modelmanager.fragments.TeamFragment;
 import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.model.Team;
 import de.rlill.modelmanager.persistance.TeamDbAdapter;
@@ -34,18 +35,18 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 	private static final String LOG_TAG = "MM*" + TeamListAdapter.class.getSimpleName();
     private LayoutInflater inflater;
     private Context context;
-    private OnClickListener clickListener;
+    private TeamFragment teamFragment;
 
     Drawable enterShape;
     Drawable normalShape;
 
     public TeamListAdapter(Context context, int resource, int textViewResourceId,
 			List<Team> objects, LayoutInflater inflater,
-			OnClickListener listener) {
+			TeamFragment listener) {
 		super(context, resource, textViewResourceId, objects);
         this.inflater = inflater;
         this.context = context;
-        clickListener = listener;
+        teamFragment = listener;
 
         enterShape = context.getResources().getDrawable(R.drawable.shape_droptarget);
         normalShape = context.getResources().getDrawable(R.drawable.shape);
@@ -73,7 +74,7 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 		updateListElement(convertView, team);
 
         LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.teamImageList);
-        ll.setOnClickListener(clickListener);
+        ll.setOnClickListener(teamFragment);
         ll.setTag(viewElements);
 
 		return convertView;
@@ -105,6 +106,7 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 			View scroller = (HorizontalScrollView) v.findViewById(R.id.teamImageScroll);
 			LinearLayout ll = (LinearLayout) scroller.findViewById(R.id.teamImageList);
 			scroller.setOnDragListener(new TeamDragListener(scroller, ll));
+			viewElements.setTeamId(team.getId());
 		}
 	}
 
@@ -190,6 +192,7 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 
     	}
 
+		public void setTeamId(int id) { teamId = id; }
         public int getTeamId() {
             return teamId;
         }
@@ -263,6 +266,9 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
                     }
                     // assignment to new team
                     ModelService.setTeam(model.getId(), tteam);
+
+	                // update details
+	                teamFragment.updateCurrentTeamDetails();
 
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:

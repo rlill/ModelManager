@@ -45,6 +45,7 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
     private LayoutInflater inflater;
     private Context context;
     private Team selectedTeam;
+    private View selectedView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,6 +93,10 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
         adapter.notifyDataSetChanged();
     }
 
+	public void updateCurrentTeamDetails() {
+		if (selectedView != null) onItemClick(null, selectedView, 0, 0);
+	}
+
 	@Override
 	public void onItemClick(android.widget.AdapterView<?> parent, View v, int position, long id) {
 		ViewElements ve = (ViewElements)v.getTag();
@@ -99,6 +104,7 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 		int teamId = ve.getContextInt();
 		if (teamId == ModelService.TEAM_NO_TEAM) return;
 		selectedTeam = ModelService.getTeam(teamId);
+		selectedView = v;
 
         Spinner sp = (Spinner)fragmentView.findViewById(R.id.selectTeamLeader);
 		List<Model> substList = new ArrayList<Model>();

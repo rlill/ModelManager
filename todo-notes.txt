@@ -70,9 +70,8 @@ Car defect - Notification with repair cost
 
 DRAG & DROP in teams view:
 
-- update display of leaders after drop action
-- update select lists after drop action
-
+- changes in teamleader, tl-bonus save-without-button
+- new team button (?)
 
 
 
