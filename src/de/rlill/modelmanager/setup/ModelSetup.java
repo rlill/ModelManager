@@ -54,7 +54,10 @@ public class ModelSetup {
 				} while (cursor.moveToNext());
 			}
 			cursor.close();
-		} catch (SQLException e) { }
+		} catch (SQLException e) {
+			Log.e(LOG_TAG, "Failed to initialize existing models list: ", e);
+			return;
+		}
 
 		for (Field f : R.drawable.class.getFields()) {
 			String resourceName = f.getName();
@@ -83,6 +86,7 @@ public class ModelSetup {
 
 			ModelStatus status = (Util.rnd(4) == 0) ? ModelStatus.FREE : ModelStatus.UNAVAILABLE;
 			Log.i(LOG_TAG, "Creating model " + firstName + " " + lastName + ", " + status + " for " + resourceName);
+			modelNames.add(firstName + lastName);
 
 			// insert
 			ContentValues values = new ContentValues();
