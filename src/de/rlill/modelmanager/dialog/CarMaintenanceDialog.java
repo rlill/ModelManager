@@ -32,7 +32,7 @@ import de.rlill.modelmanager.struct.EventFlag;
 
 public class CarMaintenanceDialog extends Activity implements OnClickListener {
 
-	private static final String LOG_TAG = CarMaintenanceDialog.class.getSimpleName();
+	private static final String LOG_TAG = "MM*" + CarMaintenanceDialog.class.getSimpleName();
 
 	private int companyCarId;
 	private CompanyCar companyCar;

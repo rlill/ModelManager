@@ -1,7 +1,5 @@
 package de.rlill.modelmanager.dialog;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,12 +8,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -24,6 +23,9 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import java.util.List;
+
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.adapter.StatusBarFragmentAdapter;
@@ -35,9 +37,9 @@ import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.struct.TransactionIterator;
 
 public class AccountDetailDialog extends Activity
-	implements OnClickListener, OnKeyListener {
+	implements OnClickListener {
 
-//	private static final String LOG_TAG = AccountDetailDialog.class.getSimpleName();
+	private static final String LOG_TAG = "MM*" + AccountDetailDialog.class.getSimpleName();
 
 	private int modelId;
 	public final static String EXTRA_MODEL_ID = "account.detail.dialog.model.id";
@@ -149,7 +151,7 @@ public class AccountDetailDialog extends Activity
 
 
 		EditText et = (EditText)findViewById(R.id.editTextFilter);
-		et.setOnKeyListener(this);
+		et.addTextChangedListener(mTextEditorWatcher);
 
 
 		if (modelId == 0) {
@@ -242,12 +244,10 @@ public class AccountDetailDialog extends Activity
 		refreshTransactionList();
 	}
 
-	@Override
-	public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-		EditText et = (EditText)v;
-		filterDescription = et.getText().toString();
+	public boolean filter(String s) {
+		filterDescription = s;
 		if (filterDescription != null && filterDescription.length() == 0) filterDescription = null;
+		if (filterDescription != null) filterDescription = filterDescription.toLowerCase();
 		refreshTransactionList();
 		return false;
 	}
@@ -263,6 +263,7 @@ public class AccountDetailDialog extends Activity
 		else
 			tlist = TransactionDbAdapter.getTransactions(modelId);
 		for (Transaction t : tlist) {
+//			Log.i(LOG_TAG, "Filtering " + t.getDescription() + " with " + filterDescription);
 			if (filterDescription != null &&
 					!t.getDescription().toLowerCase().contains(filterDescription)) continue;
 			String p2 = "";
@@ -280,5 +281,18 @@ public class AccountDetailDialog extends Activity
 					0, 0, ""));
 
 	}
+
+	private final TextWatcher mTextEditorWatcher = new TextWatcher() {
+
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+		}
+
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+		}
+
+		public void afterTextChanged(Editable s) {
+			filter(s.toString());
+		}
+	};
 
 }
