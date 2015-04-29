@@ -617,6 +617,7 @@ public class TodayService {
 			}
 
 			int carId = Util.atoi(formularData.get(R.string.labelCar));
+			carPrice = Util.atoi(formularData.get(R.string.labelPrice));
 			if (carId == 0) {
 				// must buy first
 				carTypeId = Util.atoi(formularData.get(R.string.labelCarTypes));
@@ -627,6 +628,9 @@ public class TodayService {
 				CarService.log(carId, CarAction.ASSIGN,
 						MessageService.getMessage(R.string.logmessage_car_assign),
 						CarService.getCarValue(carId));
+
+				String msg = ctx.getString(R.string.logmessage_car_assign, CarService.getCarInfo(carId));
+				DiaryService.log(msg, EventClass.ACCEPT, EventFlag.CAR_UPDATE, today.getModelId(), carPrice);
 			}
 
 			// check whether request may now be acceptable
