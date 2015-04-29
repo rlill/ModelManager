@@ -32,16 +32,16 @@
     </style>
 
 
-
-
     <style name="BlockHeadline" parent="AppTheme">
-<!-- 
-        <item name="android:background">#ff00BFFF</item>
-        <item name="android:padding">4dp</item>
- -->
         <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/rounded_corner</item>
     </style>
+
+
+	<style name="VerticalChartBar" parent="AppTheme">
+		<item name="android:background">@drawable/vertical_bar</item>
+	</style>
+
 
 
 </resources>

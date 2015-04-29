@@ -1119,5 +1119,9 @@ public class ModelService {
 		public int w4daysSick;
 		public int w4payments;
 		public int w4bonus;
+
+		public int extraEarnings;
+		public int extraLoss;
+		public int extraModelCount;
 	}
 }

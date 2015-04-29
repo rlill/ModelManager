@@ -1,8 +1,5 @@
 package de.rlill.modelmanager.dialog;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -30,6 +27,10 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.adapter.OpChartGridAdapter;
@@ -377,11 +378,19 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 			}
 		}
 
-		label = getResources().getString(R.string.labelExpenses);
-		tl.addView(mkChartRow(label, sumCost, 0, Color.RED));
-		label = getResources().getString(R.string.labelIncomes);
-		tl.addView(mkChartRow(label, sumEarn, 0, Color.GREEN));
+		ModelService.Statistics st = DiaryService.getTotalStatistics();
+		if (st.extraModelCount > 0) {
+			int avgEarnings = (st.w4movieEarnings + st.w4photoEarnings + st.extraEarnings) / st.extraModelCount;
+			int avgPayments = (st.w4payments + st.w4bonus + st.extraLoss) / st.extraModelCount;
+			int maxavg = (avgEarnings > avgPayments) ? avgEarnings : avgPayments;
 
+			if (maxavg > 0) {
+				label = getResources().getString(R.string.labelExpenses);
+				tl.addView(mkChartRow(label, sumCost, maxavg, Color.RED));
+				label = getResources().getString(R.string.labelIncomes);
+				tl.addView(mkChartRow(label, sumEarn, maxavg, Color.GREEN));
+			}
+		}
 
 		// create chart
 		if (startDay > 0) {
@@ -442,7 +451,7 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		return tr;
 	}
 
-	private TableRow mkChartRow(String key, int value, int max, int color) {
+	private TableRow mkChartRow(String key, int value, int maxavg, int color) {
 		TableRow tr = new TableRow(this);
 
 		TextView tv = new TextView(this);
@@ -452,8 +461,9 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		tv.setPadding(4, 4, 4, 4);
 		tr.addView(tv);
 
-		// TODO calc width from value + max
-		int width=120;
+		double ac = (double)value / maxavg;
+		int width = (int)(250 * ac);
+		if (width > 500) width = 500;
 
 		LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		RelativeLayout rl = (RelativeLayout)inflater.inflate( R.layout.element_vertical_bar, null );

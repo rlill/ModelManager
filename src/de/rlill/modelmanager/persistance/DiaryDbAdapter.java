@@ -2,6 +2,8 @@ package de.rlill.modelmanager.persistance;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -338,5 +340,128 @@ public class DiaryDbAdapter extends DbAdapter {
 
     	return stat;
     }
+
+	public static ModelService.Statistics getTotalStatistics() {
+		ModelService.Statistics stat = new ModelService.Statistics();
+
+		int startDay = DiaryService.today() - 28;
+		if (startDay < 0) startDay = 0;
+		Set<Integer> modelSet = new TreeSet<Integer>();
+
+		SQLiteDatabase db = open();
+		Cursor cursor = db.query(
+				TABLE_NAME_DIARY,
+				null,
+				KEY_DAY + ">=?",
+				new String[] { Integer.toString(startDay) },
+				null, null, KEY_DAY + " desc", null);
+
+		if (cursor.moveToFirst()) {
+			do {
+				Diary d = readCursorLine(cursor);
+
+				switch (d.getEventClass()) {
+					case BOOKING:
+						switch (d.getEventFlag()) {
+							case PHOTO:
+								stat.w4photoEarnings += d.getAmount();
+								stat.w4photoSessions++;
+								modelSet.add(d.getModelId());
+								break;
+							case MOVIE:
+								stat.w4movieEarnings += d.getAmount();
+								stat.w4movieSessions++;
+								modelSet.add(d.getModelId());
+								break;
+							default:
+								Log.w(LOG_TAG, "Booked for unknown event type " + d.getEventFlag());
+						}
+						break;
+					case NOTIFICATION:
+						switch (d.getEventFlag()) {
+							case SICK:
+								stat.w4daysSick++;
+								break;
+						}
+						break;
+					case ACCEPT:
+						switch (d.getEventFlag()) {
+							case TRAINING:
+								stat.w4daysTraining++;
+								break;
+							case VACATION:
+								stat.w4daysVacation++;
+								break;
+							case PAYFIX_PERSON:
+							case PAYVAR_PERSON:
+							case PAYOPT_PERSON:
+								stat.w4payments += d.getAmount();
+								modelSet.add(d.getModelId());
+								break;
+							case CAR_UPDATE:
+								stat.extraLoss += d.getAmount();
+								modelSet.add(d.getModelId());
+								break;
+							case BONUS:
+								stat.w4bonus += d.getAmount();
+								modelSet.add(d.getModelId());
+								break;
+							case RAISE:
+							case GROUPWORK:
+								break;
+							case PHOTO:
+								stat.w4photoEarnings += d.getAmount();
+								stat.w4photoSessions++;
+								modelSet.add(d.getModelId());
+								break;
+							case MOVIE:
+								stat.w4movieEarnings += d.getAmount();
+								stat.w4movieSessions++;
+								modelSet.add(d.getModelId());
+								break;
+							default:
+								Log.w(LOG_TAG, "Accept for unknown event flag " + d.getEventFlag());
+						}
+						break;
+					case REQUEST:
+					case APPLICATION:
+						break;
+
+					case EXTRA_IN:
+					case EXTRA_OUT:
+					case EXTRA_LOSS:
+						switch (d.getEventFlag()) {
+							case WIN_PERSON:
+								stat.extraEarnings += d.getAmount();
+								modelSet.add(d.getModelId());
+								break;
+							case PAYFIX_PERSON:
+							case PAYVAR_PERSON:
+							case PAYOPT_PERSON:
+							case LOSE_PERSON:
+								stat.extraLoss += d.getAmount();
+								modelSet.add(d.getModelId());
+								break;
+							default:
+						}
+						break;
+					case MOVIE_CAST:
+						if (d.getEventFlag() == EventFlag.MOVIE) {
+							stat.w4payments += d.getAmount();
+							modelSet.add(d.getModelId());
+						}
+						break;
+
+					default:
+						Log.w(LOG_TAG, "Unknown event class " + d.getEventClass());
+				}
+
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		stat.extraModelCount = modelSet.size();
+
+		return stat;
+	}
 
 }

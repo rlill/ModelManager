@@ -87,4 +87,8 @@ public class DiaryService {
 	public static Diary getDiaryEntry(int id) {
 		return DiaryDbAdapter.getDiaryEntry(id);
 	}
+
+	public static ModelService.Statistics getTotalStatistics() {
+		return DiaryDbAdapter.getTotalStatistics();
+	}
 }
