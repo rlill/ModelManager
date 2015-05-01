@@ -502,7 +502,8 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 
 				// request training
 				if (st.lastTraining < DiaryService.today() - 28
-						&& Util.rnd(model.getAmbition()) > 20) {
+						&& Util.rnd(model.getAmbition()) > 20
+						&& ModelService.plannedTrainingForModel(model.getId()) != null) {
 					EventService.newTrainingRequest(model.getId());
 				}
 

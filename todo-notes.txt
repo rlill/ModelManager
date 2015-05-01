@@ -10,7 +10,7 @@ Events:
 
 Training planned + vacation request
 
-training planned -> no today request training!
+(test) training planned -> no today request training!
 
 insufficient offer: redisplay form with previous values
 - (test) hire (salary, car, team)
@@ -31,9 +31,6 @@ Games (from pl)
 - 5 names > select face (multiple choice, 4 options)
 - 5 faces > type in name, compare after reducing the spelling
 - bet amount for each question (1 000 .. 10 000 000)
-
-
-(test) Total refactoring of Services: use instances instead of static, initialize in MainActivity
 
 
 (test) BUG: sometimes booking-request (officially impossible) can be accepted
@@ -61,7 +58,7 @@ First-time startup: set worthincrease factor = 1
 
 (test) Car defect - Notification with repair cost
 
-DRAG & DROP in teams view:
+(test) DRAG & DROP in teams view:
 
 - changes in teamleader, tl-bonus save-without-button
 - new team button (?)
