@@ -388,6 +388,7 @@ public class DiaryDbAdapter extends DbAdapter {
 						switch (d.getEventFlag()) {
 							case TRAINING:
 								stat.w4daysTraining++;
+								stat.w4payments += d.getAmount();
 								break;
 							case VACATION:
 								stat.w4daysVacation++;

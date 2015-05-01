@@ -149,6 +149,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 			Model model = allModels.get(mix[i]);
 			int avgCompareSalary = ModelService.getAverageSalary(model.getId());
 			int expectedBonus = ModelService.getExpectedBonus(model.getId());
+			int trainingCost = 0;
 
 			progress.incrementProgressBy(1);
 
@@ -161,6 +162,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 							training.getTraining().getDescription() + " - " + model.getFullname());
 					TrainingService.setTrainingStatus(training.getId(), TrainingStatus.IN_PROGRESS);
 					ModelService.reportTraining(model.getId());
+					trainingCost = training.getPrice();
 				}
 			}
 
@@ -244,7 +246,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 						if (DiaryService.todayWeekday() != Weekday.SATURDAY && DiaryService.todayWeekday() != Weekday.SUNDAY) {
 							ModelService.reportTraining(model.getId());
 							DiaryService.log(MessageService.getMessage(R.string.logmessage_training_today, model, mt.getTraining()),
-								EventClass.ACCEPT, EventFlag.TRAINING, model.getId(), 0);
+								EventClass.ACCEPT, EventFlag.TRAINING, model.getId(), trainingCost);
 						}
 					}
 					else {
@@ -450,7 +452,8 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 								MessageService.getMessage(R.string.logmessage_car_breakdown),
 								CarService.getCarValue(model.getCarId()));
 						CarService.setCarStatus(model.getCarId(), CarStatus.DEFECT);
-						t = EventService.newNotification(model.getId(), EventFlag.CAR_BROKEN, 0);
+						t = EventService.newNotification(model.getId(), EventFlag.CAR_BROKEN,
+								CarService.getCarRepairCost(model.getCarId()));
 						DiaryService.log(t);
 						break;
 					case 3:

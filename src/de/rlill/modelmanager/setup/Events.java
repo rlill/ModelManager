@@ -44,11 +44,11 @@ public class Events {
 		event.setDescription("%N hat sich heute krank gemeldet.");
 		result.add(event);
 
-		event = new Event(1004, 3);
+		event = new Event(1004, 4);
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.CAR_BROKEN);
 		event.setIcon(EventIcon.CAR);
-		event.setDescription("%N hat einen Blechschaden mit ihrem Auto (%C) verursacht. Es muß instandgesetzt werden.");
+		event.setDescription("%N hat einen Blechschaden mit ihrem Auto (%C) verursacht. Es muß für %A instandgesetzt werden.");
 		result.add(event);
 
 		event = new Event(1005, 3);

@@ -119,7 +119,7 @@ public class CarService {
 
 		int price = cc.getPrice();
 		int rnd = Util.atoi(cc.getLicensePlate().substring(5)) % 100;
-		int cost = (int)(price * (rnd * 1.2 + 5) / 300);
+		int cost = Util.niceRound((int)(price * (rnd * 1.2 + 5) / 300));
 
 		return cost;
 	}

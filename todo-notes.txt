@@ -3,11 +3,6 @@ Events:
 - offer 0 ?!?!
 - impact on mood !!!
 
-Model negDlg
-	- balance summary
-		o (test) correct sums
-		o vertical bars in color
-
 "1 Tage Resturlaub" - Singular!
       ^
 "Ihre Ehrgeiz" - Artikel!
@@ -64,9 +59,7 @@ First-time startup: set worthincrease factor = 1
 
 (test) sick-report + salary-report in spite of deselected option
 
-Car defect - Notification with repair cost
-
-
+(test) Car defect - Notification with repair cost
 
 DRAG & DROP in teams view:
 
