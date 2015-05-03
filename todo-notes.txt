@@ -10,6 +10,8 @@ Events:
 
 Training planned + vacation request
 
+grant credit also with small fortune
+
 (test) training planned -> no today request training!
 
 insufficient offer: redisplay form with previous values

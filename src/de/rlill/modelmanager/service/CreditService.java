@@ -17,8 +17,8 @@ public class CreditService {
 	public static int getMaxCredit(int modelId) {
 		Model model = ModelService.getModelById(modelId);
 		int balance = TransactionService.getBalance(modelId);
-		if (balance <= 100 * model.getSalary()) return 0;
-		return Util.niceRound(balance) - 100 * model.getSalary();
+		if (balance <= 10 * model.getSalary()) return 0;
+		return Util.niceRound(balance) - 10 * model.getSalary();
 	}
 
 	public static double getCreditInterest(int modelId) {

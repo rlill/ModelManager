@@ -955,11 +955,11 @@ public class Events {
 		event.setAmountMin(1000);
 		result.add(event);
 
-		event = new Event(1087, 2);
+		event = new Event(1087, 3);
 		event.setEclass(EventClass.NOTIFICATION);
 		event.setFlag(EventFlag.BUSTED);
 		event.setIcon(EventIcon.LIGHTENING);
-		event.setDescription("Ihr Konto ist um %A überzogen. Nehmen Sie bei einem Model einen Kredit auf, um weiterarbeiten zu können.");
+		event.setDescription("Ihr Konto ist um %A überzogen. Nehmen Sie bei einem Model einen Kredit auf oder verkaufen Sie Autos, um weiterarbeiten zu können.");
 		result.add(event);
 
 		return result;
