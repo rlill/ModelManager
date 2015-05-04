@@ -10,7 +10,7 @@ Events:
 
 Training planned + vacation request
 
-grant credit also with small fortune
+rejectBooking -> payBonus -> remove bonus requests FIXME
 
 (test) training planned -> no today request training!
 
