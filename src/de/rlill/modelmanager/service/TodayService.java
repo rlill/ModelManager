@@ -614,6 +614,20 @@ public class TodayService {
 			if (offer == 0) offer = Util.atoi(formularData.get(R.string.labelBonus));
 			if (offer > 0) {
 				ModelService.grantBonus(today.getModelId(), offer, today.getAmount1());
+				// remove further bonus requests
+				for (Today td : TodayDbAdapter.getEventsForModel(today.getModelId())) {
+					if (td.getEvent().getEclass() == EventClass.REQUEST
+						&& td.getEvent().getFlag() == EventFlag.BONUS) {
+						if (offer >= td.getAmount2())
+							TodayDbAdapter.removeToday(td.getId());
+						else {
+							int expectedBonus = ModelService.getExpectedBonus(today.getModelId());
+							td.setAmount1(Util.niceRandom(expectedBonus, 2 * expectedBonus));
+							td.setAmount2(expectedBonus);
+							TodayDbAdapter.updateToday(td);
+						}
+					}
+				}
 			}
 
 			int carId = Util.atoi(formularData.get(R.string.labelCar));
@@ -690,6 +704,8 @@ public class TodayService {
 	}
 
 	public static void dropEvents(int modelId, EventClass eclass, EventFlag ... flag) {
+		String fs = ""; for (EventFlag f : flag)  fs += " " + f.name();
+		Log.d(LOG_TAG, "dropping Events for model #" + modelId + ", class " + eclass.name() + ", flags " + fs);
 		for (Today t : TodayDbAdapter.getEventsForModel(modelId)) {
 			if (t.getEvent().getEclass() == eclass) {
 				for (EventFlag f : flag) {
