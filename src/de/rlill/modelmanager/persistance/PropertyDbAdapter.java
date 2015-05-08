@@ -6,11 +6,13 @@ import java.util.List;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import de.rlill.modelmanager.model.Property;
 
 public class PropertyDbAdapter extends DbAdapter {
 
-	private static final String LOG_TAG = PropertyDbAdapter.class.getSimpleName();
+	private static final String LOG_TAG = "MM*" + PropertyDbAdapter.class.getSimpleName();
 
 	public static final String TABLE_NAME_PROPERTIES = "tbl_properties";
 
@@ -64,6 +66,7 @@ public class PropertyDbAdapter extends DbAdapter {
     	// update row
     	int u = db.update(TABLE_NAME_PROPERTIES, values, KEY_KEY + "=?", new String [] { properties.getKey() });
 
+	    // if update failed, insert instead
     	if (u < 1) db.insert(TABLE_NAME_PROPERTIES, null, values);
     }
 

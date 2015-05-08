@@ -723,11 +723,6 @@ public class ModelService {
 		st.w4bonus += bonus;
 		DiaryService.log(MessageService.getMessage(R.string.logmessage_bonus) + " " + Util.amount(bonus),
 				EventClass.ACCEPT, EventFlag.BONUS, modelId, bonus);
-		bonusMoodImpact(modelId, bonus, expect);
-		TodayService.updateBookingRequestAcceptance(modelId);
-	}
-
-	public static void bonusMoodImpact(int modelId, int bonus, int expect) {
 		if (expect == 0) {
 			Model model = getModelById(modelId);
 			int salary = (model.getSalary() > 0) ? model.getSalary() : 1;
@@ -746,6 +741,25 @@ public class ModelService {
 			 * bonus < fairexpect -> ..-10 */
 			int satisfaction = (int)(30 * ((double)bonus - fairExpect) / expectrange);
 			Log.d(LOG_TAG, "Expected min: " + fairExpect + ".- opt: " + expect + ", got " + bonus + " -> mood + " + satisfaction);
+			if (satisfaction < -10) satisfaction = -10;
+
+			improveMood(modelId, satisfaction);
+		}
+
+		TodayService.updateBookingRequestAcceptance(modelId);
+	}
+
+	public static void paymentMoodImpact(int modelId, int bonus, int expect, int minExpect) {
+		if (expect > 0) {
+			int expectrange = expect - minExpect;
+			if (expectrange < 1) expectrange = 1;
+
+			/* bonus > expect -> ..+60
+			 * bonus = expect -> + 30
+			 * bonus = fairexpect -> +- 0
+			 * bonus < fairexpect -> ..-10 */
+			int satisfaction = (int)(30 * ((double)bonus - minExpect) / expectrange);
+			Log.d(LOG_TAG, "Expected min: " + minExpect + ".- opt: " + expect + ", got " + bonus + " -> mood + " + satisfaction);
 			if (satisfaction < -10) satisfaction = -10;
 
 			improveMood(modelId, satisfaction);
@@ -864,7 +878,6 @@ public class ModelService {
 	}
 
 	public static void reportTeamleadWork(int teamleaderModelId) {
-		// FIXME: implement
 		Statistics st = getStatistics(teamleaderModelId);
 		st.teamleadToday++;
 	}

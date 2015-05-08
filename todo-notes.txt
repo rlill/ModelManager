@@ -1,14 +1,8 @@
 
-Events:
-- offer 0 ?!?!
-- impact on mood !!!
-
 "1 Tage Resturlaub" - Singular!
       ^
 "Ihre Ehrgeiz" - Artikel!
     ^
-
-TL-Buchung zum Dumping-Preis !????  Foto vor Film ???
 
 Training planned + vacation request
 
@@ -18,30 +12,25 @@ Training planned + vacation request
 
 insufficient offer: redisplay form with previous values
 - (test) hire (salary, car, team)
-- OUT/LOSS-PAYVAR (offer)
+- (test) OUT/LOSS-PAYVAR (offer)
 
 
-Diary logging duplicates, formulation
-Today: "soll gebucht werden" -> Diary "wurde gebucht"
+(test) Diary logging duplicates, formulation
+(test) Today: "soll gebucht werden" -> Diary "wurde gebucht"
 
-Teams: hide empty
-
-New day progress dialog:
 (test) [ ] Benachrichtigung bei Trainingsabschluß
 
-
 Games (from pl)
-- 5 faces > select name (multiple choice, 4 options)
-- 5 names > select face (multiple choice, 4 options)
-- 5 faces > type in name, compare after reducing the spelling
-- bet amount for each question (1 000 .. 10 000 000)
+- (test) 5 faces > select name (multiple choice, 4 options)
+- (test) 5 names > select face (multiple choice, 4 options)
+- (test) bet amount for each question (1 000 .. 10 000 000)
 
 
 (test) BUG: sometimes booking-request (officially impossible) can be accepted
 
 
 Account Detail view:
-- search slot: filter... Umlauts!!!
+- (test) search slot: filter... Umlauts!!!
 - (test) decide ID 0 / >0
 	: ID 0 :
 		o show one day per page

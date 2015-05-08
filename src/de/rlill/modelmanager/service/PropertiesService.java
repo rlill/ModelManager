@@ -12,7 +12,7 @@ import de.rlill.modelmanager.persistance.PropertyDbAdapter;
 
 public class PropertiesService {
 
-	private static final String LOG_TAG = PropertiesService.class.getSimpleName();
+	private static final String LOG_TAG = "MM*" + PropertiesService.class.getSimpleName();
 	private static Map<String, String> propertyMap;
 
 	private final static String PROPERTY_WORTHINCREASE = "worthincrease";

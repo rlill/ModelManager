@@ -45,11 +45,14 @@ public class TodayService {
 		switch (today.getEvent().getEclass()) {
 		case NOTIFICATION:
 			if (today.getEvent().getFlag() == EventFlag.NEWDAY) {
+
+				// process tasks and start preparation thread to setup next day
 				newDay(ctx, ve);
 
 				// calculate worthincrease factor
 				double currWI = PropertiesService.getWorthincrease();
 				double newWI = calculateWorthincrease();
+				Log.i(LOG_TAG, String.format("Worthincrease old: %5.2f new: %5.2f", currWI, newWI));
 
 				if (newWI > currWI) {
 					Log.i(LOG_TAG, String.format("Worthincrease changed from %5.2f to %5.2f", currWI, newWI));
@@ -411,7 +414,7 @@ public class TodayService {
 					TransactionService.transfer(0, today.getModelId(), offer, today.getEvent().getNoteAcct());
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYOPT_PERSON, today.getModelId(), offer);
-					ModelService.bonusMoodImpact(today.getModelId(), offer, today.getAmount1());
+					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());
 					TodayDbAdapter.removeToday(today.getId());
 				}
 				break;
@@ -423,7 +426,7 @@ public class TodayService {
 					TransactionService.transfer(0, today.getModelId(), offer, today.getEvent().getNoteAcct());
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYVAR_PERSON, today.getModelId(), offer);
-					ModelService.bonusMoodImpact(today.getModelId(), offer, today.getAmount1());
+					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());
 					TodayDbAdapter.removeToday(today.getId());
 				}
 				break;
@@ -466,7 +469,7 @@ public class TodayService {
 					TransactionService.transfer(0, today.getModelId(), offer, today.getEvent().getNoteAcct());
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYOPT_PERSON, today.getModelId(), offer);
-					ModelService.bonusMoodImpact(today.getModelId(), offer, today.getAmount1());
+					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());
 
 					String optFire = formularData.get(R.string.labelFireImmmediately);
 					if ("1".equals(optFire)) {
@@ -506,7 +509,7 @@ public class TodayService {
 					TransactionService.transfer(0, today.getModelId(), offer, today.getEvent().getNoteAcct());
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYVAR_PERSON, today.getModelId(), offer);
-					ModelService.bonusMoodImpact(today.getModelId(), offer, today.getAmount1());
+					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());
 
 					String optFire = formularData.get(R.string.labelFireImmmediately);
 					if ("1".equals(optFire)) {
