@@ -65,6 +65,7 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 	private static final String LOG_TAG = "MM*" + ModelNegotiationDialog.class.getSimpleName();
 
 	private int modelId;
+	private int carId;
 	public final static String EXTRA_MODEL_ID = "model.negotiation.dialog.model.id";
 	private int compensation;
 
@@ -93,6 +94,7 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 	private void displayModelData() {
 
 		Model model = ModelService.getModelById(modelId);
+		carId = model.getCarId();
 
 		// status correction
 		Movieproduction mpr = null;
@@ -110,6 +112,9 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		int ir = getResources().getIdentifier(model.getImage(), "drawable", getPackageName());
 		ImageView iv = (ImageView)findViewById(R.id.imageView1);
 		iv.setImageResource(ir);
+
+		iv = (ImageView)findViewById(R.id.imageCar);
+		iv.setOnClickListener(this);
 
 		TextView tv = (TextView)findViewById(R.id.textview_name);
 		tv.setText(model.getFullname());
@@ -513,8 +518,19 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		else if (v.getId() == R.id.buttonAccount) {
 			Intent intent = new Intent(this, AccountDetailDialog.class);
 			intent.putExtra(AccountDetailDialog.EXTRA_MODEL_ID, modelId);
-			startActivity(intent);
+			startActivityForResult(intent, 1);
 		}
+		else if (v.getId() == R.id.imageCar) {
+			Intent intent = new Intent(this, CarMaintenanceDialog.class);
+			intent.putExtra(CarMaintenanceDialog.EXTRA_COMPANYCAR_ID, carId);
+			startActivityForResult(intent, 1);
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		displayModelData();
 	}
 
 

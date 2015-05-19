@@ -279,6 +279,8 @@ public class DiaryDbAdapter extends DbAdapter {
             		case RAISE:
             		case CAR_UPDATE:
             		case GROUPWORK:
+			        case CHANGETEAM:
+			        case HIRE:
             			break;
             		case PHOTO:
             			if (init.latestPhoto == 0) {
