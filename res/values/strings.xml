@@ -306,6 +306,8 @@
     <string name="display_msg_credit_offer" formatted="false">Ich verfüge über ein Privatvermögen von %1s, wovon ich Dir einen Betrag von bis zu %2s kurzfristig als Kredit mit einem Zinssatz von %3s %% pro Tag zur Verfügung stellen würde. Für den Gesamtbetrag wären das %4s Zinsen (plus Zinseszinsen ab dem 2. Tag) täglich.</string>
     <string name="display_msg_credit_open" formatted="false">Sie haben bei %1s noch Schulden in Höhe von %2s (%3s %% Zinsen)</string>
 
+    <string name="display_msg_hire_insuff_offer">Unzureichendes Angebot</string>
+
     <string name="display_msg_movie_start_cost">Vorbereitungskosten</string>
     <string name="display_msg_movie_daily_cost">tägl. Produktionskosten</string>
     <string name="display_msg_movie_finish_cost">Abschlußkosten</string>

@@ -49,10 +49,10 @@ public class PropertiesService {
 	}
 	public static boolean setWorthincrease(double inf) {
 		double wi = getWorthincrease();
-		if (inf > wi * 1.2) {
-			Log.e(LOG_TAG, "A worthincrease from " + wi + " to " + inf + " is not realistic");
-			return false;
-		}
+//		if (inf > wi * 1.2) {
+//			Log.e(LOG_TAG, "A worthincrease from " + wi + " to " + inf + " is not realistic");
+//			return false;
+//		}
 		setProperty(PROPERTY_WORTHINCREASE, Double.toString(inf));
 		return true;
 	}

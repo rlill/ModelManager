@@ -27,6 +27,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -667,12 +668,20 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		EditText et = (EditText)findViewById(R.id.editTextSalary);
 		int salary = Util.atoi(et.getText().toString());
 		int expect = ModelService.getAverageSalary(modelId);
-		if (salary < expect) return;
+		if (salary < expect) {
+			String msg = getResources().getString(R.string.display_msg_hire_insuff_offer);
+			Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+			return;
+		}
 
 		// Vacation
 		et = (EditText)findViewById(R.id.editTextVacation4week);
 		int vacation = Util.atoi(et.getText().toString());
-		if (vacation < 4) return; // FIXME: use value from some kind of settings
+		if (vacation < 4) { // FIXME: use value from some kind of settings
+			String msg = getResources().getString(R.string.display_msg_hire_insuff_offer);
+			Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+			return;
+		}
 
 		// Bonus
 		et = (EditText)findViewById(R.id.editTextBonus);
