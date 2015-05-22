@@ -67,7 +67,9 @@ public class OperationchartFragment extends Fragment {
 
 	private void createChart() {
 
-		actionColumns = (parentView.getWidth() - NAME_COLUMN_WIDTH) / ACTION_COLUMN_WIDTH;
+		int ncWidth = Util.convertDpToPixel(NAME_COLUMN_WIDTH, parentView.getContext());
+		int acWidth = Util.convertDpToPixel(ACTION_COLUMN_WIDTH, parentView.getContext());
+		actionColumns = (parentView.getWidth() - ncWidth) / acWidth;
 //		Log.i(LOG_TAG, "width = " + parentView.getWidth() + " -> " + actionColumns + " columns");
 		if (actionColumns < 1) return;
 		if (actionColumns > DiaryService.today()) actionColumns = DiaryService.today();
@@ -77,7 +79,7 @@ public class OperationchartFragment extends Fragment {
 		ll.removeAllViews();
 
 		TextView tv = new TextView(parentView.getContext());
-		tv.setLayoutParams(new LayoutParams(NAME_COLUMN_WIDTH, LayoutParams.WRAP_CONTENT));
+		tv.setLayoutParams(new LayoutParams(ncWidth, LayoutParams.WRAP_CONTENT));
 		tv.setPadding(4,  4,  4,  4);
 		tv.setTextSize(16);
 		tv.setText(R.string.labelName);
@@ -86,7 +88,7 @@ public class OperationchartFragment extends Fragment {
 		int startDay = DiaryService.today() - actionColumns + 1;
 		for (int day = startDay; day <= DiaryService.today(); day++) {
 			tv = new TextView(parentView.getContext());
-			tv.setLayoutParams(new LayoutParams(ACTION_COLUMN_WIDTH, LayoutParams.WRAP_CONTENT));
+			tv.setLayoutParams(new LayoutParams(acWidth, LayoutParams.WRAP_CONTENT));
 			tv.setPadding(4,  4,  4,  4);
 			tv.setGravity(Gravity.CENTER);
 			tv.setTextSize(12);
@@ -160,7 +162,7 @@ public class OperationchartFragment extends Fragment {
 			llrow.setOrientation(LinearLayout.HORIZONTAL);
 
 			tv = new TextView(parentView.getContext());
-			tv.setLayoutParams(new LayoutParams(NAME_COLUMN_WIDTH, LayoutParams.WRAP_CONTENT));
+			tv.setLayoutParams(new LayoutParams(ncWidth, LayoutParams.WRAP_CONTENT));
 			tv.setPadding(4,  4,  4,  4);
 			tv.setTextSize(16);
 			tv.setText(model.getFullname());
@@ -172,7 +174,7 @@ public class OperationchartFragment extends Fragment {
 			for (int day = startDay; day <= DiaryService.today(); day++) {
 
 				tv = new TextView(parentView.getContext());
-				tv.setLayoutParams(new LayoutParams(ACTION_COLUMN_WIDTH, LayoutParams.WRAP_CONTENT));
+				tv.setLayoutParams(new LayoutParams(acWidth, LayoutParams.WRAP_CONTENT));
 				tv.setPadding(4,  4,  4,  4);
 				tv.setGravity(Gravity.CENTER);
 				tv.setTextSize(16);

@@ -57,4 +57,9 @@ First-time startup: set worthincrease factor = 1
 - new team button (?)
 
 
+Cynthia Cox: Zuteilung Firmenwagen %1s
+
+Auswirkung quality_TL auf Verhandlungserfolg + Member-Zufriedenheit
+
+(test) Auslastungsplan: Namensspalte breiter
 
