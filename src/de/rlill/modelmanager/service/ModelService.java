@@ -284,6 +284,22 @@ public class ModelService {
 	}
 
 
+	public static Model getTeamLeader(int teamId) {
+		Team team = getTeam(teamId);
+
+		// check if fist leader is active
+		Model leader = getModelById(team.getLeader1());
+		if (leader != null && leader.getStatus() == ModelStatus.HIRED) return leader;
+
+		// check if second leader is active
+		leader = getModelById(team.getLeader2());
+		if (leader != null && leader.getStatus() == ModelStatus.HIRED) return leader;
+
+		// no active leader, act unmanaged
+		return null;
+	}
+
+
 	public static void teamwork(Team team) {
 
 		// check if first leader is active
@@ -355,8 +371,21 @@ public class ModelService {
 				int squal = match.getQuality_movie();
 				if (squal < 1) squal = 1;
 
+				int oldPrice = t.getAmount1() / mqual * squal;
 				int newPrice = t.getAmount2() / mqual * squal;
 				Log.i(LOG_TAG, "PRICE " + t.getAmount2() + ".- / " + mqual + " * " + squal + " = " + newPrice);
+
+				// TL quality influence
+				int sp = newPrice - oldPrice;
+				Log.w(LOG_TAG, String.format("SP = %d.- (%d.- - %d.-)", sp, newPrice, oldPrice));
+				if (sp < ((int)(newPrice * 0.1))) {
+					oldPrice = ((int)(newPrice * 0.9));
+					sp = newPrice - oldPrice;
+				}
+				sp = (leader.getQuality_tlead() + 40) * sp / 100;
+				Log.w(LOG_TAG, String.format("TL Q=%d result=%d.-", leader.getQuality_tlead(), sp));
+				newPrice = oldPrice + sp;
+				Log.i(LOG_TAG, "PRICE " + oldPrice + ".- + " + sp + ".-  = " + newPrice + ".-");
 
 				t.setAmount1(newPrice);
 				t.setModelId(match.getId());
@@ -397,8 +426,21 @@ public class ModelService {
 				int squal = match.getQuality_photo();
 				if (squal < 1) squal = 1;
 
+				int oldPrice = t.getAmount1() / mqual * squal;
 				int newPrice = t.getAmount2() / mqual * squal;
 				Log.i(LOG_TAG, "PRICE " + t.getAmount2() + ".- / " + mqual + " * " + squal + " = " + newPrice);
+
+				// TL quality influence
+				int sp = newPrice - oldPrice;
+				Log.w(LOG_TAG, String.format("SP = %d.- (%d.- - %d.-)", sp, newPrice, oldPrice));
+				if (sp < ((int)(newPrice * 0.1))) {
+					oldPrice = ((int)(newPrice * 0.9));
+					sp = newPrice - oldPrice;
+				}
+				sp = (leader.getQuality_tlead() + 40) * sp / 100;
+				Log.w(LOG_TAG, String.format("TL Q=%d result=%d.-", leader.getQuality_tlead(), sp));
+				newPrice = oldPrice + sp;
+				Log.i(LOG_TAG, "PRICE " + oldPrice + ".- + " + sp + ".-  = " + newPrice + ".-");
 
 				t.setAmount1(newPrice);
 				t.setModelId(match.getId());

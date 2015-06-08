@@ -566,6 +566,18 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 							}
 							else {
 								// do the booking right away
+								Log.i(LOG_TAG, "PRICE " + pmax + ".-)");
+								int sp = pmax - price;
+								if (sp < ((int)(pmax * 0.1))) {
+									price = ((int)(pmax * 0.9));
+									sp = pmax - price;
+								}
+								Model leader = ModelService.getTeamLeader(model.getTeamId());
+								sp = (leader.getQuality_tlead() + 40) * sp / 100;
+								Log.w(LOG_TAG, String.format("TL Q=%d result=%d.-", leader.getQuality_tlead(), sp));
+								pmax = price + sp;
+								Log.i(LOG_TAG, "PRICE " + price + ".- + " + sp + ".-  = " + pmax + ".-");
+
 								today.setAmount1(pmax);
 								ModelService.reportBooking(today);
 								TransactionService.transfer(-1, 0, pmax, today.getNoteAcct());

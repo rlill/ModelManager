@@ -1,4 +1,4 @@
-
+Ich
 "1 Tage Resturlaub" - Singular!
       ^
 "Ihre Ehrgeiz" - Artikel!
@@ -61,5 +61,4 @@ Cynthia Cox: Zuteilung Firmenwagen %1s
 
 Auswirkung quality_TL auf Verhandlungserfolg + Member-Zufriedenheit
 
-(test) Auslastungsplan: Namensspalte breiter
 
