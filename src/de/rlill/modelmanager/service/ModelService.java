@@ -500,13 +500,13 @@ public class ModelService {
 		Model model = getModelById(modelId);
 		int expectBonus = (st.w4photoEarnings + st.w4movieEarnings) / 100
 				* (model.getAmbition() / 5 + 10);
-		Log.i(LOG_TAG, "In 4 weeks model #" + modelId
-				+ " has earned " + st.w4photoEarnings + ".- + " + st.w4movieEarnings + ".- "
-				+ " and expects a refund of " + expectBonus + ".-");
+//		Log.i(LOG_TAG, "In 4 weeks model #" + modelId
+//				+ " has earned " + st.w4photoEarnings + ".- + " + st.w4movieEarnings + ".- "
+//				+ " and expects a refund of " + expectBonus + ".-");
 		expectBonus -= st.w4bonus;
 		if (expectBonus < 0) expectBonus = 0;
-		Log.i(LOG_TAG, "She already has received " + st.w4bonus + ".- in payments and still wants "
-				+ expectBonus + ".-");
+//		Log.i(LOG_TAG, "She already has received " + st.w4bonus + ".- in payments and still wants "
+//				+ expectBonus + ".-");
 		return expectBonus;
 	}
 
@@ -883,6 +883,10 @@ public class ModelService {
 		model.setAmbition(     model.getAmbition()      + training.getTraining().getInc_ambition());
 		model.setMood(         model.getMood()          + training.getTraining().getInc_mood());
 		model.setCriminal(     model.getCriminal()      + training.getTraining().getInc_criminal());
+		ModelDbAdapter.updateModel(model);
+	}
+
+	public static void update(Model model) {
 		ModelDbAdapter.updateModel(model);
 	}
 

@@ -487,7 +487,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				}
 
 				// request quit
-				if (model.getHireday() < DiaryService.today() - 14
+				if (model.getHireday() < DiaryService.today() - 7
 						&& (model.getSalary() < avgCompareSalary || expectedBonus > 0)
 						&& Util.rnd(model.getMood()) < 10) {
 					EventService.newQuitRequest(model.getId(), expectedBonus, avgCompareSalary);
@@ -566,7 +566,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 							}
 							else {
 								// do the booking right away
-								Log.i(LOG_TAG, "PRICE " + pmax + ".-)");
+								Log.i(LOG_TAG, "PRICE " + pmax + ".-");
 								int sp = pmax - price;
 								if (sp < ((int)(pmax * 0.1))) {
 									price = ((int)(pmax * 0.9));

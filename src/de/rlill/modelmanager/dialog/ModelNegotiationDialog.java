@@ -61,7 +61,7 @@ import de.rlill.modelmanager.struct.OpChartElement;
 import de.rlill.modelmanager.struct.Operation;
 import de.rlill.modelmanager.struct.TeamOption;
 
-public class ModelNegotiationDialog extends Activity implements View.OnClickListener {
+public class ModelNegotiationDialog extends Activity implements View.OnClickListener, RatingBar.OnRatingBarChangeListener {
 
 	private static final String LOG_TAG = "MM*" + ModelNegotiationDialog.class.getSimpleName();
 
@@ -261,29 +261,31 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 	    	tl.addView(mkTextRow(label, sb.toString()));
 		}
 
-		// rating bars
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean geek = sharedPref.getBoolean("geekMode", false);
+
+			// rating bars
     	label = getResources().getString(R.string.labelQualityPhoto);
-    	tl.addView(mkRatingRow(label, model.getQuality_photo()));
+    	tl.addView(mkRatingRow(label, model.getQuality_photo(), R.id.ratingBarQualityPhoto, geek));
 
     	label = getResources().getString(R.string.labelQualityMovie);
-    	tl.addView(mkRatingRow(label, model.getQuality_movie()));
+    	tl.addView(mkRatingRow(label, model.getQuality_movie(), R.id.ratingBarQualityMovie, geek));
 
     	label = getResources().getString(R.string.labelQualityTLead);
-    	tl.addView(mkRatingRow(label, model.getQuality_tlead()));
+    	tl.addView(mkRatingRow(label, model.getQuality_tlead(), R.id.ratingBarQualityTLead, geek));
 
-    	label = getResources().getString(R.string.labelHealth);
-    	tl.addView(mkRatingRow(label, model.getHealth()));
+		label = getResources().getString(R.string.labelMood);
+		tl.addView(mkRatingRow(label, model.getMood(), R.id.ratingBarMood, geek));
 
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		if (sharedPref.getBoolean("geekMode", false)) {
+		if (geek) {
+			label = getResources().getString(R.string.labelHealth);
+			tl.addView(mkRatingRow(label, model.getHealth(), R.id.ratingBarHealth, geek));
+
 	    	label = getResources().getString(R.string.labelAmbition);
-	    	tl.addView(mkRatingRow(label, model.getAmbition()));
+	    	tl.addView(mkRatingRow(label, model.getAmbition(), R.id.ratingBarAmbition, geek));
 
 	    	label = getResources().getString(R.string.labelCriminal);
-	    	tl.addView(mkRatingRow(label, model.getCriminal()));
-
-	    	label = getResources().getString(R.string.labelMood);
-	    	tl.addView(mkRatingRow(label, model.getMood()));
+	    	tl.addView(mkRatingRow(label, model.getCriminal(), R.id.ratingBarCriminal, geek));
 		}
 
     	// past events
@@ -433,7 +435,7 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		tl.addView(mkTextRow(label, pastEventLog.toString()));
 	}
 
-	private TableRow mkRatingRow(String key, int value) {
+	private TableRow mkRatingRow(String key, int value, int id, boolean modifyable) {
 		TableRow tr = new TableRow(this);
 
 		TextView tv = new TextView(this);
@@ -448,10 +450,12 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		tr.addView(ll);
 
 		RatingBar rb = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
+		rb.setId(id);
 		rb.setStepSize((float) 0.1);
-		rb.setIsIndicator(true);
+		rb.setIsIndicator(!modifyable);
 		rb.setNumStars(10);
-		rb.setRating((float)value / 10);
+		rb.setRating((float) value / 10);
+		rb.setOnRatingBarChangeListener(this);
 		ll.addView(rb);
 
 		return tr;
@@ -509,7 +513,6 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 
 	@Override
 	public void onClick(View v) {
-
 		if (v.getId() == R.id.buttonSave)
 			saveChanges();
 		else if (v.getId() == R.id.buttonHire)
@@ -526,6 +529,40 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 			intent.putExtra(CarMaintenanceDialog.EXTRA_COMPANYCAR_ID, carId);
 			startActivityForResult(intent, 1);
 		}
+		else {
+			Log.e(LOG_TAG, "onClick for invalid view " + v);
+		}
+	}
+
+	@Override
+	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		if (!(sharedPref.getBoolean("geekMode", false))) return;
+
+		Model model = ModelService.getModelById(modelId);
+		int q = (int)(10 * ratingBar.getRating());
+		if (ratingBar.getId() == R.id.ratingBarQualityPhoto) {
+			model.setQuality_photo(q);
+		}
+		else if (ratingBar.getId() == R.id.ratingBarQualityMovie) {
+			model.setQuality_movie(q);
+		}
+		else if (ratingBar.getId() == R.id.ratingBarQualityTLead) {
+			model.setQuality_tlead(q);
+		}
+		else if (ratingBar.getId() == R.id.ratingBarMood) {
+			model.setMood(q);
+		}
+		else if (ratingBar.getId() == R.id.ratingBarHealth) {
+			model.setHealth(q);
+		}
+		else if (ratingBar.getId() == R.id.ratingBarAmbition) {
+			model.setAmbition(q);
+		}
+		else if (ratingBar.getId() == R.id.ratingBarCriminal) {
+			model.setCriminal(q);
+		}
+		ModelService.update(model);
 	}
 
 	@Override
@@ -736,5 +773,4 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 
         displayModelData();
 	}
-
 }
