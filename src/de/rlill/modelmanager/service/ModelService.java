@@ -27,6 +27,7 @@ import de.rlill.modelmanager.service.TodayService.TeamWork;
 import de.rlill.modelmanager.struct.CarAction;
 import de.rlill.modelmanager.struct.CarClass;
 import de.rlill.modelmanager.struct.CarStatus;
+import de.rlill.modelmanager.struct.Characteristic;
 import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
 import de.rlill.modelmanager.struct.ModelStatus;
@@ -886,7 +887,33 @@ public class ModelService {
 		ModelDbAdapter.updateModel(model);
 	}
 
-	public static void update(Model model) {
+	public static void updateModelCharacteristic(int modelId, Characteristic ch, int value) {
+		Model model = getModelById(modelId);
+		switch (ch) {
+			case QUALITY_PHOTO:
+				model.setQuality_photo(value);
+				break;
+			case QUALITY_MOVIE:
+				model.setQuality_movie(value);
+				break;
+			case QUALITY_TLEAD:
+				model.setQuality_tlead(value);
+				break;
+			case EROTIC:
+				model.setErotic(value);
+				break;
+			case HEALTH:
+				model.setHealth(value);
+				break;
+			case AMBITION:
+				model.setAmbition(value);
+				break;
+			case MOOD:
+				model.setMood(value);
+				break;
+			case CRIMINAL:
+				model.setCriminal(value);
+		}
 		ModelDbAdapter.updateModel(model);
 	}
 

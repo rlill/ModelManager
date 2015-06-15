@@ -53,6 +53,7 @@ import de.rlill.modelmanager.service.TrainingService;
 import de.rlill.modelmanager.service.TransactionService;
 import de.rlill.modelmanager.struct.CarAction;
 import de.rlill.modelmanager.struct.CarOffer;
+import de.rlill.modelmanager.struct.Characteristic;
 import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
 import de.rlill.modelmanager.struct.ListReverser;
@@ -266,26 +267,29 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 
 			// rating bars
     	label = getResources().getString(R.string.labelQualityPhoto);
-    	tl.addView(mkRatingRow(label, model.getQuality_photo(), R.id.ratingBarQualityPhoto, geek));
+    	tl.addView(mkRatingRow(label, model.getQuality_photo(), Characteristic.QUALITY_PHOTO, geek));
 
     	label = getResources().getString(R.string.labelQualityMovie);
-    	tl.addView(mkRatingRow(label, model.getQuality_movie(), R.id.ratingBarQualityMovie, geek));
+    	tl.addView(mkRatingRow(label, model.getQuality_movie(), Characteristic.QUALITY_MOVIE, geek));
 
     	label = getResources().getString(R.string.labelQualityTLead);
-    	tl.addView(mkRatingRow(label, model.getQuality_tlead(), R.id.ratingBarQualityTLead, geek));
+    	tl.addView(mkRatingRow(label, model.getQuality_tlead(), Characteristic.QUALITY_TLEAD, geek));
 
 		label = getResources().getString(R.string.labelMood);
-		tl.addView(mkRatingRow(label, model.getMood(), R.id.ratingBarMood, geek));
+		tl.addView(mkRatingRow(label, model.getMood(), Characteristic.MOOD, geek));
 
 		if (geek) {
+			label = getResources().getString(R.string.labelErotic);
+			tl.addView(mkRatingRow(label, model.getErotic(), Characteristic.EROTIC, geek));
+
 			label = getResources().getString(R.string.labelHealth);
-			tl.addView(mkRatingRow(label, model.getHealth(), R.id.ratingBarHealth, geek));
+			tl.addView(mkRatingRow(label, model.getHealth(), Characteristic.HEALTH, geek));
 
 	    	label = getResources().getString(R.string.labelAmbition);
-	    	tl.addView(mkRatingRow(label, model.getAmbition(), R.id.ratingBarAmbition, geek));
+	    	tl.addView(mkRatingRow(label, model.getAmbition(), Characteristic.AMBITION, geek));
 
 	    	label = getResources().getString(R.string.labelCriminal);
-	    	tl.addView(mkRatingRow(label, model.getCriminal(), R.id.ratingBarCriminal, geek));
+	    	tl.addView(mkRatingRow(label, model.getCriminal(), Characteristic.CRIMINAL, geek));
 		}
 
     	// past events
@@ -435,7 +439,7 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		tl.addView(mkTextRow(label, pastEventLog.toString()));
 	}
 
-	private TableRow mkRatingRow(String key, int value, int id, boolean modifyable) {
+	private TableRow mkRatingRow(String key, int value, Characteristic ch, boolean modifyable) {
 		TableRow tr = new TableRow(this);
 
 		TextView tv = new TextView(this);
@@ -450,7 +454,7 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		tr.addView(ll);
 
 		RatingBar rb = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
-		rb.setId(id);
+		rb.setTag(ch);
 		rb.setStepSize((float) 0.1);
 		rb.setIsIndicator(!modifyable);
 		rb.setNumStars(10);
@@ -538,31 +542,8 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		if (!(sharedPref.getBoolean("geekMode", false))) return;
-
-		Model model = ModelService.getModelById(modelId);
 		int q = (int)(10 * ratingBar.getRating());
-		if (ratingBar.getId() == R.id.ratingBarQualityPhoto) {
-			model.setQuality_photo(q);
-		}
-		else if (ratingBar.getId() == R.id.ratingBarQualityMovie) {
-			model.setQuality_movie(q);
-		}
-		else if (ratingBar.getId() == R.id.ratingBarQualityTLead) {
-			model.setQuality_tlead(q);
-		}
-		else if (ratingBar.getId() == R.id.ratingBarMood) {
-			model.setMood(q);
-		}
-		else if (ratingBar.getId() == R.id.ratingBarHealth) {
-			model.setHealth(q);
-		}
-		else if (ratingBar.getId() == R.id.ratingBarAmbition) {
-			model.setAmbition(q);
-		}
-		else if (ratingBar.getId() == R.id.ratingBarCriminal) {
-			model.setCriminal(q);
-		}
-		ModelService.update(model);
+		ModelService.updateModelCharacteristic(modelId, (Characteristic)ratingBar.getTag(), q);
 	}
 
 	@Override
