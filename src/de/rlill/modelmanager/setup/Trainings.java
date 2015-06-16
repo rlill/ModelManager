@@ -30,7 +30,7 @@ public class Trainings {
 		Training training = new Training(1);
 		training.setDescription("Profitraining für Fotomodels");
 		training.setDuration(4);
-		training.setPrice((int)(worthincreaseFactor * 12000));
+		training.setPrice((int)(worthincreaseFactor * 24000));
 		training.setInc_qphoto(40);
 		training.setInc_mood(20);
 		trainingList.add(training);
@@ -39,7 +39,7 @@ public class Trainings {
 		training = new Training(2);
 		training.setDescription("Profitraining für Filmmodels");
 		training.setDuration(4);
-		training.setPrice((int)(worthincreaseFactor * 15000));
+		training.setPrice((int)(worthincreaseFactor * 32000));
 		training.setInc_qmovie(40);
 		training.setInc_mood(20);
 		trainingList.add(training);
@@ -67,7 +67,7 @@ public class Trainings {
 		training = new Training(4);
 		training.setDescription("Teamleiterkurs");
 		training.setDuration(5);
-		training.setPrice((int)(worthincreaseFactor * 30000));
+		training.setPrice((int)(worthincreaseFactor * 28000));
 		training.setInc_ambition(20);
 		training.setInc_qtlead(40);
 		trainingList.add(training);
@@ -87,7 +87,7 @@ public class Trainings {
 		training = new Training(6);
 		training.setDescription("Wellness-Urlaub");
 		training.setDuration(8);
-		training.setPrice((int)(worthincreaseFactor * 40000));
+		training.setPrice((int)(worthincreaseFactor * 32000));
 		training.setInc_ambition(20);
 		training.setInc_mood(40);
 		training.setInc_health(50);
