@@ -80,6 +80,7 @@
     <string name="labelGameFacedetect">Gesicht zum Namen</string>
     <string name="labelGameGuessName">Namen erraten</string>
     <string name="labelGameNext">Weiterspielen</string>
+    <string name="labelSummary">Zusammenfassung</string>
 
     <string name="descriptionGameNamedetect">Wählen Sie den richtigen Namen zum Gesicht.</string>
     <string name="descriptionGameFacedetect">Wählen Sie das richtige Gesicht zum Namen.</string>
@@ -334,6 +335,8 @@
     <string name="display_week_pl">Wochen</string>
     <string name="display_day_si">Tag</string>
     <string name="display_day_pl">Tage</string>
+    <string name="display_course_si">Kurs</string>
+    <string name="display_course_pl">Kurse</string>
 
     <string name="display_option_yes">Ja</string>
     <string name="display_option_no">No</string>

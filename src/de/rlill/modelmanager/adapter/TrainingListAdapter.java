@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+
 import de.rlill.modelmanager.R;
 import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.model.Model;
@@ -14,6 +16,7 @@ import de.rlill.modelmanager.model.ModelTraining;
 import de.rlill.modelmanager.model.Training;
 import de.rlill.modelmanager.persistance.ModelTrainingDbAdapter;
 import de.rlill.modelmanager.service.ModelService;
+import de.rlill.modelmanager.struct.TrainingStatus;
 import de.rlill.modelmanager.struct.ViewElements;
 
 public class TrainingListAdapter extends ArrayAdapter<Training> {
@@ -45,6 +48,100 @@ public class TrainingListAdapter extends ArrayAdapter<Training> {
 		else {
 			viewElements = (TrainingListViewElements) convertView.getTag();
 		}
+
+		if (training.getId() == -1) {
+			viewElements.setName(training.getDescription());
+			viewElements.hideDetails();
+
+			StringBuilder summary = new StringBuilder();
+			int daysum_p = 0;
+			int trainingsum_p = 0;
+			int costsum_p = 0;
+			int daysum_w = 0;
+			int trainingsum_w = 0;
+			int costsum_w = 0;
+			int daysum_f = 0;
+			int trainingsum_f = 0;
+			int costsum_f = 0;
+			int daysum_e = 0;
+			int trainingsum_e = 0;
+			int costsum_e = 0;
+
+			for (int i = 0; i < getCount(); i++) {
+				Training t = getItem(i);
+				for (ModelTraining mt : ModelTrainingDbAdapter.getTrainings(t.getId())) {
+
+					switch (mt.getTrainingStatus()) {
+						case PLANNED:
+							trainingsum_p++;
+							daysum_p += t.getDuration();
+							costsum_p += mt.getPrice();
+							break;
+						case IN_PROGRESS:
+							trainingsum_w++;
+							daysum_w += t.getDuration();
+							costsum_w += mt.getPrice();
+							break;
+						case FINISHED:
+							trainingsum_f++;
+							daysum_f += t.getDuration();
+							costsum_f += mt.getPrice();
+							break;
+						case FAILED:
+							trainingsum_e++;
+							daysum_e += t.getDuration();
+							costsum_e += mt.getPrice();
+							break;
+					}
+				}
+			}
+
+			String day_si = mContext.getResources().getString(R.string.display_day_si);
+			String day_pl = mContext.getResources().getString(R.string.display_day_pl);
+			String course_si = mContext.getResources().getString(R.string.display_course_si);
+			String course_pl = mContext.getResources().getString(R.string.display_course_pl);
+
+			if (trainingsum_p > 0) {
+				summary.append(TrainingStatus.PLANNED.getName()).append(": ")
+						.append(Integer.toString(trainingsum_p)).append(' ')
+						.append(trainingsum_p == 1 ? course_si : course_pl).append(", ")
+						.append(Integer.toString(daysum_p)).append(' ')
+						.append(daysum_p == 1 ? day_si : day_pl).append(", ")
+						.append(Util.amount(costsum_p)).append('\n');
+			}
+
+			if (trainingsum_w > 0) {
+				summary.append(TrainingStatus.IN_PROGRESS.getName()).append(": ")
+						.append(Integer.toString(trainingsum_w)).append(' ')
+						.append(trainingsum_w == 1 ? course_si : course_pl).append(", ")
+						.append(Integer.toString(daysum_w)).append(' ')
+						.append(daysum_w == 1 ? day_si : day_pl).append(", ")
+						.append(Util.amount(costsum_w)).append('\n');
+			}
+
+			if (trainingsum_f > 0) {
+				summary.append(TrainingStatus.FINISHED.getName()).append(": ")
+						.append(Integer.toString(trainingsum_f)).append(' ')
+						.append(trainingsum_f == 1 ? course_si : course_pl).append(", ")
+						.append(Integer.toString(daysum_f)).append(' ')
+						.append(daysum_f == 1 ? day_si : day_pl).append(", ")
+						.append(Util.amount(costsum_f)).append('\n');
+			}
+
+			if (trainingsum_e > 0) {
+				summary.append(TrainingStatus.FAILED.getName()).append(": ")
+						.append(Integer.toString(trainingsum_e)).append(' ')
+						.append(trainingsum_e == 1 ? course_si : course_pl).append(", ")
+						.append(Integer.toString(daysum_e)).append(' ')
+						.append(daysum_e == 1 ? day_si : day_pl).append(", ")
+						.append(Util.amount(costsum_e)).append('\n');
+			}
+
+			viewElements.setDetails(summary.toString());
+
+			return convertView;
+		}
+
 
 		viewElements.setContextInt(training.getId());
 		viewElements.setName(training.getDescription());
@@ -159,6 +256,9 @@ public class TrainingListAdapter extends ArrayAdapter<Training> {
     	public void setDuration(String d) {
     		findTextView(R.id.textViewDuration).setText(d);
     	}
+	    public void hideDetails() {
+		    adaptedView.findViewById(R.id.trainingDetails).setVisibility(LinearLayout.GONE);
+	    }
     }
 
 }

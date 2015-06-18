@@ -51,6 +51,9 @@ public class TrainingFragment extends Fragment {
         super.onResume();
 	    listItems.clear();
 	    listItems.addAll(Trainings.getTrainings());
+	    Training t = new Training(-1);
+	    t.setDescription(getResources().getString(R.string.labelSummary));
+	    listItems.add(t);
         adapter.notifyDataSetChanged();
     }
 

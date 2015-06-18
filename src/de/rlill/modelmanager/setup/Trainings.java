@@ -55,7 +55,7 @@ public class Trainings {
 		trainingList.add(training);
 		trainingMap.put(training.getId(), training);
 
-		training = new Training(3);
+		training = new Training(4);
 		training.setDescription("Shopping-Urlaub");
 		training.setDuration(3);
 		training.setPrice((int)(worthincreaseFactor * 20000));
@@ -64,7 +64,7 @@ public class Trainings {
 		trainingList.add(training);
 		trainingMap.put(training.getId(), training);
 
-		training = new Training(4);
+		training = new Training(5);
 		training.setDescription("Teamleiterkurs");
 		training.setDuration(5);
 		training.setPrice((int)(worthincreaseFactor * 28000));
@@ -73,7 +73,7 @@ public class Trainings {
 		trainingList.add(training);
 		trainingMap.put(training.getId(), training);
 
-		training = new Training(5);
+		training = new Training(6);
 		training.setDescription("Wellness-Kurzurlaub");
 		training.setDuration(3);
 		training.setPrice((int)(worthincreaseFactor * 25000));
@@ -84,7 +84,7 @@ public class Trainings {
 		trainingList.add(training);
 		trainingMap.put(training.getId(), training);
 
-		training = new Training(6);
+		training = new Training(7);
 		training.setDescription("Wellness-Urlaub");
 		training.setDuration(8);
 		training.setPrice((int)(worthincreaseFactor * 32000));
@@ -94,7 +94,7 @@ public class Trainings {
 		trainingList.add(training);
 		trainingMap.put(training.getId(), training);
 /*
-		training = new Training(7);
+		training = new Training(8);
 		training.setDescription("Powertraining");
 		training.setDuration(1);
 		training.setPrice(100000);
