@@ -17,9 +17,10 @@ import de.rlill.modelmanager.struct.DiaryIterator;
 import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
 
+
 public class DiaryDbAdapter extends DbAdapter {
 
-	private static final String LOG_TAG = DiaryDbAdapter.class.getSimpleName();
+	private static final String LOG_TAG = "MM*" + DiaryDbAdapter.class.getSimpleName();
 
 	public static final String TABLE_NAME_DIARY = "tbl_diary";
 
@@ -313,6 +314,7 @@ public class DiaryDbAdapter extends DbAdapter {
             	case EXTRA_IN:
             	case EXTRA_OUT:
             	case EXTRA_LOSS:
+		        case BOOKREJECT:
             		break;
             	default:
         			Log.w(LOG_TAG, "Unknown event class " + d.getEventClass());
@@ -411,6 +413,8 @@ public class DiaryDbAdapter extends DbAdapter {
 								break;
 							case RAISE:
 							case GROUPWORK:
+							case HIRE:
+							case CHANGETEAM:
 								break;
 							case PHOTO:
 								stat.w4photoEarnings += d.getAmount();
@@ -425,9 +429,6 @@ public class DiaryDbAdapter extends DbAdapter {
 							default:
 								Log.w(LOG_TAG, "Accept for unknown event flag " + d.getEventFlag());
 						}
-						break;
-					case REQUEST:
-					case APPLICATION:
 						break;
 
 					case EXTRA_IN:
@@ -455,6 +456,11 @@ public class DiaryDbAdapter extends DbAdapter {
 						}
 						break;
 
+					case REQUEST:
+					case APPLICATION:
+					case BOOKREJECT:
+						break;
+
 					default:
 						Log.w(LOG_TAG, "Unknown event class " + d.getEventClass());
 				}
@@ -465,6 +471,33 @@ public class DiaryDbAdapter extends DbAdapter {
 		stat.extraModelCount = modelSet.size();
 
 		return stat;
+	}
+
+	public static List<Integer> getRecentBonusPayments(int days) {
+
+		int startDay = DiaryService.today() - days;
+		if (startDay < 0 || days == 0) startDay = 0;
+		List<Integer> result = new ArrayList<Integer>();
+
+		SQLiteDatabase db = open();
+		Cursor cursor = db.query(
+				TABLE_NAME_DIARY,
+				null,
+				KEY_DAY + ">=? and " + KEY_EVENT_CLASS + "=? and " + KEY_EVENT_FLAG + "=?",
+				new String[] { Integer.toString(startDay),
+								Integer.toString(EventClass.ACCEPT.getIndex()),
+								Integer.toString(EventFlag.BONUS.getIndex()) },
+				null, null, KEY_DAY + " desc", null);
+
+		if (cursor.moveToFirst()) {
+			do {
+				Diary d = readCursorLine(cursor);
+				result.add(d.getAmount());
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+
+		return result;
 	}
 
 }

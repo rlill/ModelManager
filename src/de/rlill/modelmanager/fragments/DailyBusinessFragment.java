@@ -75,6 +75,10 @@ public class DailyBusinessFragment extends Fragment implements OnItemClickListen
 		StatusBarFragmentAdapter.initStatusBar(fragmentView);
 	}
 
+	public void refreshData() {
+		onResume();
+	}
+
     @Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
     	DailyBusinessListAdapter adapter = (DailyBusinessListAdapter) parent.getAdapter();

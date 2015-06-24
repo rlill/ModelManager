@@ -1,8 +1,11 @@
-Ich
+
 "1 Tage Resturlaub" - Singular!
       ^
 "Ihre Ehrgeiz" - Artikel!
     ^
+
+unterschiedlicher Logeintrag: BOoked - vermittelt durch TL / player
+
 
 Training planned + vacation request
 
@@ -42,7 +45,7 @@ Account Detail view:
 
 (test) Movie-rental & Movie-sale: finishing cost intransparently added afterwards!!!
 
-First-time startup: set worthincrease factor = 1
+(test) First-time startup: set worthincrease factor = 1
 
 
 (test) New game: ensure applications on first day
@@ -59,6 +62,10 @@ First-time startup: set worthincrease factor = 1
 
 Cynthia Cox: Zuteilung Firmenwagen %1s
 
-Auswirkung quality_TL auf Verhandlungserfolg + Member-Zufriedenheit
+(test) Auswirkung quality_TL auf Verhandlungserfolg
+
+Auswirkung erotische Ausstrahlung auf Preis
+
+Switch geek-mode on only with code
 
 

@@ -37,6 +37,18 @@
 	            android:inputType="numberDecimal"
 			/>
 
+			<ImageView
+				android:id="@+id/accountIcon"
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:layout_alignParentTop="true"
+				android:layout_toLeftOf="@id/messageImage"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:contentDescription="@string/imageDescription"
+				android:onClick="modelQuickBonus"
+				android:src="@drawable/money2" />
+
 		</LinearLayout>
 
         <Button

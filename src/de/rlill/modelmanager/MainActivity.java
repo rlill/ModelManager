@@ -1,6 +1,7 @@
 package de.rlill.modelmanager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.ActionBar;
@@ -33,12 +34,15 @@ import de.rlill.modelmanager.fragments.TeamFragment;
 import de.rlill.modelmanager.fragments.TrainingFragment;
 import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.persistance.DbAdapter;
+import de.rlill.modelmanager.persistance.DiaryDbAdapter;
 import de.rlill.modelmanager.service.DiaryService;
 import de.rlill.modelmanager.service.MessageService;
 import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.service.TodayService;
+import de.rlill.modelmanager.struct.BonusOptionListener;
 import de.rlill.modelmanager.struct.CarClass;
 import de.rlill.modelmanager.struct.CarStatus;
+import de.rlill.modelmanager.struct.TaskListRefresher;
 import de.rlill.modelmanager.struct.ModelStatus;
 import de.rlill.modelmanager.struct.MovieStatus;
 import de.rlill.modelmanager.struct.MovieType;
@@ -46,7 +50,7 @@ import de.rlill.modelmanager.struct.TrainingStatus;
 import de.rlill.modelmanager.struct.ViewElements;
 import de.rlill.modelmanager.struct.Weekday;
 
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener, TaskListRefresher {
 
 	private static final String LOG_TAG = "MM*" + MainActivity.class.getSimpleName();
 
@@ -306,6 +310,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		modelList.refreshData();
 	}
 
+
+	public void refreshTaskList() {
+		// refresh Task List
+		// TODO: index 0 might change!!! Find other way of addressing DailyBusinessFragment!
+		DailyBusinessFragment taskList = (DailyBusinessFragment)getSupportFragmentManager().getFragments().get(0);
+		taskList.refreshData();
+	}
+
 	public void modelViewDetails(View view) {
 		ViewElements ve = (ViewElements)view.getTag();
 		if (ve != null) {
@@ -326,6 +338,58 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				Intent intent = new Intent(this, AccountDetailDialog.class);
 				intent.putExtra(AccountDetailDialog.EXTRA_MODEL_ID, model.getId());
 				startActivity(intent);
+			}
+		}
+	}
+
+	public void modelQuickBonus(View view) {
+		ViewElements ve = (ViewElements)view.getTag();
+		if (ve != null) {
+			Model model = ve.getContextModel();
+			if (model != null && model.getId() > 0) {
+
+				// suggest standard bonus amounts
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle(getResources().getString(R.string.labelStandardBonus));
+
+				List<Integer> bonusStepsInt = new ArrayList<Integer>();
+				List<Integer> w4bonus = DiaryDbAdapter.getRecentBonusPayments(28);
+				Log.d(LOG_TAG, "recent boni: " + w4bonus.size());
+				if (w4bonus.size() > 20) {
+					// find 5 most popular amounts
+					Collections.sort(w4bonus);
+					// StringBuilder sb = new StringBuilder(); for (int b : w4bonus) sb.append(b).append(".- "); Log.d(LOG_TAG, sb.toString());
+					int gsize = w4bonus.size() / 5;
+					int lowerb = w4bonus.get(0);
+					int loweri = 0;
+					for (int i = 0; i < 5; i++) {
+						int upperi = loweri + gsize;
+						if (upperi >= w4bonus.size()) upperi = w4bonus.size() - 1;
+						int upperb = w4bonus.get(upperi);
+						int b = Util.niceRound((lowerb + upperb) / 2);
+						Log.d(LOG_TAG, String.format("BONUS %d-%d: min %d, max %d, avg %d", loweri, upperi, lowerb, upperb, b));
+						bonusStepsInt.add(b);
+						lowerb = upperb;
+						loweri = upperi;
+					}
+				}
+				else {
+					// default steps
+					bonusStepsInt.add(1000);
+					bonusStepsInt.add(2000);
+					bonusStepsInt.add(5000);
+					bonusStepsInt.add(10000);
+				}
+
+				CharSequence [] bonusStepsChar = new CharSequence[bonusStepsInt.size()];
+				int i = 0;
+				for (int bonus : bonusStepsInt) bonusStepsChar[i++] = Util.amount(bonus);
+
+				builder.setItems(bonusStepsChar, new BonusOptionListener(bonusStepsInt, model.getId(), this));
+
+				builder.show();
+
 			}
 		}
 	}
