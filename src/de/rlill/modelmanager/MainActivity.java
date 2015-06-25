@@ -158,7 +158,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			}
 		});
 
-		if (DiaryService.today() >= 28) {
+		if (DiaryService.today() >= 14) {
 			activityFragments.add(new ActivityFragmentProvider() {
 				public String getTitle(Resources res) {
 					return res.getString(R.string.title_section_movieproduction);
@@ -168,7 +168,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				}
 			});
 		}
-
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -347,49 +346,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		if (ve != null) {
 			Model model = ve.getContextModel();
 			if (model != null && model.getId() > 0) {
-
-				// suggest standard bonus amounts
-
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setTitle(getResources().getString(R.string.labelStandardBonus));
-
-				List<Integer> bonusStepsInt = new ArrayList<Integer>();
-				List<Integer> w4bonus = DiaryDbAdapter.getRecentBonusPayments(28);
-				Log.d(LOG_TAG, "recent boni: " + w4bonus.size());
-				if (w4bonus.size() > 20) {
-					// find 5 most popular amounts
-					Collections.sort(w4bonus);
-					// StringBuilder sb = new StringBuilder(); for (int b : w4bonus) sb.append(b).append(".- "); Log.d(LOG_TAG, sb.toString());
-					int gsize = w4bonus.size() / 5;
-					int lowerb = w4bonus.get(0);
-					int loweri = 0;
-					for (int i = 0; i < 5; i++) {
-						int upperi = loweri + gsize;
-						if (upperi >= w4bonus.size()) upperi = w4bonus.size() - 1;
-						int upperb = w4bonus.get(upperi);
-						int b = Util.niceRound((lowerb + upperb) / 2);
-						Log.d(LOG_TAG, String.format("BONUS %d-%d: min %d, max %d, avg %d", loweri, upperi, lowerb, upperb, b));
-						bonusStepsInt.add(b);
-						lowerb = upperb;
-						loweri = upperi;
-					}
-				}
-				else {
-					// default steps
-					bonusStepsInt.add(1000);
-					bonusStepsInt.add(2000);
-					bonusStepsInt.add(5000);
-					bonusStepsInt.add(10000);
-				}
-
-				CharSequence [] bonusStepsChar = new CharSequence[bonusStepsInt.size()];
-				int i = 0;
-				for (int bonus : bonusStepsInt) bonusStepsChar[i++] = Util.amount(bonus);
-
-				builder.setItems(bonusStepsChar, new BonusOptionListener(bonusStepsInt, model.getId(), this));
-
-				builder.show();
-
+				ModelService.showStandardBonusButtons(this, model.getId(), this);
 			}
 		}
 	}

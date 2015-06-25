@@ -60,9 +60,10 @@ import de.rlill.modelmanager.struct.ListReverser;
 import de.rlill.modelmanager.struct.ModelStatus;
 import de.rlill.modelmanager.struct.OpChartElement;
 import de.rlill.modelmanager.struct.Operation;
+import de.rlill.modelmanager.struct.TaskListRefresher;
 import de.rlill.modelmanager.struct.TeamOption;
 
-public class ModelNegotiationDialog extends Activity implements View.OnClickListener, RatingBar.OnRatingBarChangeListener {
+public class ModelNegotiationDialog extends Activity implements View.OnClickListener, RatingBar.OnRatingBarChangeListener, TaskListRefresher {
 
 	private static final String LOG_TAG = "MM*" + ModelNegotiationDialog.class.getSimpleName();
 
@@ -515,6 +516,10 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		return tr;
 	}
 
+	public void refreshTaskList() {
+		displayModelData();
+	}
+
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.buttonSave)
@@ -753,5 +758,9 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
         StatusBarFragmentAdapter.initStatusBar(findViewById(R.id.status_bar_include));
 
         displayModelData();
+	}
+
+	public void modelQuickBonus(View view) {
+		ModelService.showStandardBonusButtons(this, modelId, this);
 	}
 }

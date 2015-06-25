@@ -38,7 +38,7 @@
 			/>
 
 			<ImageView
-				android:id="@+id/accountIcon"
+				android:id="@+id/standardBonusIcon"
 				android:layout_width="100dp"
 				android:layout_height="wrap_content"
 				android:layout_alignParentTop="true"

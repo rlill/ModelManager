@@ -57,10 +57,10 @@ public class BonusOptionListener implements DialogInterface.OnClickListener {
 				today.setAmount2(expectedBonus);
 				TodayDbAdapter.updateToday(today);
 			}
-
-			// update today listing
-			refresher.refreshTaskList();
 		}
+
+		// update today listing
+		if (refresher != null) refresher.refreshTaskList();
 
 		dialog.dismiss();
 	}
