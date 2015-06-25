@@ -419,13 +419,13 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 						if (e.getEclass() == EventClass.EXTRA_LOSS && e.getFlag() == EventFlag.PAYFIX_PERSON) {
 							// transfer money to model now - can be reclaimed later
 							TransactionService.transfer(0, m.getId(), amount, t.getNoteAcct());
-							DiaryService.log(e.getNoteFile(), e.getEclass(), e.getFlag(), model.getId(), amount);
+							DiaryService.log(e.getNoteFile(), e.getEclass(), e.getFlag(), m.getId(), amount);
 						}
 
 						if (e.getEclass() == EventClass.EXTRA_LOSS && e.getFlag() == EventFlag.LOSE_PERSON) {
 							// pay now - can be reclaimed later
 							TransactionService.transfer(0, -1, amount, t.getNoteAcct());
-							DiaryService.log(e.getNoteFile(), e.getEclass(), e.getFlag(), model.getId(), amount);
+							DiaryService.log(e.getNoteFile(), e.getEclass(), e.getFlag(), m.getId(), amount);
 						}
 					}
 					TodayDbAdapter.addToday(t);
