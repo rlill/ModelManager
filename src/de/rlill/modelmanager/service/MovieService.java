@@ -239,10 +239,27 @@ public class MovieService {
 	public static List<Movieproduction> getCurrentMovies() {
 		List<Movieproduction> result = new ArrayList<Movieproduction>();
 		if (movieProductions == null) getMovie(1);
+		Log.d(LOG_TAG, "all current movies:");
 		for (int i = 0; i < movieProductions.size(); i++) {
 			Movieproduction mpr = movieProductions.valueAt(i);
 			if ((mpr.getStatus() == MovieStatus.PLANNED || mpr.getStatus() == MovieStatus.IN_PROGRESS)
 					&& mpr.getStartDay() <= DiaryService.today()) {
+				Log.d(LOG_TAG, String.format(mpr.getName()));
+				result.add(mpr);
+			}
+		}
+		return result;
+	}
+
+	public static List<Movieproduction> getPlannedMovies() {
+		List<Movieproduction> result = new ArrayList<Movieproduction>();
+		if (movieProductions == null) getMovie(1);
+		Log.d(LOG_TAG, "all future movies:");
+		for (int i = 0; i < movieProductions.size(); i++) {
+			Movieproduction mpr = movieProductions.valueAt(i);
+			if ((mpr.getStatus() == MovieStatus.PLANNED || mpr.getStatus() == MovieStatus.IN_PROGRESS)
+					&& mpr.getStartDay() > DiaryService.today()) {
+				Log.d(LOG_TAG, String.format(mpr.getName()));
 				result.add(mpr);
 			}
 		}

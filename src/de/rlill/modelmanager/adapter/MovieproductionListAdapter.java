@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import de.rlill.modelmanager.R;
+import de.rlill.modelmanager.Util;
+import de.rlill.modelmanager.model.MovieModel;
 import de.rlill.modelmanager.model.Movieproduction;
+import de.rlill.modelmanager.service.DiaryService;
+import de.rlill.modelmanager.service.MovieService;
 import de.rlill.modelmanager.struct.MovieType;
 import de.rlill.modelmanager.struct.ViewElements;
 
@@ -42,11 +46,19 @@ public class MovieproductionListAdapter extends ArrayAdapter<Movieproduction> {
 			viewElements = (MovieproductionListViewElements) convertView.getTag();
 		}
 
+		int ws = 0;
+		for (MovieModel mm : MovieService.getModelsForMovie(mpr.getId(), DiaryService.today() + 1)) {
+			ws += mm.getPrice();
+		}
+
 		viewElements.setContextInt(mpr.getId());
 		viewElements.setName(mpr.getName());
 		viewElements.setType(mpr.getType());
 		viewElements.setStartDay(mpr.getStartDay());
-		viewElements.setDetails(mpr.getStatus().getName());
+		viewElements.setDetails(mpr.getStatus().getName() + ", "
+				+ convertView.getResources().getString(R.string.labelMovieDailyPayments)
+				+ ": "
+				+ Util.amount(ws));
 
 		return convertView;
 	}

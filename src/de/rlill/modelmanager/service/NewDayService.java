@@ -86,7 +86,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 		SparseArray<MovieModel> movieParticipation = new SparseArray<MovieModel>();
 		Log.i(LOG_TAG, "MOVIES # # #");
 		for (Movieproduction mpr : MovieService.getCurrentMovies()) {
-			Log.i(LOG_TAG, "Processing " + mpr.getName());
+			Log.i(LOG_TAG, "Processing (current) " + mpr.getName());
 
 			EventFlag flag = MovieService.flagForMovieType(mpr.getType());
 
@@ -119,6 +119,16 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				Model model = ModelService.getModelById(mm.getModelId());
 				if (model.getStatus() != ModelStatus.MOVIEPROD)
 					ModelService.setModelStatus(mm.getModelId(), ModelStatus.MOVIEPROD);
+			}
+		}
+
+		// future movies
+		for (Movieproduction mpr : MovieService.getPlannedMovies()) {
+			Log.i(LOG_TAG, "Processing (future) " + mpr.getName());
+			for (MovieModel mm : MovieService.getModelsForMovie(mpr.getId(), DiaryService.today())) {
+				Log.i(LOG_TAG, "CONTRACT: " + mm.getModelId());
+				// repeat plan model for same movie tomorrow
+				MovieService.addModelForMovie(mm.getMovieId(), mm.getModelId(), DiaryService.today() + 1, mm.getPrice());
 			}
 		}
 
@@ -332,6 +342,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 						DiaryService.log(msg, EventClass.MOVIE_CAST, EventFlag.MOVIE, model.getId(), mm.getPrice());
 					}
 					// plan model for same movie tomorrow
+					Log.d(LOG_TAG, String.format("MOVIE tomorrow: movie %d, model %d, price %d.-", mm.getMovieId(), model.getId(), mm.getPrice()));
 					MovieService.addModelForMovie(mm.getMovieId(), model.getId(), DiaryService.today() + 1, mm.getPrice());
 				}
 			}
