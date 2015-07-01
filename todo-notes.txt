@@ -9,9 +9,9 @@ unterschiedlicher Logeintrag: BOoked - vermittelt durch TL / player
 
 (?) Training planned + vacation request
 
-movieprod list details += sum daily model cost
+(test) movieprod list details += sum daily model cost
 
-auslastungs-tabelle: M for movieproduction
+(?) auslastungs-tabelle: M for movieproduction
 
 
 ModelNegotiationDlg: indicate participance in movieproduction

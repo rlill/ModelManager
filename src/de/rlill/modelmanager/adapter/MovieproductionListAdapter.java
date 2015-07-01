@@ -13,6 +13,7 @@ import de.rlill.modelmanager.model.MovieModel;
 import de.rlill.modelmanager.model.Movieproduction;
 import de.rlill.modelmanager.service.DiaryService;
 import de.rlill.modelmanager.service.MovieService;
+import de.rlill.modelmanager.struct.MovieStatus;
 import de.rlill.modelmanager.struct.MovieType;
 import de.rlill.modelmanager.struct.ViewElements;
 
@@ -41,24 +42,30 @@ public class MovieproductionListAdapter extends ArrayAdapter<Movieproduction> {
 			convertView = mInflater.inflate(R.layout.fragment_movieproduction_item, null);
 			viewElements = new MovieproductionListViewElements(convertView);
 			convertView.setTag(viewElements);
-		}
-		else {
+		} else {
 			viewElements = (MovieproductionListViewElements) convertView.getTag();
 		}
 
-		int ws = 0;
-		for (MovieModel mm : MovieService.getModelsForMovie(mpr.getId(), DiaryService.today() + 1)) {
-			ws += mm.getPrice();
-		}
 
 		viewElements.setContextInt(mpr.getId());
 		viewElements.setName(mpr.getName());
 		viewElements.setType(mpr.getType());
 		viewElements.setStartDay(mpr.getStartDay());
-		viewElements.setDetails(mpr.getStatus().getName() + ", "
-				+ convertView.getResources().getString(R.string.labelMovieDailyPayments)
-				+ ": "
-				+ Util.amount(ws));
+
+		if (mpr.getStatus() == MovieStatus.PLANNED || mpr.getStatus() == MovieStatus.IN_PROGRESS) {
+
+			int ws = 0;
+			for (MovieModel mm : MovieService.getModelsForMovie(mpr.getId(), DiaryService.today() + 1)) {
+				ws += mm.getPrice();
+			}
+
+			viewElements.setDetails(mpr.getStatus().getName() + ", "
+					+ convertView.getResources().getString(R.string.labelMovieDailyPayments)
+					+ ": "
+					+ Util.amount(ws));
+		} else {
+			viewElements.setDetails(mpr.getStatus().getName());
+		}
 
 		return convertView;
 	}
