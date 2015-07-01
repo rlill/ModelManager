@@ -57,4 +57,33 @@ public class Movieproduction {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Movieproduction that = (Movieproduction) o;
+
+		if (id != that.id) return false;
+		if (startDay != that.startDay) return false;
+		if (endDay != that.endDay) return false;
+		if (price != that.price) return false;
+		if (!name.equals(that.name)) return false;
+		if (type != that.type) return false;
+		return status == that.status;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id;
+		result = 31 * result + name.hashCode();
+		result = 31 * result + type.hashCode();
+		result = 31 * result + status.hashCode();
+		result = 31 * result + startDay;
+		result = 31 * result + endDay;
+		result = 31 * result + price;
+		return result;
+	}
 }

@@ -58,6 +58,7 @@ import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
 import de.rlill.modelmanager.struct.ListReverser;
 import de.rlill.modelmanager.struct.ModelStatus;
+import de.rlill.modelmanager.struct.MovieStatus;
 import de.rlill.modelmanager.struct.OpChartElement;
 import de.rlill.modelmanager.struct.Operation;
 import de.rlill.modelmanager.struct.TaskListRefresher;
@@ -251,7 +252,16 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		}
 
 		label = getResources().getString(R.string.labelTraining);
-		tl.addView(mkTextRow(label, sb.toString()));
+		if (sb.length() > 0) tl.addView(mkTextRow(label, sb.toString()));
+
+		// planned for / participating in movie
+		sb = new StringBuilder();
+		for (Movieproduction mp2 : MovieService.getMovieproductionsForModel(modelId)) {
+			sb.append('(').append(mp2.getStatus().getName()).append(") ").append(mp2.getName())
+					.append(", ").append(mp2.getType().getName()).append('\n');
+		}
+		label = getResources().getString(R.string.labelMovieproduction);
+		if (sb.length() > 0) tl.addView(mkTextRow(label, sb.toString()));
 
 		if (hired) {
 			// Events today

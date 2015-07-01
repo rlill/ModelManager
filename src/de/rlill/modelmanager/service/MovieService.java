@@ -244,7 +244,7 @@ public class MovieService {
 			Movieproduction mpr = movieProductions.valueAt(i);
 			if ((mpr.getStatus() == MovieStatus.PLANNED || mpr.getStatus() == MovieStatus.IN_PROGRESS)
 					&& mpr.getStartDay() <= DiaryService.today()) {
-				Log.d(LOG_TAG, String.format(mpr.getName()));
+				Log.d(LOG_TAG, mpr.getName());
 				result.add(mpr);
 			}
 		}
@@ -259,9 +259,19 @@ public class MovieService {
 			Movieproduction mpr = movieProductions.valueAt(i);
 			if ((mpr.getStatus() == MovieStatus.PLANNED || mpr.getStatus() == MovieStatus.IN_PROGRESS)
 					&& mpr.getStartDay() > DiaryService.today()) {
-				Log.d(LOG_TAG, String.format(mpr.getName()));
+				Log.d(LOG_TAG, mpr.getName());
 				result.add(mpr);
 			}
+		}
+		return result;
+	}
+
+	public static List<Movieproduction> getMovieproductionsForModel(int modelId) {
+		List<Movieproduction> result = new ArrayList<Movieproduction>();
+		for (MovieModel mm : MovieModelDbAdapter.getMovieModels(0, modelId, 0)) {
+			Movieproduction mpr = getMovie(mm.getMovieId());
+			if (result.contains(mpr)) continue;
+			result.add(mpr);
 		}
 		return result;
 	}
