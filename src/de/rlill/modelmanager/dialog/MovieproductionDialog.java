@@ -77,11 +77,17 @@ public class MovieproductionDialog extends Activity implements View.OnClickListe
 			tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
 			if (movieValue == 0) {
+
+				// empty text to move button to second column
+				TextView tv = new TextView(this);
+				tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+				tv.setText("");
+				tr.addView(tv);
+
 				Button b = new Button(this);
 				b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-				b.setText(R.string.labelAbort);
+				b.setText(R.string.labelAbortMovie);
 				b.setPadding(5, 4, 5, 4);
-				b.setWidth(100);
 				b.setTag(MovieAction.ABORT);
 				b.setBackgroundResource(R.drawable.button_red);
 				b.setOnClickListener(this);
