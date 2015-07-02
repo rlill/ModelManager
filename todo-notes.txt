@@ -4,18 +4,16 @@
 "Ihre Ehrgeiz" - Artikel!
     ^
 
-unterschiedlicher Logeintrag: BOoked - vermittelt durch TL / player
+unterschiedlicher Logeintrag: Booked - vermittelt durch TL / player
+
+Konjunkturschwankungen: Zeiten mit wenig/keinen Aufträgen
 
 
 (?) Training planned + vacation request
 
 (test) movieprod list details += sum daily model cost
 
-(?) auslastungs-tabelle: M for movieproduction
-
-
-ModelNegotiationDlg: indicate participance in movieproduction
-
+(test) ModelNegotiationDlg: indicate participance in movieproduction
 
 (test) rejectBooking -> payBonus -> remove bonus requests FIXME
 

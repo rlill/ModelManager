@@ -71,7 +71,7 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 
 		viewElements.setContextInt(team.getId());
 
-		updateListElement(convertView, team);
+		updateListElement(viewElements, team);
 
         LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.teamImageList);
         ll.setOnClickListener(teamFragment);
@@ -80,9 +80,8 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 		return convertView;
 	}
 
-	public void updateListElement(View v, Team team) {
+	public void updateListElement(TeamListViewElements viewElements, Team team) {
 
-		TeamListViewElements viewElements = (TeamListViewElements)v.getTag();
 		viewElements.clearTeamMembers();
 
 		if (team.getId() == ModelService.TEAM_NO_TEAM)
@@ -103,7 +102,7 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 		}
 
 		if (ModelService.getTeamMembers(team.getId()).size() == 0) {
-			View scroller = (HorizontalScrollView) v.findViewById(R.id.teamImageScroll);
+			View scroller = (HorizontalScrollView) viewElements.getAdaptedView().findViewById(R.id.teamImageScroll);
 			LinearLayout ll = (LinearLayout) scroller.findViewById(R.id.teamImageList);
 			scroller.setOnDragListener(new TeamDragListener(scroller, ll));
 			viewElements.setTeamId(team.getId());
@@ -116,7 +115,7 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
 		}
 	}
 
-	private class TeamListViewElements extends ViewElements {
+	public class TeamListViewElements extends ViewElements {
 
         private int teamId = 0;
 

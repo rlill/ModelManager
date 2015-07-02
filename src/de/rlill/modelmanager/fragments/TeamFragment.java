@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import de.rlill.modelmanager.Util;
 import de.rlill.modelmanager.adapter.ModelSpinnerAdapter;
 import de.rlill.modelmanager.adapter.StatusBarFragmentAdapter;
 import de.rlill.modelmanager.adapter.TeamListAdapter;
+import de.rlill.modelmanager.adapter.TeamListAdapter.TeamListViewElements;
 import de.rlill.modelmanager.model.Diary;
 import de.rlill.modelmanager.model.Model;
 import de.rlill.modelmanager.model.Team;
@@ -36,7 +38,8 @@ import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
 import de.rlill.modelmanager.struct.ViewElements;
 
-public class TeamFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
+public class TeamFragment extends Fragment implements OnItemClickListener, View.OnClickListener,
+		AdapterView.OnItemSelectedListener {
 
 	private static final String LOG_TAG = "MM*" + TeamFragment.class.getSimpleName();
     private List<Team> listItems;
@@ -46,6 +49,7 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
     private Context context;
     private Team selectedTeam;
     private View selectedView;
+	private TeamListViewElements currentTeamListViewElements;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,15 +75,14 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
         listView.setTextFilterEnabled(true);
         listView.setOnItemClickListener(this);
 
-        Button b = (Button)fragmentView.findViewById(R.id.buttonSave);
-        b.setOnClickListener(this);
-
-        b = (Button)fragmentView.findViewById(R.id.buttonTeamwork);
-        b.setOnClickListener(this);
-
         StatusBarFragmentAdapter.initStatusBar(fragmentView);
 
-        return fragmentView;
+		Spinner sp = (Spinner)fragmentView.findViewById(R.id.selectTeamLeader);
+		sp.setOnItemSelectedListener(this);
+		sp = (Spinner)fragmentView.findViewById(R.id.selectTeamLeaderSubst);
+		sp.setOnItemSelectedListener(this);
+
+		return fragmentView;
 	}
 
     @Override
@@ -99,9 +102,9 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 
 	@Override
 	public void onItemClick(android.widget.AdapterView<?> parent, View v, int position, long id) {
-		ViewElements ve = (ViewElements)v.getTag();
-		if (ve == null) return;
-		int teamId = ve.getContextInt();
+		currentTeamListViewElements = (TeamListViewElements)v.getTag();
+		if (currentTeamListViewElements == null) return;
+		int teamId = currentTeamListViewElements.getContextInt();
 		if (teamId == ModelService.TEAM_NO_TEAM) return;
 		selectedTeam = ModelService.getTeam(teamId);
 		selectedView = v;
@@ -142,10 +145,6 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 		// TL Bonus
 		EditText et = (EditText)fragmentView.findViewById(R.id.editTextTeamLeaderBonus);
 		et.setText(Integer.toString(selectedTeam.getBonus()));
-
-		// save ViewElements in context for updateListElement() call in onClick(save)
-		Button b = (Button)fragmentView.findViewById(R.id.buttonSave);
-		b.setTag(ve);
 
 		fillStatistics();
 	}
@@ -249,29 +248,34 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 		if (v instanceof LinearLayout) {
 			onItemClick(null, v, 0, 0);
 		}
-		else if (v.getId() == R.id.buttonTeamwork && selectedTeam != null) {
-			// teamwork
-			ModelService.teamwork(selectedTeam);
-			fillStatistics();
-		}
-		else if (v.getId() == R.id.buttonSave && selectedTeam != null) {
-			// save
-			Spinner sp = (Spinner) fragmentView.findViewById(R.id.selectTeamLeader);
-			Model m = (Model) sp.getSelectedItem();
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		Spinner sp = (Spinner)fragmentView.findViewById(R.id.selectTeamLeader);
+		Model m = (Model) sp.getSelectedItem();
+		if (selectedTeam.getLeader1() != m.getId()) {
+			Log.i(LOG_TAG, "1s:" + m.getFullname());
 			selectedTeam.setLeader1(m.getId());
-
-			sp = (Spinner) fragmentView.findViewById(R.id.selectTeamLeaderSubst);
-			m = (Model) sp.getSelectedItem();
-			selectedTeam.setLeader2(m.getId());
-
-			EditText et = (EditText) fragmentView.findViewById(R.id.editTextTeamLeaderBonus);
-			selectedTeam.setBonus(Util.atoi(et.getText().toString()));
-
 			TeamDbAdapter.updateTeam(selectedTeam);
 			ModelService.teamwork(selectedTeam);
-
-			adapter.updateListElement(v, selectedTeam);
+			fillStatistics();
+			adapter.updateListElement(currentTeamListViewElements, selectedTeam);
 		}
+		sp = (Spinner) fragmentView.findViewById(R.id.selectTeamLeaderSubst);
+		m = (Model) sp.getSelectedItem();
+		if (selectedTeam.getLeader2() != m.getId()) {
+			Log.i(LOG_TAG, "2s:" + m.getFullname());
+			selectedTeam.setLeader2(m.getId());
+			TeamDbAdapter.updateTeam(selectedTeam);
+			ModelService.teamwork(selectedTeam);
+			fillStatistics();
+			adapter.updateListElement(currentTeamListViewElements, selectedTeam);
+		}
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
 	}
 
 }
