@@ -309,6 +309,11 @@ public class DiaryDbAdapter extends DbAdapter {
             			Log.w(LOG_TAG, "Accept for unknown event flag " + d.getEventFlag());
             		}
             		break;
+	            case MOVIE_CAST:
+		            if (d.getEventFlag() == EventFlag.MOVIE) {
+			            stat.w4payments += d.getAmount();
+		            }
+		            break;
             	case REQUEST:
             	case APPLICATION:
             	case EXTRA_IN:
