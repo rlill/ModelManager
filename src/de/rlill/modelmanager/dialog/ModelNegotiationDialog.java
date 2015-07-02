@@ -243,12 +243,12 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		StringBuilder sb = new StringBuilder();
 		for (ModelTraining mt : ModelTrainingDbAdapter.getTrainingsForModel(modelId)) {
 			if (mt.getTraining() == null) continue;
+			if (sb.length() > 0) sb.append('\n');
 			sb.append('(').append(mt.getTrainingStatus().getName()).append(") ");
 			sb.append(day_s).append(' ').append(mt.getStartDay())
 				.append('-').append(mt.getEndDay()).append(": ");
 			sb.append(mt.getTraining().getDescription());
 			sb.append(' ').append(Util.amount(mt.getPrice()));
-			sb.append("\n");
 		}
 
 		label = getResources().getString(R.string.labelTraining);
@@ -257,8 +257,9 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 		// planned for / participating in movie
 		sb = new StringBuilder();
 		for (Movieproduction mp2 : MovieService.getMovieproductionsForModel(modelId)) {
+			if (sb.length() > 0) sb.append('\n');
 			sb.append('(').append(mp2.getStatus().getName()).append(") ").append(mp2.getName())
-					.append(", ").append(mp2.getType().getName()).append('\n');
+					.append(", ").append(mp2.getType().getName());
 		}
 		label = getResources().getString(R.string.labelMovieproduction);
 		if (sb.length() > 0) tl.addView(mkTextRow(label, sb.toString()));
