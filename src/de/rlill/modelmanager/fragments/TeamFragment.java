@@ -3,6 +3,8 @@ package de.rlill.modelmanager.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,6 +83,10 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 		sp.setOnItemSelectedListener(this);
 		sp = (Spinner)fragmentView.findViewById(R.id.selectTeamLeaderSubst);
 		sp.setOnItemSelectedListener(this);
+
+		// TL Bonus
+		EditText et = (EditText)fragmentView.findViewById(R.id.editTextTeamLeaderBonus);
+		et.addTextChangedListener(mTextEditorWatcher);
 
 		return fragmentView;
 	}
@@ -278,4 +284,22 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 	public void onNothingSelected(AdapterView<?> parent) {
 	}
 
+	private final TextWatcher mTextEditorWatcher = new TextWatcher() {
+
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+		}
+
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+		}
+
+		public void afterTextChanged(Editable s) {
+//			Log.d(LOG_TAG, "afterTextChanged: " + s.toString());
+			int bonus = Util.atoi(s.toString());
+			if (bonus != selectedTeam.getBonus()) {
+				Log.i(LOG_TAG, "bonus:" + bonus);
+				selectedTeam.setBonus(bonus);
+				TeamDbAdapter.updateTeam(selectedTeam);
+			}
+		}
+	};
 }
