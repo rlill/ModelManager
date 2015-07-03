@@ -62,11 +62,12 @@ Account Detail view:
 
 (test) DRAG & DROP in teams view:
 
-- changes in teamleader, tl-bonus save-without-button
+(test) - changes in teamleader, tl-bonus save-without-button
+
 - new team button (?)
 
 
-Cynthia Cox: Zuteilung Firmenwagen %1s
+(?) Cynthia Cox: Zuteilung Firmenwagen %1s
 
 (test) Auswirkung quality_TL auf Verhandlungserfolg
 

@@ -295,7 +295,7 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 		public void afterTextChanged(Editable s) {
 //			Log.d(LOG_TAG, "afterTextChanged: " + s.toString());
 			int bonus = Util.atoi(s.toString());
-			if (bonus != selectedTeam.getBonus()) {
+			if (selectedTeam != null && bonus != selectedTeam.getBonus()) {
 				Log.i(LOG_TAG, "bonus:" + bonus);
 				selectedTeam.setBonus(bonus);
 				TeamDbAdapter.updateTeam(selectedTeam);
