@@ -5,9 +5,6 @@ import android.util.Log;
 
 import java.util.List;
 
-import de.rlill.modelmanager.Util;
-import de.rlill.modelmanager.model.Today;
-import de.rlill.modelmanager.persistance.TodayDbAdapter;
 import de.rlill.modelmanager.service.ModelService;
 
 /**
@@ -34,17 +31,6 @@ public class RaiseOptionListener implements DialogInterface.OnClickListener {
 
 		// grant raise
 		ModelService.grantRaise(modelId, offer);
-
-		// remove raise requests
-		Today today = null;
-		for (Today td : TodayDbAdapter.getEventsForModel(modelId)) {
-			if (td.getEvent().getEclass() == EventClass.REQUEST
-					&& td.getEvent().getFlag() == EventFlag.RAISE) {
-				if (offer >= today.getAmount2())
-					TodayDbAdapter.removeToday(today.getId());
-				break;
-			}
-		}
 
 		// update dialog
 		if (refresher != null) refresher.refreshTaskList();

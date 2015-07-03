@@ -62,6 +62,7 @@ import de.rlill.modelmanager.struct.ModelStatus;
 import de.rlill.modelmanager.struct.MovieStatus;
 import de.rlill.modelmanager.struct.OpChartElement;
 import de.rlill.modelmanager.struct.Operation;
+import de.rlill.modelmanager.struct.RaiseButtonListener;
 import de.rlill.modelmanager.struct.TaskListRefresher;
 import de.rlill.modelmanager.struct.TeamOption;
 
@@ -95,6 +96,9 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 
 		ImageView b = (ImageView) findViewById(R.id.standardBonusIcon);
 		b.setOnClickListener(new BonusButtonListener(this, modelId, this));
+
+		b = (ImageView) findViewById(R.id.standardRaiseIcon);
+		b.setOnClickListener(new RaiseButtonListener(this, modelId, this));
 
 		displayModelData();
 	}

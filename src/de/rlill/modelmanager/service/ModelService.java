@@ -737,6 +737,7 @@ public class ModelService {
 			model.setMood(mood);
 		}
 
+		int oldSalary = model.getSalary();
 		model.setSalary(salary);
 		ModelDbAdapter.updateModel(model);
 
@@ -749,7 +750,13 @@ public class ModelService {
 					|| today.getEvent().getFlag() == EventFlag.QUIT)) {
 				// amount2 is minimum raise in both cases:
 				if (salary >= today.getAmount2()) {
+					// temporarily set salary back to old value to force correct diary message
+					model.setSalary(oldSalary);
+					today.setAmount1(salary);
+					DiaryService.fileLogAccept(today);
 					TodayDbAdapter.removeToday(today.getId());
+					// restore correct value
+					model.setSalary(salary);
 				}
 			}
 			// unreject booking if mood has improved

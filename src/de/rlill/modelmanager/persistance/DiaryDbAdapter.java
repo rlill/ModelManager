@@ -320,6 +320,9 @@ public class DiaryDbAdapter extends DbAdapter {
             	case EXTRA_OUT:
             	case EXTRA_LOSS:
 		        case BOOKREJECT:
+	            case MOVIE_START:
+	            case MOVIE_PROGRESS:
+	            case MOVIE_FINISH:
             		break;
             	default:
         			Log.w(LOG_TAG, "Unknown event class " + d.getEventClass());
@@ -420,6 +423,7 @@ public class DiaryDbAdapter extends DbAdapter {
 							case GROUPWORK:
 							case HIRE:
 							case CHANGETEAM:
+							case QUIT:
 								break;
 							case PHOTO:
 								stat.w4photoEarnings += d.getAmount();
@@ -464,6 +468,9 @@ public class DiaryDbAdapter extends DbAdapter {
 					case REQUEST:
 					case APPLICATION:
 					case BOOKREJECT:
+					case MOVIE_START:
+					case MOVIE_PROGRESS:
+					case MOVIE_FINISH:
 						break;
 
 					default:
