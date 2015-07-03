@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
+import de.rlill.modelmanager.struct.EventFlag;
 import de.rlill.modelmanager.struct.Weekday;
 
 public class Util {
@@ -174,5 +175,18 @@ public class Util {
 		DisplayMetrics metrics = resources.getDisplayMetrics();
 		float dp = px / (metrics.densityDpi / 160f);
 		return dp;
+	}
+
+	public static EventFlag randomBooking(int day) {
+		int week = day % 7;
+		int r = rnd((week % 7 == 0) ? 30 : 6);
+		switch (r) {
+			case 0:
+			case 1:
+				return EventFlag.PHOTO;
+			case 2:
+				return EventFlag.MOVIE;
+		}
+		return null;
 	}
 }

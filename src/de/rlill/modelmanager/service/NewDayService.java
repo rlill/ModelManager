@@ -539,24 +539,23 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 
 				if (!ModelService.isActiveTeamLeader(model.getId())) {
 					// Booking
-					Today today = null;
-					int price = 0;
-					int pmax = 0;
-					switch (Util.rnd(3)) {
-					case 0:
-						today = EventService.bookingEvent(EventFlag.PHOTO);
-						price = Util.niceRandom(today.getEvent().getAmountMin(), today.getEvent().getAmountMax())
-								* model.getQuality_photo() / 10;
-						pmax = today.getEvent().getAmountMax() * (model.getQuality_photo() / 10) * ((Util.rnd(10) + 11) / 10);
-						break;
-					case 1:
-						today = EventService.bookingEvent(EventFlag.MOVIE);
-						price = Util.niceRandom(today.getEvent().getAmountMin(), today.getEvent().getAmountMax())
-								* model.getQuality_movie() / 10;
-						pmax = today.getEvent().getAmountMax() * (model.getQuality_movie() / 10) * ((Util.rnd(10) + 11) / 10);
-						break;
-					}
-					if (today != null) {
+					EventFlag flag = Util.randomBooking(DiaryService.today());
+					if (flag != null) {
+						Today today = EventService.bookingEvent(flag);
+						int price = 0;
+						int pmax = 0;
+						switch (flag) {
+							case PHOTO:
+							price = Util.niceRandom(today.getEvent().getAmountMin(), today.getEvent().getAmountMax())
+									* model.getQuality_photo() / 10;
+							pmax = today.getEvent().getAmountMax() * (model.getQuality_photo() / 10) * ((Util.rnd(10) + 11) / 10);
+							break;
+						case MOVIE:
+							price = Util.niceRandom(today.getEvent().getAmountMin(), today.getEvent().getAmountMax())
+									* model.getQuality_movie() / 10;
+							pmax = today.getEvent().getAmountMax() * (model.getQuality_movie() / 10) * ((Util.rnd(10) + 11) / 10);
+							break;
+						}
 						today.setModelId(model.getId());
 
 						TeamWork tw = teamWork.get(model.getTeamId());
@@ -613,16 +612,9 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 
 
 				// additional Booking
-				Today today = null;
-				switch (Util.rnd(3)) {
-				case 0:
-					today = EventService.bookingEvent(EventFlag.PHOTO);
-					break;
-				case 1:
-					today = EventService.bookingEvent(EventFlag.MOVIE);
-					break;
-				}
-				if (today != null) {
+				EventFlag flag = Util.randomBooking(DiaryService.today());
+				if (flag != null) {
+					Today today = EventService.bookingEvent(flag);
 					Model m = ModelService.findModelForEvent(today.getEvent());
 					if (m != null) {
 						int price = 0;
