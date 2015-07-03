@@ -353,16 +353,16 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 			if (model.getPayday() == DiaryService.todayWeekday()) {
 				if (notificationSalary) {
 					Today t = EventService.newNotification(model.getId(), EventFlag.PAYCHECK, model.getSalary());
-					TransactionService.transfer(0, model.getId(), model.getSalary(), t.getEvent().getNoteAcct());
+					TransactionService.transfer(0, model.getId(), model.getSalary(), t.getNoteAcct());
 					DiaryService.log(t);
 				}
 				else {
 					Event event = EventDbAdapter.getAllEvents(EventClass.NOTIFICATION, EventFlag.PAYCHECK).get(0);
-					TransactionService.transfer(0, model.getId(), model.getSalary(), event.getNoteAcct());
 					Today today = new Today();
 					today.setModelId(model.getId());
 					today.setEventId(event.getId());
 					today.setAmount1(model.getSalary());
+					TransactionService.transfer(0, model.getId(), model.getSalary(), today.getNoteAcct());
 					DiaryService.log(today);
 				}
 

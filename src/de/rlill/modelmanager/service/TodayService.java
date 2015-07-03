@@ -411,7 +411,7 @@ public class TodayService {
 				offer = Util.atoi(formularData.get(R.string.labelTheOffer));
 				if (offer == 0) offer = Util.atoi(formularData.get(R.string.labelBonus));
 				if (offer >= 0) {
-					TransactionService.transfer(0, today.getModelId(), offer, today.getEvent().getNoteAcct());
+					TransactionService.transfer(0, today.getModelId(), offer, today.getNoteAcct());
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYOPT_PERSON, today.getModelId(), offer);
 					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());
@@ -423,7 +423,7 @@ public class TodayService {
 				offer = Util.atoi(formularData.get(R.string.labelTheOffer));
 				if (offer == 0) offer = Util.atoi(formularData.get(R.string.labelBonus));
 				if (offer >= today.getAmount2()) {
-					TransactionService.transfer(0, today.getModelId(), offer, today.getEvent().getNoteAcct());
+					TransactionService.transfer(0, today.getModelId(), offer, today.getNoteAcct());
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYVAR_PERSON, today.getModelId(), offer);
 					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());
@@ -466,7 +466,7 @@ public class TodayService {
 					if (offer > today.getAmount1()) ModelService.improveCriminality(today.getModelId(), 30);
 					else if (offer == today.getAmount1()) ModelService.improveCriminality(today.getModelId(), 10);
 					else if (offer < today.getAmount1()) ModelService.improveCriminality(today.getModelId(), -20);
-					TransactionService.transfer(0, today.getModelId(), offer, today.getEvent().getNoteAcct());
+					TransactionService.transfer(0, today.getModelId(), offer, today.getNoteAcct());
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYOPT_PERSON, today.getModelId(), offer);
 					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());
@@ -506,7 +506,7 @@ public class TodayService {
 					if (offer > today.getAmount1()) ModelService.improveCriminality(today.getModelId(), 30);
 					else if (offer == today.getAmount1()) ModelService.improveCriminality(today.getModelId(), 10);
 					else if (offer < today.getAmount1()) ModelService.improveCriminality(today.getModelId(), -20);
-					TransactionService.transfer(0, today.getModelId(), offer, today.getEvent().getNoteAcct());
+					TransactionService.transfer(0, today.getModelId(), offer, today.getNoteAcct());
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYVAR_PERSON, today.getModelId(), offer);
 					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());
