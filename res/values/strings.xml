@@ -144,6 +144,7 @@
     <string name="labelOnBoard">Angestellt seit</string>
     <string name="labelDismissal">Kündigung</string>
     <string name="labelStandardBonus">Standardprämien</string>
+    <string name="labelStandardRaise">Gehaltserhöhung</string>
     <string name="labelSpendings">Lebenshaltung und Ausgaben</string>
     <string name="labelEvents">Ereignisse</string>
     <string name="labelTodayEvents">Heute</string>

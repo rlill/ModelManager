@@ -19,8 +19,9 @@ import de.rlill.modelmanager.model.Today;
 import de.rlill.modelmanager.persistance.TodayDbAdapter;
 import de.rlill.modelmanager.service.EventService;
 import de.rlill.modelmanager.service.TransactionService;
+import de.rlill.modelmanager.struct.TaskListRefresher;
 
-public class DailyBusinessFragment extends Fragment implements OnItemClickListener {
+public class DailyBusinessFragment extends Fragment implements OnItemClickListener, TaskListRefresher {
 
 	private static final String LOG_TAG = DailyBusinessFragment.class.getSimpleName();
 
@@ -75,14 +76,15 @@ public class DailyBusinessFragment extends Fragment implements OnItemClickListen
 		StatusBarFragmentAdapter.initStatusBar(fragmentView);
 	}
 
-	public void refreshData() {
-		onResume();
-	}
-
     @Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
     	DailyBusinessListAdapter adapter = (DailyBusinessListAdapter) parent.getAdapter();
 		adapter.setActiveIndex(position);
         adapter.notifyDataSetChanged();
 	}
+
+	public void refreshTaskList() {
+		onResume();
+	}
+
 }

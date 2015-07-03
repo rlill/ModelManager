@@ -43,10 +43,10 @@
 				android:layout_height="wrap_content"
 				android:layout_alignParentTop="true"
 				android:layout_toLeftOf="@id/messageImage"
+				android:visibility="invisible"
 				android:paddingLeft="10dp"
 				android:paddingRight="10dp"
 				android:contentDescription="@string/imageDescription"
-				android:onClick="modelQuickBonus"
 				android:src="@drawable/money2" />
 
 		</LinearLayout>

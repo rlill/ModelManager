@@ -3,6 +3,7 @@ package de.rlill.modelmanager.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -27,11 +28,15 @@ import de.rlill.modelmanager.service.DiaryService;
 import de.rlill.modelmanager.service.MessageService;
 import de.rlill.modelmanager.service.ModelService;
 import de.rlill.modelmanager.service.TrainingService;
+import de.rlill.modelmanager.struct.BonusButtonListener;
+import de.rlill.modelmanager.struct.BonusOptionListener;
 import de.rlill.modelmanager.struct.CarOffer;
 import de.rlill.modelmanager.struct.EventClass;
 import de.rlill.modelmanager.struct.EventFlag;
 import de.rlill.modelmanager.struct.ModelStatus;
+import de.rlill.modelmanager.struct.RaiseButtonListener;
 import de.rlill.modelmanager.struct.RejectReasons;
+import de.rlill.modelmanager.struct.TaskListRefresher;
 import de.rlill.modelmanager.struct.TeamOption;
 import de.rlill.modelmanager.struct.ViewElements;
 
@@ -231,6 +236,7 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 			if (today.getEvent().getEclass() == EventClass.REQUEST
 					&& today.getEvent().getFlag() == EventFlag.RAISE) {
 				viewElements.setNegotiationOffer(today.getAmount1());
+				viewElements.enableMoneyButton(new RaiseButtonListener(getContext(), model.getId(), (TaskListRefresher)parentFragment));
 			}
 
 			// Bonus
@@ -238,6 +244,8 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 					&& today.getEvent().getFlag() == EventFlag.BONUS) {
 				viewElements.setPresentation(MessageService.recentWorkPresentation(appContext, model));
 				if (rememberOffer > 0) viewElements.setNegotiationOffer(rememberOffer);
+
+				viewElements.enableMoneyButton(new BonusButtonListener(getContext(), model.getId(), (TaskListRefresher)parentFragment));
 			}
 
 			// Extras
@@ -460,6 +468,12 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
     	public void setVacation(int vacation) {
     		findTextView(R.id.editVacation).setText(Integer.toString(vacation));
     	}
+
+	    public void enableMoneyButton(View.OnClickListener listener) {
+		    ImageView b = (ImageView) adaptedView.findViewById(R.id.standardBonusIcon);
+		    b.setVisibility(View.VISIBLE);
+		    b.setOnClickListener(listener);
+	    }
 
     	@Override
     	public SparseArray<String> getFormularData() {

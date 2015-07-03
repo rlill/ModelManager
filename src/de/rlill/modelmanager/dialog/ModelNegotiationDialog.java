@@ -51,6 +51,7 @@ import de.rlill.modelmanager.service.MovieService;
 import de.rlill.modelmanager.service.TodayService;
 import de.rlill.modelmanager.service.TrainingService;
 import de.rlill.modelmanager.service.TransactionService;
+import de.rlill.modelmanager.struct.BonusButtonListener;
 import de.rlill.modelmanager.struct.CarAction;
 import de.rlill.modelmanager.struct.CarOffer;
 import de.rlill.modelmanager.struct.Characteristic;
@@ -92,7 +93,10 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
 
 	    if (modelId == 0) return;
 
-	    displayModelData();
+		ImageView b = (ImageView) findViewById(R.id.standardBonusIcon);
+		b.setOnClickListener(new BonusButtonListener(this, modelId, this));
+
+		displayModelData();
 	}
 
 	private void displayModelData() {
@@ -771,7 +775,4 @@ public class ModelNegotiationDialog extends Activity implements View.OnClickList
         displayModelData();
 	}
 
-	public void modelQuickBonus(View view) {
-		ModelService.showStandardBonusButtons(this, modelId, this);
-	}
 }

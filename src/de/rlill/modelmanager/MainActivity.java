@@ -50,7 +50,7 @@ import de.rlill.modelmanager.struct.TrainingStatus;
 import de.rlill.modelmanager.struct.ViewElements;
 import de.rlill.modelmanager.struct.Weekday;
 
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener, TaskListRefresher {
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
 	private static final String LOG_TAG = "MM*" + MainActivity.class.getSimpleName();
 
@@ -309,14 +309,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		modelList.refreshData();
 	}
 
-
-	public void refreshTaskList() {
-		// refresh Task List
-		// TODO: index 0 might change!!! Find other way of addressing DailyBusinessFragment!
-		DailyBusinessFragment taskList = (DailyBusinessFragment)getSupportFragmentManager().getFragments().get(0);
-		taskList.refreshData();
-	}
-
 	public void modelViewDetails(View view) {
 		ViewElements ve = (ViewElements)view.getTag();
 		if (ve != null) {
@@ -337,16 +329,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				Intent intent = new Intent(this, AccountDetailDialog.class);
 				intent.putExtra(AccountDetailDialog.EXTRA_MODEL_ID, model.getId());
 				startActivity(intent);
-			}
-		}
-	}
-
-	public void modelQuickBonus(View view) {
-		ViewElements ve = (ViewElements)view.getTag();
-		if (ve != null) {
-			Model model = ve.getContextModel();
-			if (model != null && model.getId() > 0) {
-				ModelService.showStandardBonusButtons(this, model.getId(), this);
 			}
 		}
 	}
