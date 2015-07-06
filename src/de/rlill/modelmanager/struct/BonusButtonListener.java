@@ -45,7 +45,7 @@ public class BonusButtonListener implements View.OnClickListener {
 		builder.setTitle(context.getResources().getString(R.string.labelStandardBonus));
 
 		List<Integer> bonusStepsInt = new ArrayList<Integer>();
-		List<Integer> w4bonus = DiaryDbAdapter.getRecentBonusPayments(7);
+		List<Integer> w4bonus = DiaryDbAdapter.getRecentBonusPayments(10);
 		// Log.d(LOG_TAG, "recent boni: " + w4bonus.size());
 		if (w4bonus.size() > 20) {
 			// find 5 most popular amounts

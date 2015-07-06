@@ -236,6 +236,7 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 			if (today.getEvent().getEclass() == EventClass.REQUEST
 					&& today.getEvent().getFlag() == EventFlag.RAISE) {
 				viewElements.setNegotiationOffer(today.getAmount1());
+
 				viewElements.enableMoneyButton(new RaiseButtonListener(getContext(), model.getId(), (TaskListRefresher)parentFragment));
 			}
 
@@ -273,6 +274,9 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 					&& today.getEvent().getFlag() == EventFlag.QUIT) {
 				viewElements.setSalary(model.getSalary());
 				viewElements.setBonus((rememberBonus > 0) ? rememberBonus : ModelService.getExpectedBonus(model.getId()));
+
+				viewElements.enableMoneyButton(new BonusButtonListener(getContext(), model.getId(), (TaskListRefresher)parentFragment));
+				viewElements.enableRaiseButton(new RaiseButtonListener(getContext(), model.getId(), (TaskListRefresher)parentFragment));
 			}
 
 			// Gambling
@@ -471,6 +475,12 @@ public class DailyBusinessListAdapter extends ArrayAdapter<Today> {
 
 	    public void enableMoneyButton(View.OnClickListener listener) {
 		    ImageView b = (ImageView) adaptedView.findViewById(R.id.standardBonusIcon);
+		    b.setVisibility(View.VISIBLE);
+		    b.setOnClickListener(listener);
+	    }
+
+	    public void enableRaiseButton(View.OnClickListener listener) {
+		    ImageView b = (ImageView) adaptedView.findViewById(R.id.standardRaiseIcon);
 		    b.setVisibility(View.VISIBLE);
 		    b.setOnClickListener(listener);
 	    }

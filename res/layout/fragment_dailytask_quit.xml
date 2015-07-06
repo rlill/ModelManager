@@ -54,6 +54,17 @@
 					android:inputType="numberDecimal"
 				/>
 
+				<ImageView
+					android:id="@+id/standardRaiseIcon"
+					android:layout_width="100dp"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_toLeftOf="@id/messageImage"
+					android:paddingLeft="10dp"
+					android:paddingRight="10dp"
+					android:contentDescription="@string/imageDescription"
+					android:src="@drawable/money2" />
+
 			</LinearLayout>
 
 		</TableRow>
@@ -83,6 +94,17 @@
 					android:padding="4dp"
 					android:inputType="numberDecimal"
 				/>
+
+				<ImageView
+					android:id="@+id/standardBonusIcon"
+					android:layout_width="100dp"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_toLeftOf="@id/messageImage"
+					android:paddingLeft="10dp"
+					android:paddingRight="10dp"
+					android:contentDescription="@string/imageDescription"
+					android:src="@drawable/money2" />
 
 			</LinearLayout>
 

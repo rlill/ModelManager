@@ -443,12 +443,13 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				}
 
 				// request raise
-				int avgCompareSalary = (int)(ModelService.getAverageSalary(model.getId())
-						* ((double)1 + model.getAmbition() / 400));
-				if (ModelService.isModelHired(model) && model.getSalary() <= avgCompareSalary && Util.rnd(model.getAmbition()) > 10) {
-					int expectMin = (int)(model.getSalary() * 1.05);
-					EventService.newRaiseSalaryRequest(model.getId(),
-							Util.niceRandom(expectMin, (int)(avgCompareSalary * 1.2)), expectMin);
+				int avgSalary = ModelService.getAverageSalary(model.getId());
+				int optExpectedSalary = (int)(avgSalary * (0.9 + (double)model.getAmbition() / 500));
+
+				if (ModelService.isModelHired(model) && model.getSalary() <= optExpectedSalary && Util.rnd(model.getAmbition()) > 10) {
+					int expectedMin = (int)(model.getSalary() * 1.05);
+					if (expectedMin < avgSalary) expectedMin = avgSalary;
+					EventService.newRaiseSalaryRequest(model.getId(), Util.niceRandom(expectedMin, optExpectedSalary), expectedMin);
 				}
 
 				if (model.getStatus() != ModelStatus.HIRED) continue;
@@ -499,9 +500,9 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 
 				// request quit
 				if (model.getHireday() < DiaryService.today() - 7
-						&& (model.getSalary() < avgCompareSalary || expectedBonus > 0)
-						&& Util.rnd(model.getMood()) < 10) {
-					EventService.newQuitRequest(model.getId(), expectedBonus, avgCompareSalary);
+						&& (model.getSalary() < optExpectedSalary || expectedBonus > 0)
+						&& Util.rnd(model.getMood()) < 15) {
+					EventService.newQuitRequest(model.getId(), expectedBonus, optExpectedSalary);
 				}
 
 				// request vacation
@@ -512,7 +513,7 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 				}
 
 				// request training
-				if (st.lastTraining < DiaryService.today() - 28
+				if (st.lastTraining < DiaryService.today() - 14
 						&& Util.rnd(model.getAmbition()) > 20
 						&& ModelService.plannedTrainingForModel(model.getId()) != null) {
 					EventService.newTrainingRequest(model.getId());
