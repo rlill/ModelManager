@@ -686,7 +686,11 @@ public class ModelService {
 //			Log.i(LOG_TAG, "Found " + salaryCnt + "/" + hiredModels + " models with qualitySum " + qualitySum + " +- " + range);
 			range *= 3;
 		} while (range < 270 && (salaryCnt < 3 || salaryCnt < (hiredModels + 9) / 10));
-		if (salaryCnt > 0) return salarySum / salaryCnt;
+		if (salaryCnt > 0) {
+			int avgSalary = salarySum / salaryCnt;
+			Log.i(LOG_TAG, String.format("AVG for QP %d, QM %d, QT %d: %d.-", model.getQuality_photo(), model.getQuality_movie(), model.getQuality_tlead(), avgSalary));
+			return avgSalary;
+		}
 		return 0;
 	}
 

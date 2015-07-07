@@ -467,6 +467,7 @@ public class TodayService {
 					else if (offer == today.getAmount1()) ModelService.improveCriminality(today.getModelId(), 10);
 					else if (offer < today.getAmount1()) ModelService.improveCriminality(today.getModelId(), -20);
 					TransactionService.transfer(0, today.getModelId(), offer, today.getNoteAcct());
+					today.setAmount1(offer);
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYOPT_PERSON, today.getModelId(), offer);
 					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());
@@ -479,7 +480,7 @@ public class TodayService {
 								EventClass.ACCEPT, EventFlag.QUIT, today.getModelId(), 0);
 					}
 
-					// quit-chance
+					// quit-chance; negative if offer > expected minimum
 					int qc = 50 - (int)(50 * (double)offer / today.getAmount2());
 
 					// model is likely to quit
@@ -507,6 +508,7 @@ public class TodayService {
 					else if (offer == today.getAmount1()) ModelService.improveCriminality(today.getModelId(), 10);
 					else if (offer < today.getAmount1()) ModelService.improveCriminality(today.getModelId(), -20);
 					TransactionService.transfer(0, today.getModelId(), offer, today.getNoteAcct());
+					today.setAmount1(offer);
 					DiaryService.log(today.getNoteFile(),
 							EventClass.ACCEPT, EventFlag.PAYVAR_PERSON, today.getModelId(), offer);
 					ModelService.paymentMoodImpact(today.getModelId(), offer, today.getAmount1(), today.getAmount2());

@@ -444,12 +444,16 @@ public class NewDayService extends AsyncTask<Void, Void, Void> {
 
 				// request raise
 				int avgSalary = ModelService.getAverageSalary(model.getId());
-				int optExpectedSalary = (int)(avgSalary * (0.9 + (double)model.getAmbition() / 500));
+				// depending on ambition: -10% .. +10% of average:
+				int optExpectedSalary = (int)((double)avgSalary * (0.9 + (double)model.getAmbition() / 500));
 
-				if (ModelService.isModelHired(model) && model.getSalary() <= optExpectedSalary && Util.rnd(model.getAmbition()) > 10) {
-					int expectedMin = (int)(model.getSalary() * 1.05);
-					if (expectedMin < avgSalary) expectedMin = avgSalary;
-					EventService.newRaiseSalaryRequest(model.getId(), Util.niceRandom(expectedMin, optExpectedSalary), expectedMin);
+				int expectedMin = (int)((double)model.getSalary() * 1.05);
+				if (expectedMin < avgSalary * 0.9) expectedMin = (int)((double)avgSalary * 0.9);
+				int expect = Util.niceRound((expectedMin > optExpectedSalary) ? expectedMin : optExpectedSalary);
+				expectedMin = (expectedMin > optExpectedSalary) ? optExpectedSalary : expectedMin;
+
+				if (ModelService.isModelHired(model) && model.getSalary() <= expectedMin && Util.rnd(model.getAmbition()) > 10) {
+					EventService.newRaiseSalaryRequest(model.getId(), expect, expectedMin);
 				}
 
 				if (model.getStatus() != ModelStatus.HIRED) continue;
