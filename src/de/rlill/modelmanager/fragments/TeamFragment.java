@@ -261,7 +261,7 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 		Spinner sp = (Spinner)fragmentView.findViewById(R.id.selectTeamLeader);
 		Model m = (Model) sp.getSelectedItem();
 		if (selectedTeam.getLeader1() != m.getId()) {
-			Log.i(LOG_TAG, "1s:" + m.getFullname());
+			Log.i(LOG_TAG, String.format("new 1st leader for team %d: %s", selectedTeam.getId(), m.getFullname()));
 			selectedTeam.setLeader1(m.getId());
 			TeamDbAdapter.updateTeam(selectedTeam);
 			ModelService.teamwork(selectedTeam);
@@ -271,7 +271,7 @@ public class TeamFragment extends Fragment implements OnItemClickListener, View.
 		sp = (Spinner) fragmentView.findViewById(R.id.selectTeamLeaderSubst);
 		m = (Model) sp.getSelectedItem();
 		if (selectedTeam.getLeader2() != m.getId()) {
-			Log.i(LOG_TAG, "2s:" + m.getFullname());
+			Log.i(LOG_TAG, String.format("new 2nd leader for team %d: %s", selectedTeam.getId(), m.getFullname()));
 			selectedTeam.setLeader2(m.getId());
 			TeamDbAdapter.updateTeam(selectedTeam);
 			ModelService.teamwork(selectedTeam);

@@ -8,6 +8,21 @@ unterschiedlicher Logeintrag: Booked - vermittelt durch TL / player
 
 Konjunkturschwankungen: Zeiten mit wenig/keinen Aufträgen
 
+- new team button (?)
+
+
+(?) Cynthia Cox: Zuteilung Firmenwagen %1s
+
+(test) Auswirkung quality_TL auf Verhandlungserfolg
+
+Auswirkung erotische Ausstrahlung auf Preis
+
+Auswirkung Anstellungsdauer auf Preis
+
+Switch geek-mode on only with code
+
+Kündigung bei Ablehnung einer Gehaltserhöhung
+
 
 (?) Training planned + vacation request
 
@@ -63,18 +78,4 @@ Account Detail view:
 (test) DRAG & DROP in teams view:
 
 (test) - changes in teamleader, tl-bonus save-without-button
-
-- new team button (?)
-
-
-(?) Cynthia Cox: Zuteilung Firmenwagen %1s
-
-(test) Auswirkung quality_TL auf Verhandlungserfolg
-
-Auswirkung erotische Ausstrahlung auf Preis
-
-Auswirkung Anstellungsdauer auf Preis
-
-Switch geek-mode on only with code
-
 

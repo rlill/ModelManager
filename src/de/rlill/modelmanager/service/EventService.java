@@ -275,4 +275,9 @@ public class EventService {
 		Event event = EventDbAdapter.getAllEvents(EventClass.NOTIFICATION, EventFlag.QUIT).get(0);
 		today.setEventId(event.getId());
 	}
+
+	public static void convertToQuitRequest(Today today) {
+		Event event = EventDbAdapter.getAllEvents(EventClass.REQUEST, EventFlag.QUIT).get(0);
+		today.setEventId(event.getId());
+	}
 }

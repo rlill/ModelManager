@@ -60,7 +60,7 @@ public class RaiseButtonListener implements View.OnClickListener {
 		int perc = 5;
 		while (salaryStepsInt.size() < 5) {
 			int sugg = Util.niceRound((int)((double)model.getSalary() * (1.0 + (double)perc / 100)));
-			Log.d(LOG_TAG, "SUGGEST: " + perc + "% => " + sugg);
+//			Log.d(LOG_TAG, "SUGGEST: " + perc + "% => " + sugg);
 			perc += 5;
 			if (salaryStepsInt.contains(sugg)) continue;
 			salaryStepsInt.add(sugg);

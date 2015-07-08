@@ -236,6 +236,17 @@ public class TodayService {
 		case REQUEST:
 			switch (today.getEvent().getFlag()) {
 			case RAISE:
+				ModelService.improveMood(today.getModelId(), -10);
+				int averageSalary = ModelService.getAverageSalary(today.getModelId());
+				int deviation = (int)(100 * ((double)today.getModel().getSalary() - averageSalary) / averageSalary);
+				Log.d(LOG_TAG, String.format("current: %d.- / avg: %d.- / expect min %d.- / deviation: %+d %%", today.getModel().getSalary(), averageSalary, today.getAmount2(), deviation));
+				if (Util.rnd(140 - today.getModel().getAmbition() + 10 * deviation) < 20) {
+					// convert to quit notification
+					EventService.convertToQuitRequest(today);
+					TodayDbAdapter.updateToday(today);
+				} else
+					TodayDbAdapter.removeToday(today.getId());
+				break;
 			case PAYOPT_PERSON:
 			case BONUS:
 				ModelService.improveMood(today.getModelId(), -10);
